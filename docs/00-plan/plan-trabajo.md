@@ -18,10 +18,12 @@ Sesión infinita sin salir de la sala. Stack: Angular 19 + Phaser 4.1 + NestJS +
 ## FASE 0 — Repositorio, Nombre y Documentación Base
 
 ### F0.1 Nuevo repositorio Git
-- [ ] Crear repositorio `Dark-Flag` (o `viinzo-dark-flag`) en GitHub (viinzostudios)
-- [ ] Cambiar remote: `git remote set-url origin https://github.com/viinzostudios/Dark-Flag.git`
-- [ ] Push inicial: `git push -u origin master`
+- [x] Crear repositorio `Dark-Flag` en GitHub (viinzostudios) — orphan branch sin historial de AST
+- [x] Agregar remote `dark-flag`: `git remote add dark-flag https://github.com/viinzostudios/Dark-Flag.git`
+- [x] Push inicial: `git push dark-flag master` — historial limpio con 1 commit inicial
 - [ ] Archivar o borrar el repo `Arena-Siege-Tanks` en GitHub si se desea
+
+> **Nota**: El remote `origin` sigue apuntando a Arena-Siege-Tanks (juego original). NUNCA pushear a `origin` desde el proyecto Dark Flag.
 
 **Done cuando**: `git remote -v` muestra el nuevo repo y el push es exitoso.
 
@@ -247,13 +249,15 @@ Sesión infinita sin salir de la sala. Stack: Angular 19 + Phaser 4.1 + NestJS +
 > No modificar la BD del juego original. Crear una BD fresca desde cero.
 
 **Aislamiento del juego original:**
-- [ ] Crear nueva base de datos PostgreSQL: `dark_flag` (la de Arena Siege Tanks se llama `game_db` o `arena_siege`)
-- [ ] Actualizar `backend/api/.env` y `infra/.env`: cambiar `DB_NAME=dark_flag`
-- [ ] El juego original sigue intacto en su propio repo y BD — no tocar
+- [x] Crear nueva base de datos PostgreSQL: `dark_flag` (puerto 5433 — aislado de Arena Siege Tanks en 5432)
+- [x] Actualizar `backend/api/.env` y `infra/.env`: `DB_NAME=dark_flag`, `DB_PORT=5433`
+- [x] Redis Dark Flag en puerto 6380 (AST usa 6379)
+- [x] Game server en 3003, API en 3002, Frontend en 4201 (AST usa 3001/3000/4200)
+- [x] El juego original sigue intacto en su propio repo y BD — no tocado
 
 **Desactivar synchronize en TypeORM (producción):**
-- [ ] Cambiar `synchronize: true` → `false` en `TypeOrmModule.forRoot()`
-- [ ] Toda la estructura se crea con migraciones explícitas (no auto-sync)
+- [x] Cambiar `synchronize: true` → `false` en `TypeOrmModule.forRoot()`
+- [x] Toda la estructura se crea con migraciones explícitas — auto-run en `OnModuleInit`
 
 **Tablas que se mantienen igual (solo cambiar el nombre de DB):**
 | Tabla | Estado |
@@ -445,8 +449,9 @@ npm run start:dev --prefix backend/api
 - [ ] Entidad `PlayerStats`: reemplazar columnas de tanques por Dark Flag
   - Eliminar: `kills`, `deaths`, `walls_placed`, `bullets_fired`
   - Agregar: `flag_captures`, `flag_pickups`, `maces_landed`, `maces_received`, `level_15_reached`, `best_score`, `best_level`, `traps_triggered`
-- [ ] Misiones: crear seed nuevo con misiones Dark Flag
-  - Ejemplo: "Entrega 5 banderas" / "Maza 20 rivales" / "Llega al nivel 10" / "Recoge 10 power-ups" / "Entrega la bandera 3 veces en una sesión"
+- [x] Misiones: seed Dark Flag — 11 misiones (8 permanentes + 3 diarias)
+  - `flag_captures/1`, `flag_captures/5`, `maces_landed/10`, `powerups_collected/5`, `games_played/5`, `score/200`, `traps_triggered/3`, `level_reached/10`, + 3 diarias
+  - `MissionType` actualizado: `flag_captures | maces_landed | powerups_collected | games_played | score | level_reached | traps_triggered`
 - [ ] Actualizar `POST /stats/session` para recibir stats de Dark Flag
 
 **Archivos**: `backend/api/src/stats/entities/player-stats.entity.ts`, `backend/api/src/missions/missions.service.ts`
@@ -476,11 +481,11 @@ npm run start:dev --prefix backend/api
 ## FASE 5 — Pulido y Testing
 
 ### F5.1 Anti-cheat Dark Flag
-- [ ] Validar `speedFactor` (mismo check que antes, `> MAX_SPEED * 1.1`)
+- [x] Validar `speedFactor > 1.1` en gateway — disconnect al 10.° violation
 - [ ] Validar `mace` input: rechazar si `now < maceCooldownEnd` del servidor
 - [ ] Validar que el portador no emita `mace: true`
 - [ ] Validar posición del mazo: target debe estar dentro del rango permitido por nivel
-- [ ] Rate limit de eventos: máximo 1 `flag_pickup` por jugador cada 5s
+- [x] Rate limit de `flag_pickup`: máximo 1 por jugador cada 5 000 ms (`lastFlagPickupAt`)
 
 **Archivos**: `backend/game-server/src/game/game.gateway.ts`, `backend/game-server/src/game/services/game-loop.service.ts`
 
@@ -497,11 +502,10 @@ npm run start:dev --prefix backend/api
 ---
 
 ### F5.3 Tutorial / Onboarding Dark Flag
-- [ ] Reescribir `TutorialModalComponent`: 4 cards específicas de Dark Flag
-  - Card 1: "Mueve el cursor para moverte. Spacebar para girar la linterna sin moverte."
-  - Card 2: "Encuentra la bandera iluminándola. Písala para agarrarla."
-  - Card 3: "Sigue la pulsación de luz hacia el destino. ¡Entrégala para puntuar!"
-  - Card 4: "Maza a tus rivales para robar su nivel. ¡Pero vigila las trampas!"
+- [x] Reescribir `TutorialModalComponent`: 4 cards Dark Flag (cursor, linterna/bandera, entrega, mazo)
+  - Persistencia: `localStorage 'df_tutorial_seen'` — se abre solo una vez
+  - Backdrop cierra solo en el último card (evita cierre accidental)
+  - Integrado en `LobbyComponent` con `showTutorial = signal(false)`
 - [ ] Hints in-game: "Primera vez con la bandera → muestra dirección del destino"
 
 **Archivos**: `frontend/src/app/shared/components/tutorial-modal.component.ts`
@@ -615,10 +619,26 @@ F6.0 (prueba) → aprobación → F6.1 (skins) → F6.2-F6.5 (resto de assets)
 
 ---
 
-## Estado al iniciar este plan
+## Estado actual (última actualización 2026-05-26)
 
+### Completado ✓
 - [x] Diseño del juego definido y documentado
-- [x] GDD.md reescrito para Dark Flag
-- [x] mecanicas-core.md reescrito para Dark Flag
-- [x] estilo-grafico.md actualizado para Dark Flag
-- [ ] Todo lo demás: pendiente
+- [x] GDD.md, mecanicas-core.md, estilo-grafico.md reescritos para Dark Flag
+- [x] Repositorio Dark-Flag creado con historial limpio (orphan, sin AST)
+- [x] Aislamiento de puertos completo (5433/6380/3002/3003/4201)
+- [x] BD dark_flag separada, TypeORM migrations con auto-run
+- [x] Anti-cheat: speedFactor validation + flag pickup rate-limit 5 000 ms
+- [x] Tutorial modal Dark Flag (4 cards, persistencia localStorage)
+- [x] MissionType + seed de misiones Dark Flag (11 misiones)
+- [x] Plan de calidad F5.5–F13 documentado en `docs/00-plan/plan-calidad.md`
+
+### Pendiente (juego funcional en placeholders, sin assets finales ni audio)
+- [ ] F0.2: Actualizar CLAUDE.md (nombre, descripción, directorio)
+- [ ] F0.3: Documentación secundaria (websocket-events, game-loop, schemas, phaser-scenes)
+- [ ] F1.x: Rediseño UI/UX completo (landing, auth, lobby, shop, overlays, HUD)
+- [ ] F2.x: Game loop Dark Flag completo (bots AI, todos los eventos WS, schemas BD)
+- [ ] F3.x: Phaser Dark Flag (personajes son círculos Arc, sin sprites, sin audio DF, sin partículas)
+- [ ] F4.x: PlayerStats schema, endpoints rankings, shop personajes
+- [ ] F5.x: Testing E2E, optimización sombras
+- [ ] F5.5–F13: Ver `docs/00-plan/plan-calidad.md`
+- [ ] F6: POSPUESTO — se ejecuta después de F13
