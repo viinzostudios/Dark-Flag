@@ -324,13 +324,21 @@ npm run start:dev --prefix backend/api
 ## FASE 3 — Frontend: Phaser Dark Flag
 
 ### F3.1 Dark rendering pipeline
-- [ ] `GameScene.create()`: fondo completamente negro (`#000000`)
-- [ ] Implementar sistema de visibilidad: cada frame, renderizar solo las zonas iluminadas
-- [ ] **Faro central**: círculo de 300px siempre iluminado (alpha overlay con agujero)
-- [ ] Técnica: renderizar overlay negro sobre todo el mapa, luego "perforar" con los conos de linterna de cada jugador (Phaser RenderTexture o WebGL mask)
+- [x] `GameScene.create()`: fondo completamente negro (`#000000`)
+- [x] Implementar sistema de visibilidad: cada frame, renderizar solo las zonas iluminadas
+- [x] Técnica: RenderTexture de pantalla completa, fill negro + erase con cono de linterna por jugador
+- [ ] **Faro central**: círculo de 300px siempre iluminado (pendiente, menor prioridad)
+- [ ] F3.2 Raycasting real (sombras de obstáculos) — actualmente el cono es un arco simple sin oclusión
+
+**Implementación real** (`GameScene.ts`):
+- `rebuildDarkOverlay()`: crea `RenderTexture` en `setScrollFactor(0)`, tamaño pantalla, depth 50
+- `updateDarkness()`: cada frame — fill negro → erase con `flashlightGfx` (coordenadas mundo→pantalla via `cam.getWorldPoint`) → `render()` para flush
+- `drawFlashlightCone()`: arco con penumbra exterior (×1.18 range, alpha 0.35)
+- **Fix crítico Phaser 4**: `fill()`/`erase()` solo acolan commandBuffer — requiere `render()` explícito
+- **Fix posicionamiento**: `cam.getWorldPoint(0,0)` da la posición mundo del corner (0,0) de pantalla con zoom y scroll
 
 **Archivos**: `frontend/src/app/game/scenes/GameScene.ts`
-**Done cuando**: El mapa es oscuro, el faro es visible, el personaje del jugador ilumina con su cono.
+**Done cuando**: El mapa es oscuro, el personaje del jugador ilumina con su cono, cone alineado con cursor.
 
 ---
 
@@ -619,7 +627,7 @@ F6.0 (prueba) → aprobación → F6.1 (skins) → F6.2-F6.5 (resto de assets)
 
 ---
 
-## Estado actual (última actualización 2026-05-26)
+## Estado actual (última actualización 2026-05-27)
 
 ### Completado ✓
 - [x] Diseño del juego definido y documentado
@@ -637,7 +645,7 @@ F6.0 (prueba) → aprobación → F6.1 (skins) → F6.2-F6.5 (resto de assets)
 - [ ] F0.3: Documentación secundaria (websocket-events, game-loop, schemas, phaser-scenes)
 - [ ] F1.x: Rediseño UI/UX completo (landing, auth, lobby, shop, overlays, HUD)
 - [ ] F2.x: Game loop Dark Flag completo (bots AI, todos los eventos WS, schemas BD)
-- [ ] F3.x: Phaser Dark Flag (personajes son círculos Arc, sin sprites, sin audio DF, sin partículas)
+- [~] F3.x: Phaser Dark Flag — F3.1 darkness pipeline ✓; raycasting, personajes, objetos del juego pendientes
 - [ ] F4.x: PlayerStats schema, endpoints rankings, shop personajes
 - [ ] F5.x: Testing E2E, optimización sombras
 - [x] F5.5: Assets mínimos — spritesheets phantom/gearhead, obstáculos PNG transparentes, trap-marker, power-ups, VFX, arena space-station, linterna por nivel

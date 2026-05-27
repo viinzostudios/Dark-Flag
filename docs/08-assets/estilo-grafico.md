@@ -2,6 +2,7 @@
 
 > Esta guía es la fuente de verdad para todo asset visual del juego.
 > Todos los prompts de IA deben ser consistentes con estas reglas.
+> Referencias visuales aprobadas: `char-mech-draft.png` y `char-phantom-draft.png`.
 
 ---
 
@@ -14,13 +15,56 @@ Dark Flag es un juego de oscuridad, misterio y tensión social. El arte debe tra
 - **Luz dramática**: los halos, glows y efectos de linterna son el protagonista visual
 - **Legibilidad**: a pesar de la oscuridad, el estado del juego debe ser claro de un vistazo
 
-**Estilo base**: cartoon/cel-shaded, outlines negros gruesos (4–6px), colores muy saturados y vibrantes que contrasten fuertemente con el fondo oscuro. Proporciones exageradas y expresivas.
+**Estilo base**: cartoon/cel-shaded, outlines negros gruesos (4–6px), colores muy saturados y vibrantes que contrasten fuertemente con el fondo oscuro. Proporciones exageradas — cabeza/cuerpo desproporciones chibi. Inspirado en los personajes `char-mech` y `char-phantom`.
 
-**NO usar**: realismo, pixel art, colores desaturados, estética militar, gore, estilos monocromáticos.
+**NO usar**: realismo, pixel art, colores desaturados, estética militar, gore, estilos monocromáticos, personajes con cara humana realista.
 
 ---
 
-## 2. Paleta de colores del juego
+## 2. Referencias visuales aprobadas (estilo canónico)
+
+Estos dos diseños definen el estilo visual para TODOS los personajes del juego. Cualquier nuevo personaje debe ser legible como parte de la misma familia estética.
+
+### Gearhead (`char-mech`) — Walker canónico ✅
+> Archivo: `docs/08-assets/review/char-mech-draft.png`
+
+**Descripción visual**:
+- Cabeza cuadrada/cúbica de metal cobrizo con remaches visibles
+- Farol circular dorado integrado en la parte frontal de la cabeza (ojo-lámpara con glow cálido)
+- Cuerpo pequeño con paneles de bronce articulados
+- Extremidades cortas: brazos y piernas mecánicas y robustas
+- Proporciones: cabeza = aprox. 50–60% del tamaño total del personaje
+- Vista: ligeramente desde arriba (top-down 2.5D) — se ve la parte superior de la caja-cabeza y la cara/frente
+- **Tipo**: Walker — tiene piernas, se mueve caminando
+
+**Paleta**:
+- Cuerpo: `#b45309` (cobre oscuro)
+- Acentos: `#fbbf24` (dorado)
+- Sombras: `#92400e` (bronce oscuro)
+- Farol: `#fef3c7` con glow `#fbbf24`
+
+---
+
+### Phantom (`char-phantom`) — Floater canónico ✅
+> Archivo: `docs/08-assets/review/char-phantom-draft.png`
+
+**Descripción visual**:
+- Capa oscura morado-marino fluyendo, sin pies visibles — la figura "levita"
+- Cuernos pequeños curvos sobre la capucha (2 cuernos simétricos)
+- Ojos blancos brillantes bajo el capuchón oscuro
+- Orbe de linterna cyan flotando al frente del personaje con bloom de luz
+- La capa se expande hacia abajo como si flotara en el aire
+- **Tipo**: Floater — sin piernas, se desplaza flotando/deslizándose
+
+**Paleta**:
+- Capa: `#1e1b4b` (índigo muy oscuro)
+- Highlights: `#4c1d95` (morado)
+- Ojos: `#ffffff` con glow
+- Orbe: `#67e8f9` (cyan) con bloom `#06b6d4`
+
+---
+
+## 3. Paleta de colores del juego
 
 ### Paleta de interfaz (UI)
 
@@ -32,7 +76,7 @@ Dark Flag es un juego de oscuridad, misterio y tensión social. El arte debe tra
 | Primario morado | `#7c3aed` | Botones principales, bordes de acción |
 | Teal / linterna | `#06b6d4` | Efectos de linterna, highlights secundarios |
 | Ámbar / bandera | `#f59e0b` | Bandera, puntuación, advertencias |
-| Rojo / mazo | `#ef4444` | Stun, peligro, level-down |
+| Rojo / impacto | `#ef4444` | Stun, peligro, level-down |
 | Texto primario | `#f8fafc` | Texto principal |
 | Texto secundario | `#94a3b8` | Labels, subtítulos |
 | Borde | `#2d2f5e` | Bordes de cards y elementos |
@@ -48,94 +92,160 @@ Dark Flag es un juego de oscuridad, misterio y tensión social. El arte debe tra
 
 ---
 
-## 3. Los personajes — Dark Flag Characters
+## 4. Tipos de personaje
 
-### Concepto general
+Todos los personajes de Dark Flag son figuras chibi 2.5D, pero se dividen en dos tipos de movimiento. Esto afecta las animaciones del spritesheet.
 
-Los personajes de Dark Flag son figuras **chibi originales** vistas en perspectiva top-down 2.5D.
-Cada skin tiene una fuente de luz integrada (farol, linterna, orbe) que representa su capacidad de iluminar la arena oscura.
+### Walker (caminante)
+- Tiene piernas cortas y robustas visibles
+- En la animación de movimiento se alternan posiciones de pies
+- En el frame `idle` puede tener un leve balanceo vertical (bob tween — lo hace Phaser, no el sprite)
+- Ejemplos del catálogo: Gearhead, personajes robóticos, humanos fantasy, criaturas con patas
+- **Reference**: `char-mech-draft.png`
 
-**Reglas visuales universales**:
-- Vista top-down con leve ángulo frontal — se ve la parte superior del personaje y la cara/frente
-- Proporciones chibi: cabeza/cuerpo grande, pies pequeños o ausentes
-- Fuente de luz claramente visible en el frente del personaje (farol, orbe, ojo brillante)
-- Sin armas visibles (el mazo es una acción, no un objeto en mano permanente)
-- Outlines negros sólidos, 4–6px
-- Cel-shading con sombras marcadas
+### Floater (flotante)
+- Sin piernas visibles — la parte inferior es una capa, sombra, llama, nube, etc.
+- En la animación de movimiento la forma inferior se inclina o deforma ligeramente
+- Transmite sensación de levitación o deslizamiento sobrenatural
+- Ejemplos del catálogo: Phantom, fantasmas, sombras vivientes, espíritus
+- **Reference**: `char-phantom-draft.png`
 
-**Estilo gráfico**: cartoon/cel-shaded, colores saturados y vibrantes que contrastan fuertemente con el fondo oscuro del juego. Proporciones exageradas, expresivas y adorables.
-
----
-
-### Referencias visuales aprobadas
-
-Estos dos skins fueron generados y aprobados como referencia de estilo para Dark Flag:
-
-#### Gearhead (`char-mech`) — Referencia: robot steampunk chibi
-> Archivo: `docs/08-assets/review/char-mech-draft.png`
-
-- Cabeza cuadrada metálica cobre/dorado con remaches
-- Farol circular dorado integrado en la frente (glow cálido)
-- Cuerpo pequeño con paneles de bronce
-- Paleta: `#b45309` cuerpo / `#fbbf24` acentos dorados / `#92400e` sombras
-- Rareza: Épica
-
-#### Phantom (`char-phantom`) — Referencia: figura encapuchada oscura
-> Archivo: `docs/08-assets/review/char-phantom-draft.png`
-
-- Capa oscura morado-marino fluyendo, vista desde arriba
-- Cuernos curvos sobre la capucha
-- Ojos blancos brillantes visibles bajo el capuchón
-- Orbe de linterna cyan flotando al frente (`#67e8f9` con bloom)
-- Paleta: `#1e1b4b` capa / `#4c1d95` highlights / `#67e8f9` orbe
-- Rareza: Legendaria
+El tipo (walker/floater) debe especificarse en el prompt de cada personaje y definirse en el catálogo.
 
 ---
 
-### Skins — catálogo (100 total)
+## 5. Sistema de spritesheet — 8 estados por personaje
 
-100 skins organizadas por rareza. Cada skin es un personaje con diseño, colores y accesorios únicos.
-La fuente de luz (farol/orbe) varía en forma y color por skin pero siempre está presente.
+Cada personaje tiene **8 frames** divididos en **2 imágenes generadas** (4 frames c/u) que se ensamblan en la spritesheet final.
 
-| Rareza | Cantidad | Características | Precio aprox |
-|--------|----------|-----------------|-------------|
-| Común | 40 | Figura base con color sólido, sin accesorios | Gratis / desbloqueables por tiempo |
-| Rara | 30 | Color + patrón (rayas, puntos, gradiente) o accesorio menor | 500–2000 coins |
-| Épica | 20 | Diseño temático con accesorios especiales (robot, mago, ninja...) | 3000–6000 coins |
-| Legendaria | 10 | Concepto único + efecto de aura o partículas (fantasma, dragón...) | 10000+ coins o gems |
+> Detalle completo de templates y proceso de producción: [`docs/08-assets/prompts/character-sprite-templates.md`](prompts/character-sprite-templates.md)
 
-**Naming de archivos**: `char-{slug}.png` (ej: `char-azure.png`, `char-mech.png`, `char-phantom.png`)
+### Layout del spritesheet final
 
-**Tamaño de archivo**: 128×128px con fondo transparente
+**Archivo**: `char-{slug}.png`
+**Formato**: `1536×1024` px (landscape)
+**Grid**: 3 columnas × 2 filas — **celda: 512×512 px**
+**Una sola llamada API** → máxima consistencia de diseño
 
-**Generación**: grids 2×5 (10 personajes por imagen 1024×1024), crop con Sharp → 10 batches = 100 skins
+```
+┌──────────┬──────────┬──────────┐
+│  0·idle  │ 1·move_a │ 2·move_b │  fila 0
+├──────────┼──────────┼──────────┤
+│ 3·strike │4·stunned │5·victory │  fila 1
+└──────────┴──────────┴──────────┘
+```
+
+**Índices de frame**:
+
+| Frame | Nombre | Descripción |
+|-------|--------|-------------|
+| 0 | `idle` | Reposo, fuente de luz visible |
+| 1 | `move_a` | Movimiento — frame 1 de 2 |
+| 2 | `move_b` | Movimiento — frame 2 de 2 (alterna con move_a) |
+| 3 | `strike` | Ataque — arma/elemento propio extendido |
+| 4 | `stunned` | Aturdido — cuerpo torcido, luz apagada |
+| 5 | `victory` | Victoria — pose triunfal, luz al máximo |
+
+**Movimiento a izquierda**: `sprite.setFlipX(true)` + frames `move_a`/`move_b` — sin poses separadas.
+**Bandera**: Phaser dibuja el ícono encima del frame activo como overlay. Sin frame `carry` en el sprite.
+
+**Configuración Phaser**:
+```typescript
+this.load.spritesheet('char-{slug}', 'assets/characters/{slug}.png', {
+  frameWidth: 512,
+  frameHeight: 512,
+});
+```
 
 ---
 
-### Skins comunes — paleta de colores base
+## 6. Sistema de arma/elemento propio
 
-Las 40 skins comunes son variantes del mismo arquetipo base (figura chibi simple con farol) en diferentes colores:
+Cada personaje tiene un **arma o elemento de ataque** que encaja con su temática y diseño.
+Este elemento **solo es visible en el frame `strike`** (frame 3 del spritesheet).
 
-| Slug | Color cuerpo | Farol | Ejemplo |
-|------|-------------|-------|---------|
-| azure | `#3b82f6` | blanco-azul | Azul vibrante |
-| crimson | `#ef4444` | blanco-rojo | Rojo intenso |
-| emerald | `#10b981` | blanco-verde | Verde esmeralda |
-| amber | `#f59e0b` | dorado | Ámbar/dorado |
-| violet | `#8b5cf6` | morado | Morado |
-| slate | `#64748b` | blanco frío | Gris azulado |
-| rose | `#f43f5e` | rosa | Rosa fuerte |
-| teal | `#14b8a6` | cyan | Teal/aguamarina |
-| *(+32 más)* | variaciones | variaciones | tonos pasteles, neones, etc. |
+**Reglas**:
+- No es un objeto que el personaje lleva permanentemente — aparece en la acción
+- Puede ser una extensión de su cuerpo, un poder, una herramienta o un accesorio temático
+- Debe verse claramente en el frame strike — tamaño generoso, bien definido
+- **No existe barra de cooldown visual en HUD** — la limitación de uso es mecánica de servidor, invisible para el jugador
+
+### Ejemplos de armas por tipo de personaje
+
+| Tipo de personaje | Arma/elemento sugerido |
+|------------------|----------------------|
+| Robot/mecánico | Puño mecánico extendido, llave inglesa, pistón hidráulico |
+| Fantasma/espectral | Tentáculo de energía oscura, garra etérea, onda de sombra |
+| Mago/místico | Vara mágica, esfera de energía lanzada, rayo de hechizo |
+| Naturaleza | Enredadera, raíz disparada, espina grande |
+| Elemental fuego | Puño de llama, bola de fuego concentrada |
+| Elemental hielo | Cristal de hielo proyectado, estalactita |
+| Ninja/sombra | Kunai de energía, onda de corte, sombra afilada |
+| Fantasma/capa | Proyección de oscuridad, pulso de aura |
+| Criatura | Zarpazo, cola de impacto, embestida de cabeza |
+
+El prompt de cada personaje debe especificar su arma. El catálogo de personajes (catálogo-master.md) define la arma de cada uno.
 
 ---
 
-## 4. Los obstáculos (perspectiva 2.5D)
+## 7. Fuente de luz integrada
 
-Los obstáculos tienen una perspectiva ligera que les da sensación de altura:
+Cada personaje tiene una fuente de luz propia que representa su capacidad de iluminar la arena oscura.
+Esta fuente de luz debe ser **claramente visible en todos los frames**, especialmente en `idle`.
+
+- Puede ser: farol, orbe flotante, ojo brillante, lámpara, cristal luminoso, llama, etc.
+- Debe coincidir estéticamente con el personaje
+- Color de la luz: varía con el nivel del jugador (ver tabla de linternas en sección 3)
+- En los sprites: siempre mostrar en su color base/neutral (el tinte de nivel lo aplica Phaser programáticamente)
+
+---
+
+## 8. Reglas universales de prompt
+
+Incluir siempre en los prompts de personajes:
+
+**Estilo base**:
+```
+top-down 2.5D view, original chibi cartoon character, bold black outlines 5px thick,
+cel-shaded coloring with strong shadows, vibrant saturated colors,
+transparent background, completely original design, video game sprite asset style,
+same aesthetic as Gearhead robot chibi and Phantom hooded ghost chibi characters
+```
+
+**Negative prompt universal**:
+```
+among us, crewmate, human realistic face, realistic, pixel art, text, logo, watermark,
+military, gore, copyright characters, background color, solid background, gradient background,
+weapons always visible (weapon only in attack pose), inconsistent style between panels
+```
+
+### Prompt de spritesheet completo (plantilla)
+
+```
+Six-panel sprite sheet on transparent background, 2 columns x 3 rows, each panel 512x512px.
+Top-down 2.5D original chibi cartoon character. Bold black outlines 5px. Cel-shaded.
+Same character design consistently across all 6 panels.
+
+Panel layout (L→R, top→bottom):
+[ROW 0, COL 0] IDLE: character at rest, light source glowing at front
+[ROW 0, COL 1] MOVE_A: movement pose A — [walker: left leg forward / floater: leaning forward]
+[ROW 1, COL 0] MOVE_B: movement pose B — [walker: right leg forward / floater: slight tilt other side]
+[ROW 1, COL 1] STRIKE: attack pose — [specific weapon/element] extended aggressively forward
+[ROW 2, COL 0] STUNNED: dazed pose — body tilted, head slumped, light source dim
+[ROW 2, COL 1] CARRY: one arm/limb raised as if holding something important
+
+Character: [specific character description — color, accessories, light source type, personality]
+Type: [Walker/Floater]
+Attack element: [specific weapon/element description]
+```
+
+---
+
+## 9. Los obstáculos (perspectiva 2.5D)
+
+Los obstáculos tienen perspectiva ligera que les da sensación de altura:
 - **Cara superior**: el techo del obstáculo visto desde arriba
-- **Cara frontal lateral**: una franja visible en el borde inferior que simula la pared
-- La cara lateral tiene un tono más oscuro que la superior (simulando iluminación)
+- **Cara frontal lateral**: franja en el borde inferior que simula la pared (tono más oscuro)
 
 **Tres tipos con sus dimensiones de hitbox**:
 
@@ -145,46 +255,36 @@ Los obstáculos tienen una perspectiva ligera que les da sensación de altura:
 | BARRIER | Muro largo de concreto/piedra | 400×99px |
 | ROUND | Obstáculo circular (roca, barril) | radio 80px |
 
-Cada arena tiene sus propios sprites temáticos para estos tres tipos.
+---
+
+## 10. Los efectos de luz (linterna)
+
+El cono de linterna es el elemento visual más importante del juego:
+- **Volumen**: gradiente de transparencia desde el origen hasta el borde del rango
+- **Suavidad**: 3 passes de erase con alpha decreciente — sin bordes abruptos
+- **Color**: según nivel del jugador (tabla sección 3)
+- **Glow**: halo suave en el origen del haz del mismo color que el cono
 
 ---
 
-## 5. Los efectos de luz (linterna)
-
-El cono de linterna es el elemento visual más importante del juego. Debe transmitir:
-
-- **Volumen**: el haz parece tener profundidad (gradiente de transparencia)
-- **Suavidad**: los bordes del cono no son cortantes — se difuminan levemente
-- **Color**: según el nivel del jugador (tabla de la sección 2)
-- **Glow**: el origen del haz (posición del personaje) emite un halo suave del mismo color
-
-**No renderizar** el cono como un triángulo plano — aplicar un gradiente radial de transparencia desde el origen hasta el extremo del rango.
-
----
-
-## 6. La bandera y el destino
+## 11. La bandera y el destino
 
 ### Bandera
-- Objeto ámbar/dorado con destello
-- Debe ser reconocible a primera vista cuando la linterna la ilumina
-- Efecto: pulsación suave de brillo (sin animación de spritesheet — un loop de opacity)
-- Cuando la lleva alguien: ícono flotante sobre el personaje, con pequeña sombra
+- Ícono ámbar/dorado con destello, reconocible de un vistazo
+- En suelo: pulso suave de brillo (tween Phaser)
+- Cuando alguien la porta: ícono flotante dibujado encima del personaje (encima del frame `carry`)
 - Tamaño en juego: ~32×32px visual
 
 ### Destino
 - Zona circular teal pulsante en el suelo
-- Solo visible para el portador (y para todos cuando está a 150px)
-- Debe verse como un portal o zona de energía en el suelo
-- Efecto de pulsación: 4 frames de animación (spritesheet) o generado con Phaser Graphics
+- Solo visible para el portador (y para todos cuando el portador está a ≤150px)
+- Efecto de pulsación: generado con Phaser Graphics (sin spritesheet)
 
 ---
 
-## 7. Power-ups (iconos)
+## 12. Power-ups (iconos)
 
-Cada power-up tiene un ícono 64×64px con fondo transparente. El ícono debe ser:
-- Legible en una fracción de segundo
-- Con el color dominante de esa acción
-- Contorno negro grueso (mismo estilo que personajes)
+Cada power-up tiene un ícono con fondo transparente. Legible en una fracción de segundo, con el color dominante de esa acción y contorno negro grueso.
 
 | Power-up | Color dominante | Símbolo |
 |----------|----------------|---------|
@@ -197,13 +297,13 @@ Cada power-up tiene un ícono 64×64px con fondo transparente. El ícono debe se
 
 ---
 
-## 8. Arenas — guía por escenario
+## 13. Arenas — guía por escenario
 
 Cada arena tiene:
 1. **Fondo** (background tileable o gradiente)
 2. **Sprites de obstáculos** (bunker + barrier + round temáticos)
 3. **Efectos ambientales** (partículas Phaser, opcionales)
-4. **Paleta de iluminación** del faro central (color del halo)
+4. **Paleta de iluminación** del farol central (color del halo)
 
 | Arena | Concepto | Faro color | Efectos ambient |
 |-------|---------|-----------|-----------------|
@@ -218,104 +318,30 @@ Cada arena tiene:
 
 ---
 
-## 9. UI — estética Dark Flag
-
-### Componentes principales
+## 14. UI — estética Dark Flag
 
 **Botones primarios**: gradiente morado→teal (`#7c3aed` → `#06b6d4`), border-radius 12px, glow exterior morado al hover
 
 **Cards**: background `#12132a`, border `#2d2f5e` con glow morado al hover/active, border-radius 16px
 
-**Inputs**: background `#1c1d3e`, border `#2d2f5e`, focus border `#7c3aed` con glow sutil
+**HUD del juego**:
+- Sin barra de cooldown del arma — la mecánica de uso es invisible al jugador
+- Indicadores de estado de power-ups: íconos pequeños con countdown circular (opcional)
+- Minimap: esquina inferior izquierda, 120×90px, fondo negro 70% alpha
 
-**Leaderboard**: fondo semitransparente `rgba(18,19,42,0.9)`, texto blanco, tu fila con borde ámbar
-
-**Toasts de nivel**: fondo `#12132a`, ícono de linterna animado, color del número = paleta de nivel
-
-### Tipografía
-
-- **Título principal** (Dark Flag): fuente display en mayúsculas, bold, con efecto de texto en gradiente
-- **Números de nivel en HUD**: fuente monospace o condensed, tamaño grande (60–80px), peso bold
-- **Texto de notificaciones**: fuente sin serif, peso normal, tamaño 14–16px
+**Tipografía**:
+- Título: display en mayúsculas, bold, gradiente de texto morado→teal
+- Números de nivel en HUD: monospace/condensed, bold, grande
+- Texto de notificaciones: sans-serif, 14–16px
 
 ---
 
-## 10. Prompts base para generación de IA
+## 15. Decisiones de diseño documentadas
 
-### Estilo universal (incluir en todos los prompts de personajes)
-
-```
-top-down 2.5D view, original chibi cartoon character, bold black outlines 5px thick,
-cel-shaded coloring with strong shadows, vibrant saturated colors,
-transparent background, single character centered in frame,
-video game sprite asset style, completely original design
-```
-
-### Negative prompt universal (personajes)
-
-```
-among us, crewmate, human face, realistic, pixel art, weapons in hand,
-text, logo, watermark, multiple characters, background, military, gore, copyright characters
-```
-
-### Prompt base — skin común (color sólido)
-
-```json
-{
-  "prompt": "a single cute original chibi cartoon character for a top-down video game, viewed from slightly above 2.5D angle, small round chubby body, bright azure blue color (#3b82f6), a small round lantern or light source glowing at the front of the character emitting white-blue light, no visible arms, tiny feet barely visible, bold black outline 5px thick, cel-shaded cartoon coloring, vibrant saturated colors, transparent background, single character perfectly centered, video game sprite asset style, completely original design",
-  "negative_prompt": "among us, crewmate, human face, realistic, pixel art, text, logo, watermark, multiple characters, background, weapons, military, copyright",
-  "output": "docs/08-assets/review/char-azure-draft.png",
-  "size": "1024x1024",
-  "quality": "low"
-}
-```
-
-### Prompt base — skin épico (Gearhead — APROBADO ✅)
-> Referencia visual: `docs/08-assets/review/char-mech-draft.png`
-
-```json
-{
-  "prompt": "a single cute cartoon robot character for a top-down video game, viewed from slightly above 2.5D angle, small chibi proportions, SQUARE boxy metallic head with copper and gold tones, bright round lantern built into the front of the head with warm glow bloom, mechanical rivets and bolts, small rounded body with bronze metallic panel plates, warm copper-brown and golden-yellow color scheme, bold black outline 5px thick, cel-shaded cartoon coloring, transparent background, single character centered, video game sprite asset style, steampunk aesthetic",
-  "negative_prompt": "among us, crewmate, human face, realistic, pixel art, text, logo, watermark, multiple characters, background, military, modern robot",
-  "output": "docs/08-assets/review/char-mech-draft.png",
-  "size": "1024x1024",
-  "quality": "low"
-}
-```
-
-### Prompt base — skin legendario (Phantom — APROBADO ✅)
-> Referencia visual: `docs/08-assets/review/char-phantom-draft.png`
-
-```json
-{
-  "prompt": "a single cute mysterious ghost character for a top-down video game, viewed from slightly above 2.5D angle, small chibi proportions, flowing dark hooded cloak dark purple-navy, TWO small bright glowing eyes under the dark hood, small curved horns on top of the hood, floating ethereal cyan lantern orb in front emitting ghostly pale cyan light with glow bloom, bold black outline 5px thick, cel-shaded cartoon coloring, transparent background, single character centered, video game sprite asset style, dark fantasy aesthetic",
-  "negative_prompt": "among us, crewmate, human body, realistic, pixel art, text, logo, watermark, multiple characters, background, military, halloween ghost, skeleton",
-  "output": "docs/08-assets/review/char-phantom-draft.png",
-  "size": "1024x1024",
-  "quality": "low"
-}
-```
-
-### Prompt base — obstáculo BUNKER (espacio)
-
-```json
-{
-  "prompt": "top-down 2.5D view of a destroyed space station bunker obstacle for a top-down game, dark grey metal panels, blue neon light strips on edges, top face visible + small side face visible for depth illusion, bold black outlines 5px, cartoon cel-shaded style, space station aesthetic, transparent background, video game prop",
-  "negative_prompt": "isometric, realistic, photo, logo, text",
-  "output": "docs/08-assets/review/bunker-space-draft.png",
-  "size": "1024x1024",
-  "quality": "low"
-}
-```
-
-### Prompt base — hero landing page
-
-```json
-{
-  "prompt": "top-down view dark arena scene, multiple original crewmate-inspired cartoon characters holding flashlights in complete darkness, dramatic flashlight beams (white cones of light), one character holds an amber glowing flag, mysterious atmosphere, dark blue-black background, vibrant character colors contrasting with darkness, cinematic composition, no text, game promotional art style",
-  "negative_prompt": "among us trademark, copyright, realistic, military, text, logo, watermark",
-  "output": "docs/08-assets/review/landing-hero-draft.png",
-  "size": "1536x1024",
-  "quality": "low"
-}
-```
+| Decisión | Detalle | Razón |
+|----------|---------|-------|
+| No cooldown bar del arma | El tiempo de reutilización del golpe es mecánico (server), sin indicador visual en HUD | El usuario prefiere que no haya barra de carga visible — la tensión debe sentirse en el gameplay, no en la UI |
+| Arma propia por personaje | Cada personaje tiene su elemento de ataque temático, no un "mazo" genérico | Mayor identidad y coherencia visual; el mazo es solo el nombre de la mecánica, no el arte |
+| Bandera como overlay Phaser | El frame `carry` del sprite no incluye la bandera — Phaser la dibuja encima | Reutilizable para cualquier personaje sin regenerar sprites |
+| 6 estados en 1 spritesheet | idle / move_a / move_b / strike / stunned / carry en imagen 1024×1536 | Balance entre calidad IA, consistencia visual y ahorro de tokens |
+| Estrellas de stun vía Phaser | El frame `stunned` no incluye estrellas orbitantes | Los efectos de partículas son responsabilidad de Phaser, no del sprite |
