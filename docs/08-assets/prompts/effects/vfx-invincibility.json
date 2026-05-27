@@ -1,0 +1,23 @@
+{
+  "id": "vfx-invincibility",
+  "category": "effects",
+  "name": "VFX — Escudo de Invencibilidad",
+  "generation_strategy": "1 frame generado por IA. El parpadeo se implementa con Phaser tween (alpha toggle). No requiere spritesheet.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-invincibility-shield.png",
+      "role": "Shield visible — frame único del escudo de invencibilidad",
+      "output": { "api_size": "1024x1024", "game_size": "160x160", "background": "transparent" },
+      "prompt": "Cartoon game VFX invincibility shield ring, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cool cartoon FX, Brawl Stars quality. A bold circular energy shield ring — bright cyan-white (#00CCFF) thick glowing ring with soft inner and outer glow. The ring has a cartoon cel-shaded sheen: bright white highlight arc on one side, soft cyan mid-tone base, slightly darker cyan-teal on the other side. 4-6 small diamond sparkle shapes on the ring suggesting energy. Center fully transparent (tank shows through). Semi-transparent ring overall. Clean, bold, regal shield feel. NO solid center, NO hexagon pattern, NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, hexagon, solid center, opaque, military, fire, background, text, watermark"
+    }
+  ],
+  "phaser_animation": {
+    "type": "tween — alpha oscillation (blink effect)",
+    "tween_config": "{ alpha: { from: 0.8, to: 0.15 }, duration: 180, yoyo: true, repeat: -1 }",
+    "duration_total": "INVINCIBILITY_MS (1500ms) — destroy after",
+    "depth": 12,
+    "blend_mode": "ADD"
+  }
+}

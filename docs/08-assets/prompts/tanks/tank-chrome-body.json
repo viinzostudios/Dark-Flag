@@ -1,0 +1,25 @@
+{
+  "id": "tank-chrome-body",
+  "category": "tanks",
+  "name": "Skin Chrome — Cuerpo",
+  "generation_strategy": "IMAGEN COMBINADA 1536×1024: skin body (izquierda) + cañón temático (derecha).",
+  "group_image": "tank-chrome-group.png",
+  "api_size": "1536x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-chrome-body.png",
+      "role": "Cuerpo del tanque skin Chrome (plata/premium) — skin rara",
+      "output": { "api_size": "1536x1024", "crop": "left half (0–768px)", "game_size": "128x128", "background": "transparent" },
+      "prompt": "TWO cartoon tank sprites side by side on a 1536x1024 transparent canvas. Both viewed strictly from directly above at 90 degrees (bird's eye zenith view, only TOP SURFACE visible). STYLE: vibrant premium cartoon art, Brawl Stars quality, bold dark charcoal outlines, smooth cel-shading gradients.\n\nLEFT PANEL — CHROME TANK BODY (silver/premium rare skin): Bright silver (#DDDDEE) tank body. The roof surface has: clean geometric panel lines with precise edges, circular turret ring with a polished look, armored hatch with cool metallic detail, very clean and precise geometric surface — premium and sleek. TWO SEGMENTED TRACK STRIPS on left/right edges (dark cool-gray with metallic sheen on individual links). Cel-shading: bright white specular highlight (large prominent area), cool silver-blue mid-tone, dark cool blue-gray shadow. Clean, premium, no grime. Chunky squat proportions.\n\nRIGHT PANEL — CHROME CANNON (matching silver theme): Narrow elongated rectangle pointing UP, base wider. Bright silver (#CCCCDD) with white specular highlight stripe. Cool metallic aesthetic. Bold charcoal outline.\n\nStrictly top-down. NO front/side face. NO background, NO text.",
+      "negative_prompt": "realistic chrome reflections, ray tracing, pixel art, military realism, warm orange/red colors, rust, dirt, worn, photorealistic, text, watermark, background scenery"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-chrome-body",
+    "path": "assets/tanks/skins/tank-chrome-body.png",
+    "size": { "w": 128, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 5
+  }
+}

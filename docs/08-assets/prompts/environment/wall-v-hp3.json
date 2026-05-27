@@ -1,0 +1,24 @@
+{
+  "id": "wall-v-hp3",
+  "category": "environment",
+  "name": "Muro Vertical — Sin Daño (HP 3/3)",
+  "generation_strategy": "Derivado de wall-h-hp3 rotado 90° por código en el script de proceso. No se genera por separado con IA — solo se documenta el resultado esperado.",
+  "derived_from": "wall-h-hp3.png rotado 90°",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "wall-v-hp3.png",
+      "role": "Muro vertical intacto — HP 3/3 (derivado del horizontal)",
+      "output": { "api_size": "N/A — derivado por código", "game_size": "32x128", "background": "transparent" },
+      "notes": "Generado por el script de proceso rotando wall-h-hp3.png 90°. No requiere generación IA por separado."
+    }
+  ],
+  "phaser_config": {
+    "key": "wall-v-hp3",
+    "path": "assets/walls/wall-v-hp3.png",
+    "size": { "w": 32, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 8,
+    "notes": "Versión vertical. Lo mismo aplica para wall-v-hp2 y wall-v-hp1."
+  }
+}

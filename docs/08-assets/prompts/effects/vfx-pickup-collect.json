@@ -1,0 +1,39 @@
+{
+  "id": "vfx-pickup-collect",
+  "category": "effects",
+  "name": "VFX — Recogida de Pickup",
+  "generation_strategy": "2 frames individuales (en blanco — se tinta en Phaser) → script ensambla spritesheet horizontal 160×80",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-pickup-collect-f1.png",
+      "role": "Burst peak — destello de recogida",
+      "output": { "api_size": "1024x1024", "game_size": "80x80", "background": "transparent" },
+      "prompt": "Cartoon game VFX pickup collect effect frame 1 of 2, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cartoon FX. Peak burst: a bold 8-pointed geometric star burst — clean sharp points, pure white-to-light-gray, white glowing center. Rendered in white and light gray only — will be tinted green (#44DD00) or blue (#2288FF) in-engine. Crisp, punchy, readable at 80x80px. NO color, NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, colored, smoke, explosion, background, text, watermark"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-pickup-collect-f2.png",
+      "role": "Particles scatter — partículas expandiéndose",
+      "output": { "api_size": "1024x1024", "game_size": "80x80", "background": "transparent" },
+      "prompt": "Cartoon game VFX pickup collect effect frame 2 of 2, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cartoon FX. Particle scatter: 8-10 small round white glowing dots scattered outward from center at various distances, each with a soft white glow halo, mostly transparent canvas. Rendered in white only — will be tinted in-engine. NO color, NO starburst rays, NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, colored, starburst rays, dense, background, text, watermark"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 2 frames left-to-right",
+    "final_size": "160x80",
+    "frame_size": "80x80",
+    "phaser_key": "vfx-pickup-collect",
+    "frame_rate": 16,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "tint": "0x44DD00 (verde) para ammo pickups | 0x2288FF (azul) para wall pickups",
+    "position": "pickup position",
+    "depth": 25,
+    "blend_mode": "ADD",
+    "destroy_on_complete": true
+  }
+}

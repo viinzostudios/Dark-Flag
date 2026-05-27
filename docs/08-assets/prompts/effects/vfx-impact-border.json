@@ -1,0 +1,38 @@
+{
+  "id": "vfx-impact-border",
+  "category": "effects",
+  "name": "VFX — Impacto de Bala en Borde de Arena",
+  "generation_strategy": "2 frames individuales → script ensambla spritesheet horizontal 192×96",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-impact-border-f1.png",
+      "role": "Energy discharge — choque con el borde",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX bullet-hits-arena-border impact frame 1 of 2, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cool electric cartoon FX, Brawl Stars quality. Electric discharge: bright blue-cyan circular burst — white-hot center, bold expanding ring of bright cyan-blue (#00AAFF) energy, 4-6 bold cartoon electric arc/lightning shapes branching outward (thick, angular, jagged arcs, not thin). The overall shape is round with electric tendrils. Cool blue-cyan palette, clearly electric — different from the warm orange wall impact. NO orange/fire. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, orange fire, warm colors, thin lightning, military, background, text, watermark"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-impact-border-f2.png",
+      "role": "Energy fade — onda disipándose",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX bullet-hits-border frame 2 of 2 (final), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cool electric cartoon FX fading. Fading ring: thin expanding cyan ring near canvas edge, nearly transparent, center empty. 3-4 small bright cyan dot sparks scattered near the ring. Almost gone. Same cool blue-cyan palette (#00AAFF). NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, bright, dense, orange fire, warm colors, background, text, watermark"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 2 frames left-to-right",
+    "final_size": "192x96",
+    "frame_size": "96x96",
+    "phaser_key": "vfx-impact-border",
+    "frame_rate": 18,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "position": "bounce point on arena border",
+    "depth": 20,
+    "blend_mode": "ADD",
+    "destroy_on_complete": true
+  }
+}

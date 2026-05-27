@@ -1,0 +1,25 @@
+{
+  "id": "tank-void-body",
+  "category": "tanks",
+  "name": "Skin Void — Cuerpo",
+  "generation_strategy": "IMAGEN COMBINADA 1536×1024: skin body (izquierda) + cañón temático (derecha).",
+  "group_image": "tank-void-group.png",
+  "api_size": "1536x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-void-body.png",
+      "role": "Cuerpo del tanque skin Void (espacio oscuro) — skin épica",
+      "output": { "api_size": "1536x1024", "crop": "left half (0–768px)", "game_size": "128x128", "background": "transparent" },
+      "prompt": "TWO cartoon tank sprites side by side on a 1536x1024 transparent canvas. Both viewed strictly from directly above at 90 degrees (bird's eye zenith view, only TOP SURFACE visible). STYLE: vibrant dark cartoon art, Brawl Stars quality, bold dark charcoal outlines, smooth cel-shading gradients.\n\nLEFT PANEL — VOID TANK BODY (space/void epic skin): Deep dark purple (#440066) tank body. The roof surface has: layered armor panels with electric purple energy lines (#AA00FF) glowing along the panel edges and seams — like energy channels carved into the armor, circular turret ring with a void energy glow, armored hatch with a small glowing purple gem detail. TWO SEGMENTED TRACK STRIPS on left/right edges (very dark near-black with purple edge glow, individual track links). Cel-shading: bright electric purple highlight, dark purple mid-tone, near-black shadow. Mysterious and powerful. Chunky squat proportions.\n\nRIGHT PANEL — VOID CANNON (matching void theme): Narrow elongated rectangle pointing UP, base wider. Near-black (#220033) with electric purple (#AA00FF) energy line along the barrel. Matching void aesthetic. Bold charcoal outline.\n\nStrictly top-down. NO front/side face. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, military realism, orange/warm colors, blue/cyan colors, bright cheerful look, text, watermark, background scenery"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-void-body",
+    "path": "assets/tanks/skins/tank-void-body.png",
+    "size": { "w": 128, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 5
+  }
+}

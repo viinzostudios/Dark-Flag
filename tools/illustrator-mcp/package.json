@@ -1,0 +1,13 @@
+{
+  "name": "illustrator-mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MCP server — Adobe Illustrator bridge for Arena Siege Tanks assets",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.0"
+  }
+}

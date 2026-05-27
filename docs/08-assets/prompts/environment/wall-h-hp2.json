@@ -1,0 +1,24 @@
+{
+  "id": "wall-h-hp2",
+  "category": "environment",
+  "name": "Muro Horizontal — HP 2/3 Dañado",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo muro centrado en canvas transparente. Strictly top-down 90°. Tight bbox crop → resize 128×32.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "wall-h-hp2.png",
+      "output": { "api_size": "1024x1024", "game_size": "128x32", "background": "transparent" },
+      "prompt": "A single top-down cartoon sci-fi wall barrier sprite, centered on a fully transparent background. Camera is STRAIGHT DOWN at 90 degrees — only the TOP FACE is visible, NO side face, NO front face, NO 3D perspective. The wall is a wide flat horizontal rectangle (approx 4:1 width-to-height ratio). LIGHTLY DAMAGED state — one impact. Same dark armored steel surface as the intact version but with ONE bold cartoon crack — a thick jagged diagonal crack line slashing across ~50% of the top surface, with rough cartoon edges and a slightly lighter exposed interior. A small chip missing from one corner. The energy stripe along the bottom long edge is now BRIGHT ORANGE-YELLOW (#FFAA00) with orange bloom — the glow is less stable, slightly flickering. Two LED dots glow orange. Bold dark charcoal outline. Soft drop shadow. Transparent background, nothing else.",
+      "negative_prompt": "side view, front face, isometric, any 3D perspective, realistic, photorealistic, pixel art, stone, sandy, beige, undamaged pristine, heavily destroyed, multiple cracks, text, watermark, background scenery"
+    }
+  ],
+  "phaser_config": {
+    "key": "wall-h-hp2",
+    "path": "assets/walls/wall-h-hp2.png",
+    "size": { "w": 128, "h": 32 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 8,
+    "notes": "Stripe naranja = 1 impacto recibido."
+  }
+}

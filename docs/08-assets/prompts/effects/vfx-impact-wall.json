@@ -1,0 +1,46 @@
+{
+  "id": "vfx-impact-wall",
+  "category": "effects",
+  "name": "VFX — Impacto de Bala en Muro",
+  "generation_strategy": "3 frames individuales → script ensambla spritesheet horizontal 288×96",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-impact-wall-f1.png",
+      "role": "Spark burst — chispas al impacto",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX bullet-hits-wall impact, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX, Brawl Stars quality. Frame 1 (impact burst): bold starburst of orange-yellow sparks — 8-10 short thick spark rays radiating outward, bright white glowing hot center, rays warm yellow-orange (#FFAA00) to orange-red tips. Chunky rounded spark dots scattered around the burst. Small stone chip fragments (2-3 tiny warm beige shapes) flying outward from center — suggesting the wall cracking. Punchy, immediate, full-energy impact. Wide readable shape at small size. Warm palette: white-yellow-orange. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, thin elongated sparks, smoke cloud, dark cold colors, military, background, text, watermark"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-impact-wall-f2.png",
+      "role": "Sparks mid-flight — chispas dispersándose",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX bullet impact on wall frame 2 of 3, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Mid-flight sparks: 8-10 small glowing rounded orange-yellow spark dots scattered outward from center at various distances and sizes, each with a tiny warm glow trail. A dim warm amber glow at center fading. 2 small stone chip fragments (tiny beige polygons) still traveling. Less dense than frame 1, sparks are spreading out. Warm orange-yellow palette. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, burst starburst full, static, dark, background, text, watermark"
+    },
+    {
+      "frame": 3,
+      "filename": "vfx-impact-wall-f3.png",
+      "role": "Final embers — últimas chispas",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX bullet impact on wall frame 3 of 3 (final fade), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Final embers: only 3-4 tiny fading warm orange glowing dots very spread out, each barely glowing, mostly transparent canvas. Minimal warm residual glow at center. Effect almost fully gone. Same warm orange palette as frames 1-2. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, bright intense, many sparks, background, text, watermark"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 3 frames left-to-right",
+    "final_size": "288x96",
+    "frame_size": "96x96",
+    "phaser_key": "vfx-impact-wall",
+    "frame_rate": 20,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "position": "bullet impact point on wall",
+    "depth": 20,
+    "blend_mode": "ADD",
+    "destroy_on_complete": true
+  }
+}

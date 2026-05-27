@@ -1,0 +1,23 @@
+{
+  "id": "particle-spark",
+  "category": "effects",
+  "name": "Partícula — Chispa (Phaser ParticleEmitter)",
+  "generation_strategy": "1 frame único. Phaser ParticleEmitter anima y controla el movimiento.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "particle-spark.png",
+      "role": "Punto de chispa — textura base del emitter de chispas",
+      "output": { "api_size": "1024x1024", "game_size": "8x8", "background": "transparent" },
+      "prompt": "A single bright white glowing dot/spark, perfectly centered on transparent background. Just a tiny luminous point of light, white center fading to transparent at the edges — a perfect radial gradient circle. Very small, clean. Will be tinted in the game engine. NOT pixel art, NO color, NO outline, NO background, NO text.",
+      "negative_prompt": "pixel art, elongated, streak, large, colored, outlined, background, text, watermark"
+    }
+  ],
+  "phaser_config": {
+    "type": "Phaser.GameObjects.Particles.ParticleEmitter",
+    "usages": [
+      "Chispas de impacto (complemento del VFX spritesheet): tintado naranja (#FF8800)",
+      "Power Stack aura: partículas orbitando al tanque, tintado según tier (verde/naranja/rojo)"
+    ]
+  }
+}

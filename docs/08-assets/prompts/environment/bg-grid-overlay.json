@@ -1,0 +1,27 @@
+{
+  "id": "bg-grid-overlay",
+  "category": "environment",
+  "name": "Fondo — Grid Overlay Sutil",
+  "generation_strategy": "1 imagen 1024×1024 tileable. Fondo transparente. Opcional — puede generarse en código con Phaser Graphics en lugar de imagen.",
+  "alternative": "Puede generarse con scene.add.graphics() dibujando líneas en Phaser si el resultado de IA no es satisfactorio.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "bg-grid-overlay.png",
+      "role": "Grid sutil sobre el suelo — ayuda a la legibilidad espacial del jugador",
+      "output": { "api_size": "1024x1024", "game_size": "512x512", "background": "transparent", "tileable": true },
+      "prompt": "Top-down view of a simple subtle grid overlay, 512x512 pixels, SEAMLESSLY TILEABLE, transparent background. The grid consists of very thin lines forming squares (~64px cells), the lines are a slightly darker or lighter tone than the floor — very low contrast, almost invisible, just enough to help spatial orientation. Very simple, flat cartoon style. No glow, no neon, no sci-fi. Just plain thin grid lines on transparent background. Opacity should be very low (~15%). Seamlessly tileable.",
+      "negative_prompt": "pixel art, opaque background, bright lines, neon cyan, holographic, characters, objects, non-tileable, watermark, text, thick lines"
+    }
+  ],
+  "phaser_config": {
+    "key": "bg-grid-overlay",
+    "path": "assets/environment/bg-grid-overlay.png",
+    "size": { "w": 512, "h": 512 },
+    "object": "Phaser.GameObjects.TileSprite",
+    "layer": "background",
+    "depth": 1,
+    "alpha": 0.15,
+    "notes": "Alpha muy bajo. Va encima del floor tile. Alternativa: generar en código con Phaser.GameObjects.Graphics."
+  }
+}

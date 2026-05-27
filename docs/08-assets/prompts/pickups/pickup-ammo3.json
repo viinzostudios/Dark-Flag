@@ -1,0 +1,24 @@
+{
+  "id": "pickup-ammo3",
+  "category": "pickups",
+  "name": "Pickup — Balas +3 (Común)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo pickup centrado en canvas transparente. Tight bbox crop → resize 48×48.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "pickup-ammo3.png",
+      "output": { "api_size": "1024x1024", "game_size": "48x48", "background": "transparent" },
+      "prompt": "A single cartoon game collectible pickup item centered on a fully transparent background. The item is a floating AMMO PACK containing 3 cartoon bullet cartridges. The cartridges are short fat golden-brass cylinders (bullet casings) with bright glowing green-lime tips (#44DD00), arranged in a small tight triangle cluster. Each cartridge has a bold dark charcoal outline, warm cel-shaded gradient on the brass body (bright gold highlight on top, warm amber midtone, dark brown shadow). The green tips glow softly, emitting a small lime-green aura. The whole cluster floats with a faint circular lime-green energy glow around it. A tiny sparkle star above the cluster. Cartoon proportions — fat and chunky, immediately reads as AMMUNITION. Bold dark charcoal outlines throughout. Transparent background, nothing else.",
+      "negative_prompt": "background, scenery, floor, grass, realistic, photorealistic, pixel art, sphere orbs, round balls, flat circles, gun shape, military crate, dark, text, watermark, side scene"
+    }
+  ],
+  "phaser_config": {
+    "key": "pickup-ammo3",
+    "path": "assets/pickups/pickup-ammo3.png",
+    "size": { "w": 48, "h": 48 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 6,
+    "idle_tween": "{ y: '+=4', duration: 1500, yoyo: true, repeat: -1 }"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "tank-default-tracks",
+  "category": "tanks",
+  "name": "Tanque Default — Marcas de orugas (opcional / baja prioridad)",
+  "generation_strategy": "Asset opcional. Solo generar si se implementa el sistema de rastro en el suelo. Baja prioridad.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-default-tracks.png",
+      "role": "Marca de oruga en el suelo — decal de rastro del tanque",
+      "output": { "api_size": "1024x1024", "game_size": "128x16", "background": "transparent" },
+      "prompt": "A cartoon tank track mark / tread imprint, top-down view, bold black outline, cel-shaded. A horizontal strip showing two parallel rows of simple rectangular tread impressions like tire tracks. Dark earthy brown color, flat and simple. The strip fades to transparent at both ends (alpha gradient). Clean and minimal, just a track mark. Cel-shaded cartoon style. Clean white background. NOT realistic dirt, NOT pixel art, NO text, NO watermark.",
+      "negative_prompt": "realistic dirt texture, pixel art, complex texture, 3D, color variation, text, watermark"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-tracks",
+    "path": "assets/tanks/tank-default-tracks.png",
+    "size": { "w": 128, "h": 16 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 1,
+    "notes": "Se renderiza debajo de todo (depth 1). Alpha reducido (0.3). Baja prioridad de implementación — puede omitirse en MVP."
+  }
+}

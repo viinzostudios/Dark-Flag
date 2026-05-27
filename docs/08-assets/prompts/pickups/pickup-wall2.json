@@ -1,0 +1,24 @@
+{
+  "id": "pickup-wall2",
+  "category": "pickups",
+  "name": "Pickup — Muros +2 (Poco Común)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo pickup centrado en canvas transparente. Tight bbox crop → resize 48×48.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "pickup-wall2.png",
+      "output": { "api_size": "1024x1024", "game_size": "48x48", "background": "transparent" },
+      "prompt": "A single cartoon game collectible pickup item centered on a fully transparent background. The item is a floating WALL CHARGE pickup showing 2 miniature cartoon wall blocks — chunky rectangular brick segments, bright cyan-blue (#2288FF) with bold dark charcoal outlines, cel-shaded (light blue highlight on top face, mid blue body, dark blue shadow). The two wall blocks are stacked or side by side, hovering and glowing. A soft cyan-blue energy shimmer/force-field aura wraps around the blocks like a protective glow. A small sparkle above. Very clearly reads as DEFENSIVE WALL MATERIAL — not ammunition, not coins. Bright blue, chunky, unmistakably 'wall tiles'. Transparent background, nothing else.",
+      "negative_prompt": "background, scenery, floor, realistic, photorealistic, pixel art, green color, bullets, round, golden, military, dark, text, watermark"
+    }
+  ],
+  "phaser_config": {
+    "key": "pickup-wall2",
+    "path": "assets/pickups/pickup-wall2.png",
+    "size": { "w": 48, "h": 48 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 6,
+    "idle_tween": "{ y: '+=4', duration: 1500, yoyo: true, repeat: -1 }"
+  }
+}

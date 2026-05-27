@@ -1,0 +1,45 @@
+{
+  "id": "vfx-wall-destroy",
+  "category": "effects",
+  "name": "VFX — Destrucción de Muro",
+  "generation_strategy": "3 frames individuales → script ensambla spritesheet horizontal 384×128",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-wall-destroy-f1.png",
+      "role": "Burst — fragmentos saliendo disparados",
+      "output": { "api_size": "1024x1024", "game_size": "128x128", "background": "transparent" },
+      "prompt": "Cartoon game VFX wall destruction explosion frame 1 of 3, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX, Brawl Stars quality. Burst phase: 6-8 chunky bold cartoon rectangular and triangular stone/concrete fragments flying outward from center — fragments are warm beige-gray (#B8A898) matching the wall color, with warm orange-glowing edges. Bright warm yellow-orange explosion flash at center. Dust particle puffs in warm off-white around the fragments. Bold punchy burst, feels like a solid wall exploding. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, round organic fragments, cold blue colors, military, background, text, watermark"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-wall-destroy-f2.png",
+      "role": "Fragments mid-air — fragmentos volando",
+      "output": { "api_size": "1024x1024", "game_size": "128x128", "background": "transparent" },
+      "prompt": "Cartoon game VFX wall destruction frame 2 of 3, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Mid-flight: 5-6 warm beige-gray wall fragments farther from center, edges glowing warm orange, dim amber glow at center fading. A small warm dust puff cloud at center. Warm palette. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, bright flash, cold colors, complex, military, background, text, watermark"
+    },
+    {
+      "frame": 3,
+      "filename": "vfx-wall-destroy-f3.png",
+      "role": "Settling — últimas partículas",
+      "output": { "api_size": "1024x1024", "game_size": "128x128", "background": "transparent" },
+      "prompt": "Cartoon game VFX wall destruction frame 3 of 3 (final), top-down overhead view, isolated on transparent background, centered. STYLE: warm cartoon FX fading. Final settling: 2-3 tiny dim warm orange ember dots, a tiny fading warm dust puff in the center, mostly transparent. Almost completely gone. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, large fragments, bright intense, cold, background, text, watermark"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 3 frames left-to-right",
+    "final_size": "384x128",
+    "frame_size": "128x128",
+    "phaser_key": "vfx-wall-destroy",
+    "frame_rate": 18,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "position": "center of destroyed wall",
+    "depth": 20,
+    "destroy_on_complete": true
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "id": "spritesheet-atlas-b",
+  "category": "atlas",
+  "name": "Sprite Atlas B — Common Skins (8 tanques × body + cannon)",
+  "generation_strategy": "Canvas 1536×1024 dividido en 4 columnas × 2 filas = 8 slots de 384×512. Cada slot contiene UN skin: body centrado en la mitad izquierda (192×512), cannon centrado en la mitad derecha (192×512). Misma forma del tanque default, distintos esquemas de color.",
+  "api_size": "1536x1024",
+  "draft_output": "docs/08-assets/review/spritesheet-atlas-b-draft.png",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "spritesheet-atlas-b.png",
+      "role": "Atlas de 8 skins comunes: camo, desert, arctic, rust, urban, olive, navy, charcoal",
+      "output": {
+        "api_size": "1536x1024",
+        "crop": "ver crop_regions abajo",
+        "game_size": "various",
+        "background": "transparent"
+      },
+      "prompt": "Sprite sheet atlas on a 1536x1024 fully transparent canvas. 8 tank skins arranged in a 4-column × 2-row grid of slots, each slot 384px wide × 512px tall. Thin 1px semi-transparent gray lines mark slot boundaries as guides. Art style: vibrant cartoon, cel-shaded with smooth gradient transitions (NOT harsh flat tones), bold 3-4px dark charcoal outlines (#1A1A2E), chunky proportions, Brawl Stars visual quality. Strictly 90-degree bird's-eye overhead view — only TOP SURFACE visible, NO front/side faces.\n\nEVERY TANK BODY shares the SAME chunky structural shape as the reference tank:\n  - Roof with multiple armored panel segments separated by engraved lines\n  - Prominent circular turret ring/mount in the center of the roof\n  - Small armored hatch with 4 rivets\n  - Rear ventilation grilles (parallel engraved lines)\n  - Two circular exhaust ports near rear\n  - TWO wide flat TRACK STRIPS on far left and far right edges — each showing individual chain links from above (row of small rounded rectangles)\n  - Bold charcoal outline on all edges\n  - Subtle warm drop shadow\n  - Chunky squat proportions: wide and low\n\nEVERY CANNON shares the same shape:\n  - Narrow elongated rectangle pointing UPWARD (12 o'clock direction)\n  - Slightly wider turret base plate at bottom with bolt details\n  - Barrel narrows slightly toward muzzle at top\n  - Small muzzle brake at tip (slightly wider notch)\n  - Bold charcoal outline\n\nSLOT LAYOUT:\nRow 0 (y=0..512): slot positions left-to-right at x=0, 384, 768, 1152\nRow 1 (y=512..1024): slot positions left-to-right at x=0, 384, 768, 1152\n\nWithin EACH slot (384×512):\n  - LEFT HALF (192×512): Tank BODY centered at 160×160px\n  - RIGHT HALF (192×512): Tank CANNON centered at 128×128px\n  - Thin 1px vertical guide line at x-midpoint of slot separating body/cannon\n\n===== ROW 0 SKINS =====\n\n[Slot R0C0, x=0..384] SKIN_CAMO:\n  BODY: Classic military camouflage pattern. Base color olive green (#4A6620), irregular darker green (#2D4012) and khaki (#8A7040) patches across all armor panels, same chunky shape. Track strips in dark gray-green (#2A3018). Cel-shaded with warm highlights on raised panels.\n  CANNON: Matching olive green (#3D5518) with darker barrel, same camouflage touches, bold outline.\n\n[Slot R0C1, x=384..768] SKIN_DESERT:\n  BODY: Desert sand color scheme. Warm sandy beige (#C8A060) base, pale yellow-tan (#E0C080) highlight areas on raised panels, warm brown (#7A5A30) shadow areas and tracks. Panels look slightly sun-bleached with faded paint cartoon effect (lighter worn patches on panel edges). Track strips dark warm brown.\n  CANNON: Matching sandy beige (#B89050), slightly more worn look, bold outline.\n\n[Slot R0C2, x=768..1152] SKIN_ARCTIC:\n  BODY: Arctic snow camouflage. Crisp white (#F2F2F0) base with soft light gray (#BBBBC8) shadow areas, irregular dark gray (#5A5A6A) camo patches on some panels. Track strips in medium gray (#707080). Looks clean and cold. Cel-shaded highlights are slightly blue-tinted (#E8E8FF).\n  CANNON: White (#EBEBEB) with gray (#6A6A7A) accents, bold dark outline.\n\n[Slot R0C3, x=1152..1536] SKIN_RUST:\n  BODY: Rusty worn metal cartoon style. Reddish-brown base (#7A3020), bright orange rust patches (#CC5520) on panel surfaces and edges, dark brown (#3A1808) shadow areas and crevices. Track strips in dark rust brown (#5A2010). Despite the worn theme: KEEP cartoon cel-shaded quality, bold outlines — NOT ultra-realistic grime, just stylized cartoon rust.\n  CANNON: Matching rust-brown (#7A3020) with orange rust spots, bold outline.\n\n===== ROW 1 SKINS =====\n\n[Slot R1C0, x=0..384, y=512..1024] SKIN_URBAN:\n  BODY: Urban gray camouflage. Medium gray (#707080) base, darker gray (#484858) geometric angular camo patches on panels, light gray (#9898A8) highlight areas. Track strips in charcoal gray (#3A3A4A). Clean modern city camo look.\n  CANNON: Matching medium gray (#686878) with angular dark gray patches, bold outline.\n\n[Slot R1C1, x=384..768, y=512..1024] SKIN_OLIVE:\n  BODY: Solid olive green, no pattern. Rich saturated olive (#5A7A32), warm yellow-green (#7A9A42) highlights on raised panels, deep olive shadow (#384E1E) in recessed areas. Track strips dark olive (#2E3E16). Clean solid-color military look, Brawl Stars saturated style.\n  CANNON: Slightly darker olive (#4A6828), smooth gradient, bold outline.\n\n[Slot R1C2, x=768..1152, y=512..1024] SKIN_NAVY:\n  BODY: Deep navy blue scheme. Dark navy (#1A2A4A) base, slightly lighter navy (#253566) raised panel highlights, silver-gray (#9090A0) small accent rivets and trim details, tracks in dark navy-black (#101820). Polished naval look with subtle metallic silver details.\n  CANNON: Matching dark navy (#182240) with silver trim on tip and base, bold outline.\n\n[Slot R1C3, x=1152..1536, y=512..1024] SKIN_CHARCOAL:\n  BODY: Deep charcoal dark gray scheme. Very dark charcoal (#1E1E24) base, slightly lighter charcoal (#2E2E38) on raised panels, subtle dark silver (#5A5A6A) highlight sheen on panel edges. Track strips near-black (#141418). Sleek, stealthy but still with bold outlines and visible cel-shading. NOT pure black — shows depth.\n  CANNON: Dark charcoal (#1A1A20) with subtle silver highlight stripe, bold outline.\n",
+      "negative_prompt": "side view, isometric, 3/4 angle, front face visible, lateral faces, any angle other than top-down, floating in air, realistic metal textures, photorealistic, pixel art, thin proportions, fragile-looking, pure flat colors without cel-shading, missing track strips, missing turret ring, generic blob shapes, text labels, watermarks, numbers, symbols overlaid on sprites, backgrounds"
+    }
+  ],
+  "crop_regions": {
+    "tank-camo-body":     { "x": 0,    "y": 0,   "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-camo-body.png" },
+    "tank-camo-cannon":   { "x": 192,  "y": 0,   "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-camo-cannon.png" },
+    "tank-desert-body":   { "x": 384,  "y": 0,   "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-desert-body.png" },
+    "tank-desert-cannon": { "x": 576,  "y": 0,   "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-desert-cannon.png" },
+    "tank-arctic-body":   { "x": 768,  "y": 0,   "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-arctic-body.png" },
+    "tank-arctic-cannon": { "x": 960,  "y": 0,   "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-arctic-cannon.png" },
+    "tank-rust-body":     { "x": 1152, "y": 0,   "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-rust-body.png" },
+    "tank-rust-cannon":   { "x": 1344, "y": 0,   "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-rust-cannon.png" },
+    "tank-urban-body":    { "x": 0,    "y": 512, "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-urban-body.png" },
+    "tank-urban-cannon":  { "x": 192,  "y": 512, "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-urban-cannon.png" },
+    "tank-olive-body":    { "x": 384,  "y": 512, "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-olive-body.png" },
+    "tank-olive-cannon":  { "x": 576,  "y": 512, "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-olive-cannon.png" },
+    "tank-navy-body":     { "x": 768,  "y": 512, "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-navy-body.png" },
+    "tank-navy-cannon":   { "x": 960,  "y": 512, "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-navy-cannon.png" },
+    "tank-charcoal-body": { "x": 1152, "y": 512, "w": 192, "h": 512, "game_size": "128x128", "output": "frontend/public/assets/tanks/skins/tank-charcoal-body.png" },
+    "tank-charcoal-cannon":{ "x": 1344,"y": 512, "w": 192, "h": 512, "game_size": "64x64",   "output": "frontend/public/assets/tanks/skins/tank-charcoal-cannon.png" }
+  },
+  "generation_params": {
+    "model": "gpt-image-1",
+    "quality_draft": "low",
+    "quality_final": "high",
+    "background": "transparent",
+    "output_format": "png",
+    "response_format": "b64_json"
+  },
+  "notes": "Después de generar y aprobar el borrador, recortar cada región con scripts/process-asset.js según crop_regions. Los cuerpos (192×512) y cañones (192×512) quedan muy altos — recortar el bbox del sprite real o escalar directamente a game_size sin respetar el padding. Verificar que los 8 tanques mantengan coherencia con tank-default-body.png aprobado."
+}

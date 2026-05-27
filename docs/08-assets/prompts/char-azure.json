@@ -1,0 +1,20 @@
+{
+  "id": "char-azure",
+  "character": "Lamper",
+  "description": "Lamper azul — skin común. Criatura esférica con ojo-linterna. Skin de prueba de estilo.",
+  "prompt": "a single cute original cartoon creature called a Lamper for a top-down video game, round chubby spherical blob body viewed from slightly above, ONE very large glowing circular eye on the front that acts as a built-in flashlight (eye takes up 40% of body width), azure blue body color (#3b82f6), dark navy blue iris in the large eye, bright white glowing center pupil with light bloom effect, small cute round antenna on top of head, no arms visible, no legs visible, slight top-down 2.5D perspective showing top of sphere and front face, bold black outline 5px thick, cel-shaded cartoon coloring, vibrant saturated colors, transparent background, single character perfectly centered in frame, video game sprite asset style, completely original creature not similar to any existing game character",
+  "negative_prompt": "among us, crewmate, human, humanoid, realistic, military, pixel art, weapons, arms, legs, text, logo, watermark, multiple characters, background, other characters, copyright",
+  "output": "docs/08-assets/review/char-azure-draft.png",
+  "final_output": "frontend/public/assets/characters/char-azure.png",
+  "size": "1024x1024",
+  "quality": "low",
+  "background": "transparent",
+  "output_format": "png",
+  "model": "gpt-image-1",
+  "phaser_config": {
+    "key": "char-azure",
+    "frameWidth": 128,
+    "frameHeight": 128,
+    "crop": true
+  }
+}

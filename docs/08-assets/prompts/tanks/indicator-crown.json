@@ -1,0 +1,24 @@
+{
+  "id": "indicator-crown",
+  "category": "tanks",
+  "name": "Corona del Líder — Indicador",
+  "generation_strategy": "1 imagen individual 1024×1024.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "indicator-crown.png",
+      "role": "Corona dorada que aparece sobre el tanque líder (#1 en ranking)",
+      "output": { "api_size": "1024x1024", "game_size": "48x48", "background": "transparent" },
+      "prompt": "A cartoon golden crown icon, slightly elevated front view (like a UI badge), bold dark charcoal outline, cel-shaded style, isolated on transparent background, centered. STYLE: vibrant warm cartoon game UI, Brawl Stars quality. Crown shape: a bold base band with 3 upward points (middle tallest), simple and iconic — instantly reads as a crown at 48x48px. Rich bright gold (#FFD700) with smooth cel-shading: bright warm yellow-white highlight on top face, rich golden mid-tone, warm orange-gold shadow. Subtle warm sparkle/gleam highlights. Clean, premium, bold — no gems or excessive decoration. NOT realistic, NOT pixel art, NO text, NO watermark.",
+      "negative_prompt": "realistic jewels, detailed decoration, pixel art, text, watermark, background scenery, 3D render, complex ornate design"
+    }
+  ],
+  "phaser_config": {
+    "key": "indicator-crown",
+    "path": "assets/tanks/indicator-crown.png",
+    "size": { "w": 48, "h": 48 },
+    "origin": { "x": 0.5, "y": 1.0 },
+    "depth": 10,
+    "notes": "Se posiciona sobre el tanque líder. origin.y = 1.0 para que la base de la corona quede en el punto de referencia (justo encima del tanque). Visible solo cuando player.isLeader === true."
+  }
+}

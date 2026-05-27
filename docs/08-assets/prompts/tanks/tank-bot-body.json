@@ -1,0 +1,26 @@
+{
+  "id": "tank-bot-body",
+  "category": "tanks",
+  "name": "Bot Tank — Cuerpo",
+  "generation_strategy": "IMAGEN COMBINADA 1536×1024 con bot body (izquierda) y cannon (derecha). Mismo cannon que el default pero tintado diferente en-game.",
+  "group_image": "tank-bot-group.png",
+  "api_size": "1536x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-bot-body.png",
+      "role": "Cuerpo del tanque bot (IA de relleno) — visualmente distinto al jugador",
+      "output": { "api_size": "1536x1024", "crop": "left half (0–768px)", "game_size": "128x128", "background": "transparent" },
+      "prompt": "TWO cartoon game sprites side by side on a single 1536x1024 transparent canvas. Both viewed strictly from directly above at 90 degrees (pure bird's eye zenith view). STYLE: vibrant cartoon game art — same quality as Brawl Stars, bold dark charcoal outlines, cel-shading with smooth gradients.\n\nLEFT PANEL (left half): Robot/AI BOT TANK BODY, top-down view, only the roof visible. Cool muted blue-gray (#778899) color — clearly different from the warm orange player tank. The roof surface has: angular geometric armor panels (more angular/mechanical than the player tank), a small cylindrical antenna/sensor on the rear section visible from above, a single bright red circular sensor dot on one panel (AI eye/sensor), ventilation slots, mechanical panel lines. TWO SEGMENTED TRACK STRIPS on left and right edges with individual track links visible from above. Cel-shading: cool blue-gray highlight, mid blue-gray base, darker blue-gray shadow. Drop shadow. Chunky squat proportions.\n\nRIGHT PANEL (right half): Same CANNON as the default player cannon — narrow elongated rectangle pointing UP (12 o'clock), base is wider rounded rectangle. Cool blue-gray color (#4A5566) to match the bot aesthetic. Same cel-shading quality.\n\nBoth: strictly top-down 90-degree overhead. NO front face, NO side face. Professional 2D game art.",
+      "negative_prompt": "side view, isometric, angled, front face, warm orange colors, realistic, pixel art, military, text, watermark, solid background"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-bot-body",
+    "path": "assets/tanks/tank-bot-body.png",
+    "size": { "w": 128, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 5,
+    "notes": "Usa el mismo cañón que el default (tank-default-cannon) con tint gris (#AAAAAA)."
+  }
+}

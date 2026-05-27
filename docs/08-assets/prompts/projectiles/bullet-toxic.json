@@ -1,0 +1,23 @@
+{
+  "id": "bullet-toxic",
+  "category": "projectiles",
+  "name": "Bala Tóxica — Nivel 13+ (radioactiva, 2 HP de daño)",
+  "output": "frontend/public/assets/projectiles/bullet-toxic.png",
+  "frames": [
+    {
+      "filename": "bullet-toxic.png",
+      "role": "Orbe de energía radiactiva — tóxico, verde neón brillante con aura de múltiples anillos",
+      "output": { "api_size": "1024x1024", "game_size": "64x64", "background": "transparent" },
+      "prompt": "Top-down cartoon game bullet/projectile sprite, viewed strictly from directly above at 90 degrees bird's eye view. A glowing toxic radioactive energy orb. Bold black outline (4px), cel-shaded cartoon style, isolated on perfectly transparent background, centered, nothing else in the image. The orb: bright white-green (#CCFF00) core at center, surrounded by intense neon green (#39FF14) glow, with three concentric glow/haze rings radiating outward fading to dark green. Inner ring is solid neon green, middle ring semi-transparent toxic green, outer ring a radioactive hazard glow haze. The whole orb looks dangerous, toxic, powerful. Chunky cartoon proportions, very clean edges, strong glow. Similar style to energy orbs in Brawl Stars or Clash Royale. NOT elongated, NOT a biohazard symbol, NOT a skull — purely a glowing energy ball with aura rings.",
+      "negative_prompt": "realistic, pixel art, elongated, bullet shape, military, dark background, skull, biohazard symbol, text, watermark, background scenery, white background, 3/4 view, side view, perspective"
+    }
+  ],
+  "phaser_config": {
+    "key": "bullet-toxic",
+    "path": "assets/projectiles/bullet-toxic.png",
+    "size": { "w": 64, "h": 64 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 15,
+    "notes": "Bala tóxica nivel 13+. Quita 2 HP. Usa escala 2.0 en Phaser (mostrada a ~40px)."
+  }
+}

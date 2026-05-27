@@ -1,0 +1,24 @@
+{
+  "id": "vfx-powerstack-aura-max",
+  "category": "effects",
+  "name": "VFX — Aura Power Stack Máximo (Stacks 8-10)",
+  "generation_strategy": "1 frame generado. Animación de pulso agresivo + partículas por código.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-powerstack-aura-max.png",
+      "role": "Aura roja intensa — Power Stack 8-10 (máximo)",
+      "output": { "api_size": "1024x1024", "game_size": "160x160", "background": "transparent" },
+      "prompt": "Cartoon game VFX power aura ring (maximum intensity, stacks 8-10), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant intense cartoon FX, Brawl Stars quality. A wide intense circular ring of fiery red-orange energy (#FF3300) — significantly thicker and brighter than the low aura. The ring has jagged cartoon flame-like protrusions/spikes bursting outward at 5-6 irregular points around its outer edge. Bright inner glow from the ring. Intense, aggressive energy — feels dangerous and powerful. Center fully transparent. Warm red-orange palette. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, subtle, green, blue, soft uniform circle, solid center, background, text, watermark"
+    }
+  ],
+  "phaser_animation": {
+    "type": "tween — alpha pulse (aggressive)",
+    "tween_config": "{ alpha: { from: 0.7, to: 1.0 }, duration: 300, yoyo: true, repeat: -1 }",
+    "extra": "particle-spark emitter tintado 0xFF3300, orbiting r=80px, 3 partículas/sec",
+    "depth": 9,
+    "blend_mode": "ADD",
+    "visible_when": "player.powerStack >= 8"
+  }
+}

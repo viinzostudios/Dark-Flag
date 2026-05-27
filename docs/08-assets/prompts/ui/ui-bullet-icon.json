@@ -1,0 +1,24 @@
+{
+  "id": "ui-bullet-icon",
+  "category": "ui",
+  "name": "UI — Ícono de Bala (HUD contador de munición)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo ícono centrado en canvas transparente. Tight bbox crop → resize 24×24.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "ui-bullet-icon.png",
+      "output": { "api_size": "1024x1024", "game_size": "24x24", "background": "transparent" },
+      "prompt": "A single cartoon HUD icon centered on a fully transparent background. The icon is a BULLET / PROJECTILE icon for a game HUD counter. A fat chunky cartoon bullet cartridge shape — wide brass body tapering to a rounded glowing tip. Warm gold-brass body (#C8940A) with cel-shading: bright yellow-gold highlight on the upper left, warm gold midtone, dark amber shadow. The bullet tip glows bright warm white-yellow (#FFFFA0) with a small radiant glow aura. Bold dark charcoal outline, 4-5px. The shape is INSTANTLY readable as a bullet even at 24x24px — thick, bold, iconic. No background, no scene, only the bullet icon floating centered. Transparent background.",
+      "negative_prompt": "background, scenery, realistic, photorealistic, pixel art, sphere, coin, round circle only, gun, rifle, wall, brick, text, watermark, complex detail"
+    }
+  ],
+  "phaser_config": {
+    "key": "ui-bullet-icon",
+    "path": "assets/ui/ui-bullet-icon.png",
+    "size": { "w": 24, "h": 24 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 100,
+    "notes": "HUD. N activos alpha 1.0 + (max-N) alpha 0.2. Max = 15."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "vfx-tank-explosion",
+  "category": "effects",
+  "name": "VFX — Explosión de Tanque (Muerte)",
+  "generation_strategy": "5 frames individuales → script ensambla spritesheet horizontal 1280×256",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-tank-explosion-f1.png",
+      "role": "Initial flash — detonación inicial",
+      "output": { "api_size": "1024x1024", "game_size": "256x256", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank explosion frame 1 of 5, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX, Brawl Stars quality, large and dramatic. Initial detonation flash: massive bright starburst — 8-10 thick bold spiky rays radiating outward from a blinding white-yellow core, rays gradient from white-hot center to bright golden yellow (#FFD700) to warm orange (#FF8800) at tips. Very large shape filling most of the canvas. No smoke yet, pure explosive energy light. Exaggerated, punchy, maximum impact. Warm white-yellow-orange palette. NO smoke, NO debris yet. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, smoke, debris, military, dark, subtle, cold colors, background, text, watermark"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-tank-explosion-f2.png",
+      "role": "Fireball peak — bola de fuego cartoon",
+      "output": { "api_size": "1024x1024", "game_size": "256x256", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank explosion frame 2 of 5, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX, large dramatic fireball. Fireball at peak: large round glowing fireball — bright orange (#FF6600) center with rich radiant glow, outer edge has bold cartoon flame tongues/petals pointing outward in warm red-orange, yellow flame accents. 4-6 angular dark cartoon debris chunks (simple dark warm-gray rectangles/triangles) flying outward from center. 4-5 round warm orange spark dots scattered. Exaggerated, fun, cartoon. Warm orange-red-yellow palette. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, black smoke, cold dark colors, subtle, military, background, text, watermark"
+    },
+    {
+      "frame": 3,
+      "filename": "vfx-tank-explosion-f3.png",
+      "role": "Debris scatter — fragmentos en vuelo",
+      "output": { "api_size": "1024x1024", "game_size": "256x256", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank explosion frame 3 of 5, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Debris scatter phase: 6-8 bold cartoon chunk shapes (dark warm-gray/charcoal rectangles and triangle shards) flying outward at various distances and angles from center. A warm orange-amber glow remains at center, dimmer than before. 6-8 small round warm orange spark dots scattered around. Light warm puff beginning to form at center. Warm palette: amber center, warm gray debris, orange sparks. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, heavy black smoke, complex debris, cold colors, military, background, text, watermark"
+    },
+    {
+      "frame": 4,
+      "filename": "vfx-tank-explosion-f4.png",
+      "role": "Smoke billow — nube de humo cartoon",
+      "output": { "api_size": "1024x1024", "game_size": "256x256", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank explosion frame 4 of 5, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Smoke billow: large round puffy cartoon smoke cloud covering the explosion center — 3-4 overlapping rounded puff blobs in warm off-white to warm light gray, cel-shaded with warm highlight and warm shadow tone (NOT cold gray). The cloud has warm undertones (very slight warm beige-gray). Small orange ember dots visible at cloud edges. Cartoon fluffy cloud shapes, bold rounded forms. NO pure cold gray, keep warmth in the smoke. NO background, NO text.",
+      "negative_prompt": "realistic cold black smoke, pixel art, complex realistic cloud, pure cold gray, military, bright fire visible, background, text, watermark"
+    },
+    {
+      "frame": 5,
+      "filename": "vfx-tank-explosion-f5.png",
+      "role": "Dissipating — último rastro de humo",
+      "output": { "api_size": "1024x1024", "game_size": "256x256", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank explosion frame 5 of 5 (final dissipation), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Dissipating smoke: 2-3 small fading warm wispy smoke puffs at low opacity, spreading outward, mostly transparent canvas. 1-2 tiny faint orange embers barely visible. Very sparse — explosion almost fully gone. Same warm palette as previous frames. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, dense, intense fire, cold dark, military, background, text, watermark"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 5 frames left-to-right",
+    "final_size": "1280x256",
+    "frame_size": "256x256",
+    "phaser_key": "vfx-tank-explosion",
+    "frame_rate": 14,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "position": "center of dead tank",
+    "depth": 30,
+    "destroy_on_complete": true
+  }
+}

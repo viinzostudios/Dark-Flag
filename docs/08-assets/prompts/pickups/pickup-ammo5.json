@@ -1,0 +1,24 @@
+{
+  "id": "pickup-ammo5",
+  "category": "pickups",
+  "name": "Pickup — Balas +5 (Poco Común)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo pickup centrado en canvas transparente. Tight bbox crop → resize 48×48.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "pickup-ammo5.png",
+      "output": { "api_size": "1024x1024", "game_size": "48x48", "background": "transparent" },
+      "prompt": "A single cartoon game collectible pickup item centered on a fully transparent background. The item is a floating AMMO PACK containing 5 cartoon bullet cartridges. The cartridges are short fat golden-brass cylinders (bullet casings) with bright glowing green-lime tips (#44DD00), arranged in a fan/radial pattern. Each cartridge has a bold dark charcoal outline, warm cel-shaded brass body (bright gold highlight, amber midtone, dark shadow). The green tips glow brightly, emitting a vibrant lime-green aura around the cluster — more intense than the 3-bullet version. A small white sparkle star above. The cluster is visibly bigger and more impressive than a 3-bullet pack. Cartoon proportions — chunky and readable as AMMUNITION. Transparent background, nothing else.",
+      "negative_prompt": "background, scenery, floor, realistic, photorealistic, pixel art, sphere orbs, round balls, gun shape, military, dark, text, watermark"
+    }
+  ],
+  "phaser_config": {
+    "key": "pickup-ammo5",
+    "path": "assets/pickups/pickup-ammo5.png",
+    "size": { "w": 48, "h": 48 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 6,
+    "idle_tween": "{ y: '+=4', duration: 1500, yoyo: true, repeat: -1 }"
+  }
+}

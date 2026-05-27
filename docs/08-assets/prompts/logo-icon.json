@@ -1,0 +1,8 @@
+{
+  "id": "logo-icon",
+  "output": "frontend/public/icons/",
+  "sizes": [512, 384, 192, 152, 144, 128, 96, 72],
+  "favicon_size": 32,
+  "prompt": "A cartoon game logo icon. A single chunky cartoon battle tank viewed strictly from directly above at 90 degrees (bird's eye view, top-down), only the top surface is visible. The tank is centered in the frame and fills about 70% of the canvas. Orange-golden colored tank body (#E8A020) with thick black outlines (4-5px), cel-shaded with 2-3 color tones, chunky proportions. Two wide flat rectangular tracks/treads on left and right sides. A short bold cannon barrel pointing straight upward. Subtle cel-shaded drop shadow directly below. Background: solid very dark navy #07071a. Style: cartoon, bold thick outlines, bright saturated colors, similar to Brawl Stars or Clash Royale game icons. No text, no UI elements, no ground texture, no other objects. Square composition.",
+  "negative_prompt": "text, letters, isometric, 3/4 view, perspective, front view, side view, realistic, military, pixel art, thin outlines, photorealistic"
+}

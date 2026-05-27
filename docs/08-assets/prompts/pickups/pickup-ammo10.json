@@ -1,0 +1,24 @@
+{
+  "id": "pickup-ammo10",
+  "category": "pickups",
+  "name": "Pickup — Balas +10 (Raro)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo pickup centrado en canvas transparente. Tight bbox crop → resize 64×64.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "pickup-ammo10.png",
+      "output": { "api_size": "1024x1024", "game_size": "64x64", "background": "transparent" },
+      "prompt": "A single cartoon game collectible pickup item centered on a fully transparent background. The item is a floating RARE AMMO CRATE — a small chunky cartoon ammunition box/crate overflowing with 10 cartoon bullet cartridges. The crate itself is a small bold dark wooden/metal box with a bright golden clasp and bold charcoal outlines. Multiple fat brass bullet casings with glowing green lime tips (#44DD00) burst upward from the open top of the crate in an explosive fan. A bright glowing green aura radiates from the crate. A golden sparkle ring around the whole thing signals rarity. Tiny star sparkles float around it. Very clearly reads as RARE AMMUNITION JACKPOT. Cartoon chunky proportions, cel-shaded. Transparent background, nothing else.",
+      "negative_prompt": "background, scenery, floor, realistic, photorealistic, pixel art, sphere orbs, gun shape, military, dark, dull, text, watermark"
+    }
+  ],
+  "phaser_config": {
+    "key": "pickup-ammo10",
+    "path": "assets/pickups/pickup-ammo10.png",
+    "size": { "w": 64, "h": 64 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 6,
+    "idle_tween": "{ rotation: 2*Math.PI, duration: 4000, repeat: -1 }"
+  }
+}

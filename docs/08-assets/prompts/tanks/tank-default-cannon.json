@@ -1,0 +1,25 @@
+{
+  "id": "tank-default-cannon",
+  "category": "tanks",
+  "name": "Tanque Default — Cañón",
+  "generation_strategy": "NO se genera individualmente. Se extrae del panel derecho de tank-default-group.png (1536×1024). Ver tank-default-body.json para el prompt combinado.",
+  "group_image": "tank-default-group.png",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-default-cannon.png",
+      "role": "Cañón del tanque default — gira independiente del cuerpo",
+      "output": { "api_size": "1024x1024", "game_size": "64x64", "background": "transparent" },
+      "prompt": "A cartoon tank cannon sprite viewed strictly from directly above at exactly 90 degrees (pure bird's eye / zenith view). The camera looks STRAIGHT DOWN — you see only the TOP-DOWN cross-section of the cannon barrel. The barrel appears as a NARROW ELONGATED RECTANGLE (or slightly oval tube shape seen from above) pointing straight UP toward 12 o'clock. The base (bottom of the image) is a slightly wider rounded rectangle — the turret mounting ring seen from above. The barrel narrows slightly toward the tip (top of image). Dark gray (#555566) color. Simple 2-tone cel shading on the top surface: a thin light gray highlight stripe along one side of the barrel, dark gray shadow along the other — both running lengthwise on the flat top face. Bold black outline 4px. The pivot/rotation point is at the base (bottom-center). Isolated on transparent background, centered vertically. This is NOT a side view of a cannon — it is the OVERHEAD TOP-DOWN VIEW of a barrel pointing away from you (the tip is at the top, the base is at the bottom). Cel-shaded cartoon style, chunky proportions, clean and readable. NO tank body, NOT realistic, NOT pixel art, NO text, NO watermark.",
+      "negative_prompt": "realistic, pixel art, full tank body, military realism, thin barrel, background scenery, text, watermark, side view, isometric, 3/4 view, angled perspective, cylindrical side view, barrel in profile"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-default-cannon",
+    "path": "assets/tanks/tank-default-cannon.png",
+    "size": { "w": 64, "h": 64 },
+    "origin": { "x": 0.5, "y": 0.75 },
+    "depth": 6,
+    "notes": "origin.y = 0.75 para que el pivote esté en la base del cañón. El cañón apunta hacia arriba en la imagen (eje -Y de Phaser = 0 grados). Hijo del sprite del cuerpo, posicionado en su centro."
+  }
+}

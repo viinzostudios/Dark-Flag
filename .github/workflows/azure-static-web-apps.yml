@@ -1,0 +1,101 @@
+name: Deploy Frontend to Azure Static Web Apps
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/azure-static-web-apps.yml'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - master
+    paths:
+      - 'frontend/**'
+
+permissions:
+  contents: write
+
+jobs:
+  build_and_deploy:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          lfs: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Inject ads.txt
+        env:
+          ADS_TXT_CONTENT: ${{ secrets.ADS_TXT_CONTENT }}
+        run: |
+          if [ -n "$ADS_TXT_CONTENT" ]; then
+            printf '%s\n' "$ADS_TXT_CONTENT" > public/ads.txt
+          fi
+
+      - name: Bump patch version
+        if: github.event_name == 'push'
+        working-directory: .
+        run: |
+          node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('frontend/package.json', 'utf8'));
+            const parts = pkg.version.split('.');
+            parts[2] = parseInt(parts[2]) + 1;
+            pkg.version = parts.join('.');
+            fs.writeFileSync('frontend/package.json', JSON.stringify(pkg, null, 2) + '\n');
+            fs.writeFileSync('frontend/src/app/version.ts', \`export const APP_VERSION = '\${pkg.version}';\n\`);
+            console.log('Version bumped to', pkg.version);
+          "
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build Angular (production)
+        run: npm run build -- --configuration=production
+
+      - name: Deploy to Azure Static Web Apps
+        id: deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: 'upload'
+          app_location: 'frontend/dist/frontend/browser'
+          skip_app_build: true
+          skip_api_build: true
+
+      - name: Commit bumped version
+        if: github.event_name == 'push'
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add frontend/package.json frontend/src/app/version.ts
+          git commit -m "chore: bump version [skip ci]" || echo "Nothing to commit"
+          git push origin master
+
+  close_pull_request:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close PR preview
+    steps:
+      - name: Close staging environment
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: 'close'

@@ -1,0 +1,13 @@
+{
+  "name": "arena-siege-tanks-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Asset processing scripts for Arena Siege Tanks",
+  "scripts": {
+    "process": "node process-asset.js"
+  },
+  "dependencies": {
+    "sharp": "^0.34.1"
+  }
+}

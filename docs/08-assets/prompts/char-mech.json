@@ -1,0 +1,20 @@
+{
+  "id": "char-mech",
+  "character": "Gearhead",
+  "description": "Personaje robot steampunk — skin épico. Cabeza cuadrada metálica con farol integrado. Estilo chibi/cartoon industrial.",
+  "prompt": "a single cute cartoon robot character for a top-down video game, viewed from slightly above at 2.5D angle, small chibi proportions, SQUARE boxy metallic head with copper and gold tones, a bright round lantern or spotlight built into the front of the head (the lantern IS the light source — glowing bright white-yellow center with warm glow bloom), mechanical rivets and bolts on the box head, small rounded body with bronze metallic panel plates, tiny mechanical feet barely visible, steam vent pipes on shoulders, warm copper-brown and golden-yellow color scheme (#b45309 body, #92400e shadows, #fbbf24 gold accents), glowing amber-white lantern light on front, bold black outline 5px thick, cel-shaded cartoon coloring with strong shading, vibrant saturated colors, transparent background, single character perfectly centered in frame, top-down 2.5D perspective, video game sprite asset style, completely original character design, steampunk industrial aesthetic",
+  "negative_prompt": "among us, crewmate, human face, realistic, pixel art, weapons, text, logo, watermark, multiple characters, background, military, gore, anime eyes, chibi anime, modern robot, sci-fi robot, silver chrome",
+  "output": "docs/08-assets/review/char-mech-draft.png",
+  "final_output": "frontend/public/assets/characters/char-mech.png",
+  "size": "1024x1024",
+  "quality": "low",
+  "background": "transparent",
+  "output_format": "png",
+  "model": "gpt-image-1",
+  "phaser_config": {
+    "key": "char-mech",
+    "frameWidth": 128,
+    "frameHeight": 128,
+    "crop": true
+  }
+}

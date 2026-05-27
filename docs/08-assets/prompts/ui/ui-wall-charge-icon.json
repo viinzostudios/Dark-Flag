@@ -1,0 +1,24 @@
+{
+  "id": "ui-wall-charge-icon",
+  "category": "ui",
+  "name": "UI — Ícono de Carga de Muro (HUD contador de muros)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo ícono centrado en canvas transparente. Tight bbox crop → resize 24×24.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "ui-wall-charge-icon.png",
+      "output": { "api_size": "1024x1024", "game_size": "24x24", "background": "transparent" },
+      "prompt": "A single cartoon HUD icon centered on a fully transparent background. The icon is a WALL BRICK icon for a game HUD counter — represents one deployable wall charge. A single chunky cartoon rectangular brick / wall tile, wider than tall (roughly 2:1 ratio). Bright cyan-blue (#2288FF) with bold cel-shading: bright sky-blue highlight across the top edge, medium cyan-blue body, dark navy-blue shadow along the bottom edge. A faint brick mortar line across the middle. Bold dark charcoal outline, 4-5px thick. The shape is INSTANTLY readable as a WALL TILE even at 24x24px — wide, flat, solid. Transparent background, nothing else.",
+      "negative_prompt": "background, scenery, realistic, photorealistic, pixel art, sphere, coin, bullet, green, text, watermark, cube 3D, isometric perspective, complex detail"
+    }
+  ],
+  "phaser_config": {
+    "key": "ui-wall-charge-icon",
+    "path": "assets/ui/ui-wall-charge-icon.png",
+    "size": { "w": 24, "h": 24 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 100,
+    "notes": "HUD. N activos alpha 1.0 + (max-N) alpha 0.2. Max = 10."
+  }
+}

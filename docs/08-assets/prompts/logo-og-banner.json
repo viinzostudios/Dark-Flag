@@ -1,0 +1,6 @@
+{
+  "id": "logo-og-banner",
+  "output": "frontend/public/assets/og-banner.png",
+  "prompt": "A wide horizontal game promotional banner. Left half: a chunky cartoon battle tank viewed strictly from directly above at 90 degrees (bird's eye view), orange-golden colored (#E8A020), thick black outlines, cel-shaded, chunky proportions, centered vertically. Right half: large bold cartoon text 'ARENA SIEGE TANKS' in white with thick black outline/stroke, all caps, chunky gaming font style, below it smaller text 'El juego de tanques más explosivo' in yellow. Background: very dark navy #07071a with subtle cartoon explosion sparks and particles in orange and yellow scattered around. No complex textures. Style: cartoon, vibrant, bold, mobile game promotional art style. Composition is landscape/horizontal.",
+  "negative_prompt": "realistic, military, pixel art, thin outlines, photorealistic, isometric, 3/4 view, detailed backgrounds"
+}

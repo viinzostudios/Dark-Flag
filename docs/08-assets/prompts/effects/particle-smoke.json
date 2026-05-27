@@ -1,0 +1,25 @@
+{
+  "id": "particle-smoke",
+  "category": "effects",
+  "name": "Partícula — Humo (Phaser ParticleEmitter)",
+  "generation_strategy": "IMAGEN COMBINADA 1024×1024 con las 3 partículas grandes y centradas. Las 3 se generan en una sola imagen con cada una bien separada — ver prompt. particle-spark y particle-dot se extraen de sus zonas. La imagen resultante se recorta por código.",
+  "group_image": "particles-group.png",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "particle-smoke.png",
+      "role": "Puff de humo suave — textura base del emitter",
+      "output": { "api_size": "1024x1024", "crop": "top region centered", "game_size": "32x32", "background": "transparent" },
+      "prompt": "Three particle textures on a single 1024x1024 transparent canvas, arranged vertically: one large in the top third, one medium in the center third, one small in the bottom third. All centered horizontally. All perfectly round and symmetric (usable from any angle as a particle emitter texture).\n\nTOP THIRD — SMOKE PUFF (large, ~400px diameter): A single soft round fluffy cloud puff. Warm off-white (#F5F0E8) at the core transitioning to very light warm gray at the edges, fading smoothly to fully transparent. 3-4 subtle rounded bumps on the silhouette giving it a puffy cloud character. No harsh edges, no outlines. Soft and feathery. Will be tinted warm gray in-game. Symmetric and round overall.\n\nCENTER THIRD — ENERGY DOT (medium, ~200px diameter): A single glowing energy orb/bead. Pure white (#FFFFFF) bright core, soft radial glow fading from white to transparent. Perfectly circular, smooth gradient. No outline. Versatile — will be tinted any color in-game (orange for sparks, gold for aura, cyan for respawn).\n\nBOTTOM THIRD — SPARK (small, ~80px diameter): A tiny bright spark point. Very bright white core, very tight radial glow fading quickly to transparent. Smallest of the three. A tiny 4-point star shape optional (adds visual interest at small size). No outline. Will be tinted in-game.\n\nAll three: transparent background, no outlines, soft glowing edges, symmetric.",
+      "negative_prompt": "pixel art, harsh edges, black, opaque background, colored, outlined shapes, text, watermark, isometric"
+    }
+  ],
+  "phaser_config": {
+    "type": "Phaser.GameObjects.Particles.ParticleEmitter",
+    "usages": [
+      "Tank idle exhaust: emitter trasero del tanque, 1 partícula cada 400ms, scale 0.2→0.5, alpha 0.5→0, moveToY -20px",
+      "Post-explosión: emitter breve, escala 0.5→1.5, alpha 0.7→0, múltiples partículas"
+    ]
+  }
+}

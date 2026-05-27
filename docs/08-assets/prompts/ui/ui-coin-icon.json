@@ -1,0 +1,24 @@
+{
+  "id": "ui-coin-icon",
+  "category": "ui",
+  "name": "UI — Ícono de Moneda (HUD, tienda, recompensas)",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo ícono centrado en canvas transparente. Tight bbox crop → resize 24×24.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "ui-coin-icon.png",
+      "output": { "api_size": "1024x1024", "game_size": "24x24", "background": "transparent" },
+      "prompt": "A single cartoon HUD icon centered on a fully transparent background. The icon is a GOLD COIN for a game currency display. A perfectly round coin, viewed slightly facing the viewer. Rich warm gold (#FFD700) with strong cel-shading: a bright white specular highlight in the upper-left quadrant (taking ~25% of the face), smooth gradient to warm gold mid-tone, deep amber-orange shadow on the bottom-right. A bold 5-pointed star embossed in the center, slightly raised with its own subtle shadow. A thin bright golden rim ring around the edge. Bold dark charcoal outline, 4-5px. Instantly reads as GOLD COIN at 24x24px. Transparent background, nothing else.",
+      "negative_prompt": "background, scenery, realistic, photorealistic, pixel art, bullet, wall brick, silver, bronze, dull, flat, text, watermark, complex background"
+    }
+  ],
+  "phaser_config": {
+    "key": "ui-coin-icon",
+    "path": "assets/ui/ui-coin-icon.png",
+    "size": { "w": 24, "h": 24 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 100,
+    "notes": "HUD wallet, shop, daily rewards."
+  }
+}

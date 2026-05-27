@@ -1,0 +1,24 @@
+{
+  "id": "wall-h-hp3",
+  "category": "environment",
+  "name": "Muro Horizontal — HP 3/3 Intacto",
+  "generation_strategy": "IMAGEN INDIVIDUAL 1024×1024. Un solo muro centrado en canvas transparente. Strictly top-down 90°. Tight bbox crop → resize 128×32.",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "wall-h-hp3.png",
+      "output": { "api_size": "1024x1024", "game_size": "128x32", "background": "transparent" },
+      "prompt": "A single top-down cartoon sci-fi wall barrier sprite, centered on a fully transparent background. Camera is STRAIGHT DOWN at 90 degrees — only the TOP FACE is visible, NO side face, NO front face, NO 3D perspective. The wall is a wide flat horizontal rectangle (approx 4:1 width-to-height ratio). INTACT state — no damage. Dark armored steel surface (#2A2A3A) with subtle brushed metal highlight band across the center. Bold geometric panel lines / rivets running along the long edges. A vivid BRIGHT GREEN energy stripe (#00FF66) glows along the entire bottom long edge — sharp neon glow with green bloom radiating upward across the metal surface, giving it a cool green tinted sheen. Two small glowing green LED dots near each end. Clean, sharp, pristine. Bold dark charcoal outline. Soft drop shadow below. Transparent background, nothing else.",
+      "negative_prompt": "side view, front face, isometric, any 3D perspective, angled view, realistic, photorealistic, pixel art, stone, sandy, beige, earthy, cracked, damaged, text, watermark, background scenery"
+    }
+  ],
+  "phaser_config": {
+    "key": "wall-h-hp3",
+    "path": "assets/walls/wall-h-hp3.png",
+    "size": { "w": 128, "h": 32 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 8,
+    "notes": "Stripe verde = HP completo. wall-v-hp3 = mismo PNG rotado 90° por código."
+  }
+}

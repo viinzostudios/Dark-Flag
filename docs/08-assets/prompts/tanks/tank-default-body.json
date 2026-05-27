@@ -1,0 +1,26 @@
+{
+  "id": "tank-default-body",
+  "category": "tanks",
+  "name": "Tanque Default — Cuerpo",
+  "generation_strategy": "Imagen combinada 1536×1024: body centrado en el panel izquierdo (0–768px), cañón centrado en el panel derecho (768–1536px). 1 generación API en vez de 2.",
+  "group_image": "tank-default-group.png",
+  "api_size": "1536x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-default-body.png",
+      "role": "Cuerpo principal del tanque default del jugador",
+      "output": { "api_size": "1536x1024", "crop": "left half (0–768px)", "game_size": "128x128", "background": "transparent" },
+      "prompt": "TWO separate cartoon game sprites side by side on a single 1536x1024 transparent canvas. Both viewed strictly from directly above at 90 degrees (pure bird's eye zenith view, camera pointing STRAIGHT DOWN). Transparent background. STYLE: vibrant warm cartoon palette — rich golden-oranges, glowing warm highlights, soft cel-shading with smooth gradient transitions (not harsh flat tones), bold dark charcoal outlines (#1A1A2E, not pure black), warm ambient glow on bright areas. Visual quality similar to Brawl Stars — saturated, lush, rich. High contrast and readable.\n\nLEFT PANEL (left half of canvas): Chunky cartoon TANK BODY — only TOP ROOF visible from above. Rich warm golden-orange (#E8A020) with vibrant cel-shading: bright warm yellow-orange glowing highlight area top-left, rich golden-orange mid-tone base, deep warm brown-orange shadow bottom-right with smooth transitions. Roof surface HIGHLY DETAILED: multiple layered armor panels with bold outlines and panel lines, a prominent circular turret ring/mount in the center, a small armored hatch with 4 rivets, rear ventilation grilles (parallel lines engraved on surface), two small circular exhaust ports with dark interior, stepped/raised armor plates. TWO SEGMENTED TRACK STRIPS on far left and far right edges — each shows individual track link chain segments from above (row of small rounded rectangles), wide, dark warm gray, chunky. Bold dark charcoal outline (#1A1A2E) 4px on all edges. Subtle warm drop shadow. Chunky wide squat proportions.\n\nRIGHT PANEL (right half of canvas): Cartoon TANK CANNON from directly above — barrel as a NARROW ELONGATED RECTANGLE pointing UP (12 o'clock). Bottom: wider rounded turret base plate with bolt details and circular ring. Barrel narrows slightly toward muzzle. Small muzzle brake cap at tip (slightly wider notch). Warm dark gray (#4A4A5A) with soft gradient highlight stripe. Same vibrant cartoon quality. Bold dark charcoal outline.\n\nStrictly 90-degree overhead. NO front face, NO side face, NO isometric angle. Professional 2D top-down game art.",
+      "negative_prompt": "side view, isometric, 3/4 view, angled perspective, front face visible, lateral face visible, realistic, photorealistic, pixel art, military realism, dark gritty, thin proportions, pure black outlines, flat dull colors, text, watermark, solid background"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-default-body",
+    "path": "assets/tanks/tank-default-body.png",
+    "size": { "w": 128, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 5,
+    "notes": "Rotación libre 360°. El cañón es un sprite separado hijo de este."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "vfx-bounce-flash",
+  "category": "effects",
+  "name": "VFX — Flash de Rebote de Bala",
+  "generation_strategy": "1 frame generado. Alpha fade-out por Phaser tween en 80ms. Muy rápido y pequeño.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-bounce-flash.png",
+      "role": "Flash único — destello instantáneo de rebote",
+      "output": { "api_size": "1024x1024", "game_size": "48x48", "background": "transparent" },
+      "prompt": "A small 4-pointed star burst cartoon VFX sprite, isolated on transparent background, centered. Pure white glowing center with 4 short bold pointed rays. Tiny warm yellow glow halo around it. Clean, symmetric, minimal. Cartoon game art style. Used as a bullet bounce effect. No background, no text.",
+      "negative_prompt": "realistic, pixel art, large, smoke, particles, complex, background, text, watermark, 6-pointed, 8-pointed"
+    }
+  ],
+  "phaser_animation": {
+    "type": "tween — alpha fade out",
+    "tween_config": "{ alpha: { from: 1, to: 0 }, duration: 80 }",
+    "tint": "matches bullet bounce state color (white→yellow→orange→red)",
+    "depth": 18,
+    "blend_mode": "ADD",
+    "destroy_on_complete": true
+  }
+}

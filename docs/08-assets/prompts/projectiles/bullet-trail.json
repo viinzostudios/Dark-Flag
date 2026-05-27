@@ -1,0 +1,25 @@
+{
+  "id": "bullet-trail",
+  "category": "projectiles",
+  "name": "Bala — Trail de Energía",
+  "generation_strategy": "1 imagen individual 1024×1024. Se recorta y resize a 64×16 en el script de proceso.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "bullet-trail.png",
+      "role": "Trail de energía detrás de la bala en movimiento",
+      "output": { "api_size": "1024x1024", "game_size": "64x16", "background": "transparent" },
+      "prompt": "A cartoon energy bullet trail/comet tail VFX sprite, horizontal orientation pointing LEFT, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. The trail is a glowing teardrop/flame streak shape — bright warm white (#FFFFFF) glowing hot on the RIGHT end (bullet position), transitioning through warm yellow to fully transparent on the LEFT (tail end). The streak is thin and fast-looking — narrow at both ends, widest near the right. A soft radiant warm glow around the bright end. Clean, snappy cartoon style. Will be tinted in-engine to match bullet bounce state color. NO background, NO text.",
+      "negative_prompt": "realistic smoke, pixel art, background, text, watermark, thick trail, opaque at both ends, complex"
+    }
+  ],
+  "phaser_config": {
+    "key": "bullet-trail",
+    "path": "assets/projectiles/bullet-trail.png",
+    "size": { "w": 64, "h": 16 },
+    "origin": { "x": 1.0, "y": 0.5 },
+    "depth": 14,
+    "blendMode": "ADD",
+    "notes": "origin.x = 1.0 para que el extremo brillante (derecha) esté en la posición de la bala. Rotar en sentido contrario al movimiento. Tint con color de la bala actual."
+  }
+}

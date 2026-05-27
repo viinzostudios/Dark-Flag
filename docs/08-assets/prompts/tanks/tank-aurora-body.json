@@ -1,0 +1,25 @@
+{
+  "id": "tank-aurora-body",
+  "category": "tanks",
+  "name": "Skin Aurora — Cuerpo",
+  "generation_strategy": "IMAGEN COMBINADA 1536×1024: skin body (izquierda) + cañón temático (derecha).",
+  "group_image": "tank-aurora-group.png",
+  "api_size": "1536x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-aurora-body.png",
+      "role": "Cuerpo del tanque skin Aurora (hielo/aurora boreal) — skin legendaria",
+      "output": { "api_size": "1536x1024", "crop": "left half (0–768px)", "game_size": "128x128", "background": "transparent" },
+      "prompt": "TWO cartoon tank sprites side by side on a 1536x1024 transparent canvas. Both viewed strictly from directly above at 90 degrees (bird's eye zenith view, only TOP SURFACE visible). STYLE: vibrant cool cartoon art, Brawl Stars quality, bold dark charcoal outlines, smooth cel-shading gradients.\n\nLEFT PANEL — AURORA TANK BODY (ice/aurora borealis legendary skin): Bright cyan-turquoise (#00BBCC) tank body. The roof surface has: layered armor panels with small crystalline diamond accent shapes on the panel lines, circular turret ring with a frost effect, armored hatch with ice crystal detail, subtle snowflake-like geometric engravings. TWO SEGMENTED TRACK STRIPS on left/right edges (cool dark teal-gray, individual track links). Cel-shading: bright white icy glowing highlight, rich cyan mid-tone, dark teal shadow. A subtle cool white-cyan edge glow suggesting cold energy. Chunky squat proportions.\n\nRIGHT PANEL — AURORA CANNON (matching ice theme): Narrow elongated rectangle pointing UP, base wider. Bright cyan-white (#00DDEE) with white highlight stripe, cool teal shadow. Matching aurora aesthetic. Bold charcoal outline.\n\nStrictly top-down. NO front/side face. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, military realism, orange/red warm colors, dark, gritty, text, watermark, background scenery, multiple tanks"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-aurora-body",
+    "path": "assets/tanks/skins/tank-aurora-body.png",
+    "size": { "w": 128, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 5
+  }
+}

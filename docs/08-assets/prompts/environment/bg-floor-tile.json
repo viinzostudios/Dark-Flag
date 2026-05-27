@@ -1,0 +1,32 @@
+{
+  "id": "bg-floor-tile",
+  "category": "environment",
+  "name": "Fondo — Tile de Suelo de la Arena",
+  "generation_strategy": "1 imagen 1024×1024 tileable. Fondo opaco.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "bg-floor-tile.png",
+      "role": "Tile del suelo de la arena — se repite para cubrir toda el área de juego",
+      "output": { "api_size": "1024x1024", "game_size": "512x512", "background": "opaque", "tileable": true },
+      "prompt": "Bird's eye top-down view (camera pointing straight down at 90 degrees) of a cartoon game arena floor tile. SEAMLESSLY TILEABLE, opaque flat background. Style matching a vibrant lush cartoon game (Brawl Stars / tropical platformer aesthetic): rich warm DARK DESATURATED OLIVE-GREEN (#2A3520 or similar deep earthy muted green), providing STRONG CONTRAST against bright orange tanks and warm-colored game elements. Very subtle organic flat texture — slightly varied soft brushstroke patches, like packed dirt/short grass seen from above, barely perceptible but gives life to the surface. No grid lines (separate overlay), no characters, no bright highlights. The surface must NOT attract attention — it is purely a high-contrast backdrop. Deep enough in tone that golden-orange tanks, yellow bullets, and green pickups all pop brightly against it. Seamlessly tileable with no visible seams. NOT dark sci-fi metallic, NOT bright, NOT distracting, NOT mid-gray neutral.",
+      "negative_prompt": "pixel art, dark, sci-fi, neon, grid lines, characters, objects, non-tileable edges, watermark, text, bright colors, high contrast"
+    }
+  ],
+  "wormax_alternative": {
+    "description": "En lugar de este asset, usar un color sólido CSS en el GameScene como fondo del mundo. Sin textura, sin tile, sin asset.",
+    "implementation": "this.cameras.main.setBackgroundColor('#2A3520'); // o el GameScene puede poner un Rectangle de Phaser cubriendo el área de juego",
+    "pros": ["0 tokens", "sin seam artifacts", "máximo contraste garantizado", "cambio de color instantáneo"],
+    "cons": ["menos rico visualmente", "no tiene variación de textura"],
+    "decision": "Pendiente — ambas opciones válidas"
+  },
+  "phaser_config": {
+    "key": "bg-floor-tile",
+    "path": "assets/environment/bg-floor-tile.png",
+    "size": { "w": 512, "h": 512 },
+    "object": "Phaser.GameObjects.TileSprite",
+    "layer": "background",
+    "depth": 0,
+    "notes": "TileSprite que cubre toda el área del mapa (variable según maxPlayers). Seamless tile."
+  }
+}

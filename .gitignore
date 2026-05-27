@@ -1,0 +1,64 @@
+# ──────────────────────────────
+# Node
+# ──────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ──────────────────────────────
+# Variables de entorno (NUNCA en git)
+# ──────────────────────────────
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ──────────────────────────────
+# Angular
+# ──────────────────────────────
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+
+# ──────────────────────────────
+# NestJS / TypeScript builds
+# ──────────────────────────────
+backend/*/dist/
+backend/*/.tsbuildinfo
+
+# ──────────────────────────────
+# Docker
+# ──────────────────────────────
+infra/postgres_data/
+infra/redis_data/
+
+# ──────────────────────────────
+# IDEs
+# ──────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ──────────────────────────────
+# OS
+# ──────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ──────────────────────────────
+# Logs
+# ──────────────────────────────
+*.log
+logs/
+
+# ──────────────────────────────
+# Claude Code / agentes locales
+# ──────────────────────────────
+.claude/

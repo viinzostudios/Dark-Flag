@@ -1,0 +1,46 @@
+{
+  "id": "vfx-respawn",
+  "category": "effects",
+  "name": "VFX — Respawn / Materialización de Tanque",
+  "generation_strategy": "3 frames individuales → script ensambla spritesheet horizontal 576×192",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-respawn-f1.png",
+      "role": "Particles converging — partículas entrando al centro",
+      "output": { "api_size": "1024x1024", "game_size": "192x192", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank respawn/materialization frame 1 of 3, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cool cartoon FX, cyan-white energy, Brawl Stars quality. Converging particles: 14-16 small bright glowing dots arranged in a large circle, each dot with a motion trail pointing INWARD toward the center — like energy particles being summoned and pulled toward center. Dots are bright cyan-white (#00EEFF) with a soft cyan glow. The trails are short streaks pointing inward. Center is mostly empty, particles are at the ring edge. Cool cyan-white palette, magical teleportation feel. NO orange/fire colors. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, outward explosion, fire, orange, warm colors, background, text, watermark"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-respawn-f2.png",
+      "role": "Peak glow — flash de materialización",
+      "output": { "api_size": "1024x1024", "game_size": "192x192", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank respawn frame 2 of 3, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cool cartoon FX, cyan-white peak flash. Peak materialization flash: a large bright circular burst — pure white glowing center fading to bright cyan, an expanding bold ring of cyan-white energy radiating outward. 6-8 short cyan sparkle rays around the ring edge. Bright and bold, maximum energy — the tank has just materialized. Cool cyan-white palette (#00EEFF + white). NO fire, NO orange. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, fire, orange, warm, scattered particles inward, background, text, watermark"
+    },
+    {
+      "frame": 3,
+      "filename": "vfx-respawn-f3.png",
+      "role": "Ring dissipating — onda final",
+      "output": { "api_size": "1024x1024", "game_size": "192x192", "background": "transparent" },
+      "prompt": "Cartoon game VFX tank respawn frame 3 of 3 (final), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cool cartoon FX fading. Dissipating ring: a large thin expanding cyan ring nearly at the canvas edge, fading to transparent, center completely empty. 4-6 small faint cyan dot residuals scattered near the ring. Mostly transparent, nearly gone. Same cool cyan palette (#00EEFF). NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, dense, bright center, fire, orange, background, text, watermark"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 3 frames left-to-right",
+    "final_size": "576x192",
+    "frame_size": "192x192",
+    "phaser_key": "vfx-respawn",
+    "frame_rate": 10,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "position": "spawn position of tank",
+    "depth": 25,
+    "blend_mode": "ADD",
+    "destroy_on_complete": true
+  }
+}

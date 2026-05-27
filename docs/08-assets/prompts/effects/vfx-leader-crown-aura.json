@@ -1,0 +1,24 @@
+{
+  "id": "vfx-leader-crown-aura",
+  "category": "effects",
+  "name": "VFX — Aura del Líder (Top 1)",
+  "generation_strategy": "1 frame generado. Pulso dorado por Phaser tween. Partículas ascendentes por particle-dot tintado dorado.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-leader-crown-aura.png",
+      "role": "Aura dorada del líder — frame único",
+      "output": { "api_size": "1024x1024", "game_size": "192x192", "background": "transparent" },
+      "prompt": "Cartoon game VFX leader crown aura ring, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant regal cartoon FX, Brawl Stars quality. A bold ornate ring of rich golden energy (#FFD700) — the ring has a warm gold-to-bright-yellow gradient glow. 4 slightly brighter golden accent points at N/S/E/W positions with small decorative diamond sparkles, suggesting a crown. Warm golden glow inward and outward from the ring. Regal, prestigious, clearly 'the leader'. Center fully transparent. Rich warm gold palette. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, red, aggressive, chaotic, opaque center, complex, background, text, watermark"
+    }
+  ],
+  "phaser_animation": {
+    "type": "tween — alpha + scale pulse (regal rhythm)",
+    "tween_config": "{ alpha: { from: 0.8, to: 1.0 }, scale: { from: 0.97, to: 1.03 }, duration: 1800, yoyo: true, repeat: -1 }",
+    "extra": "particle-dot emitter tintado 0xFFD700, partículas flotando hacia arriba desde el anillo, 2 partículas/sec, alpha 0.8→0",
+    "depth": 9,
+    "blend_mode": "ADD",
+    "visible_when": "player.isLeader === true"
+  }
+}

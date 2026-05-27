@@ -1,0 +1,23 @@
+{
+  "id": "vfx-powerstack-aura-low",
+  "category": "effects",
+  "name": "VFX — Aura Power Stack Bajo (Stacks 1-3)",
+  "generation_strategy": "1 frame generado. Animación de pulso suave por Phaser tween.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-powerstack-aura-low.png",
+      "role": "Aura verde sutil — Power Stack 1-3",
+      "output": { "api_size": "1024x1024", "game_size": "160x160", "background": "transparent" },
+      "prompt": "Cartoon game VFX power aura ring (low intensity, stacks 1-3), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant cartoon FX. A thin, subtle circular glow ring in vibrant lime-green (#44DD00). Soft, not aggressive — just a gentle energy presence around the tank. The ring glows softly from its inner edge outward, fading to transparent. Center fully transparent. A slight bright green highlight arc on one side. Simple and clean. NO particles, NO flames, NO solid center. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, intense, flames, complex, particles, solid center, background, text, watermark"
+    }
+  ],
+  "phaser_animation": {
+    "type": "tween — alpha pulse (gentle)",
+    "tween_config": "{ alpha: { from: 0.3, to: 0.6 }, duration: 1200, yoyo: true, repeat: -1 }",
+    "depth": 9,
+    "blend_mode": "ADD",
+    "visible_when": "player.powerStack >= 1 && player.powerStack <= 3"
+  }
+}

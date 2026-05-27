@@ -1,0 +1,47 @@
+{
+  "id": "vfx-muzzle-flash",
+  "category": "effects",
+  "name": "VFX — Muzzle Flash (Destello de Disparo)",
+  "generation_strategy": "3 frames individuales 1024×1024 → script ensambla spritesheet horizontal 288×96",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "vfx-muzzle-flash-f1.png",
+      "role": "Peak flash — destello máximo al disparar",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX muzzle flash, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX matching Brawl Stars quality — bright glowing energy, warm saturated colors, bold punchy shapes. Frame 1 of 3 (peak flash): massive bold cartoon starburst explosion — 6-8 sharp spiky rays radiating outward symmetrically, white-hot glowing core at center, rays transition from bright white to warm golden-yellow (#FFD700) to orange (#FF8800) at tips. The entire shape has a warm radiant glow emanating outward. No hard outlines on light — pure glowing energy. Wide, energetic, exaggerated cartoon punch. The shape must read instantly even at 96x96px. NOT realistic smoke, NOT pixel art, NO background, NO text.",
+      "negative_prompt": "realistic, photorealistic, smoke, subtle, dark, military, pixel art, background, text, watermark, cold colors, gray"
+    },
+    {
+      "frame": 2,
+      "filename": "vfx-muzzle-flash-f2.png",
+      "role": "Expanding ring — onda expansiva",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX muzzle flash frame 2 of 3, top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX, Brawl Stars quality. Expanding energy ring: bold circular ring of warm orange-yellow energy (#FF9900), the ring is thick and bright, center is mostly transparent/empty showing the ring has expanded outward. 6-8 small rounded warm orange spark dots scattered beyond the ring edge. The ring glows warmly. Less intense than frame 1 but still bold and punchy. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, starburst full, dense center, smoke, dark, military, background, text, watermark"
+    },
+    {
+      "frame": 3,
+      "filename": "vfx-muzzle-flash-f3.png",
+      "role": "Residual — último rastro antes de desaparecer",
+      "output": { "api_size": "1024x1024", "game_size": "96x96", "background": "transparent" },
+      "prompt": "Cartoon game VFX muzzle flash frame 3 of 3 (final fade), top-down overhead view, isolated on transparent background, centered. STYLE: vibrant warm cartoon FX. Final residual: only 4-6 small glowing warm orange spark dots scattered loosely in a circle, each dot with a tiny warm glow, fading at different opacity levels. A barely perceptible tiny warm amber glow at center. Mostly transparent — the effect is almost gone. Same warm color palette as frames 1-2. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, bright full burst, smoke, ring, background, text, watermark, dark, cold"
+    }
+  ],
+  "assembly": {
+    "layout": "horizontal spritesheet, 3 frames left-to-right",
+    "final_size": "288x96",
+    "frame_size": "96x96",
+    "phaser_key": "vfx-muzzle-flash",
+    "frame_rate": 20,
+    "repeat": 0
+  },
+  "phaser_config": {
+    "position": "tip of cannon barrel",
+    "rotation": "same as cannon angle",
+    "depth": 25,
+    "blend_mode": "ADD",
+    "destroy_on_complete": true
+  }
+}

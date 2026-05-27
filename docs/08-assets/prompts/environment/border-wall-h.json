@@ -1,0 +1,25 @@
+{
+  "id": "border-wall-h",
+  "category": "environment",
+  "name": "Borde de Arena — Pared Horizontal",
+  "generation_strategy": "1 imagen 1024×1024. Se recorta a tamaño de juego. La versión vertical se deriva rotando 90°.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "border-wall-h.png",
+      "role": "Borde horizontal de la arena — indestructible, las balas rebotan",
+      "output": { "api_size": "1024x1024", "game_size": "128x48", "background": "transparent" },
+      "prompt": "Cartoon arena boundary wall segment sprite, viewed strictly from directly above at 90 degrees (bird's eye zenith view, only TOP FACE visible), isolated on transparent background. STYLE: vibrant warm cartoon game art, Brawl Stars quality. A thick chunky horizontal rectangle — clearly heavier and more imposing than the destructible player walls. Warm dark stone/concrete color (#555550 dark charcoal-gray with warm undertone), surface has bold cartoon reinforcement details visible from above: parallel bolt/rivet rows along the length, 2-3 recessed panel lines, chunky solid feel. The inner long edge (top of rectangle in image) has bold yellow-black diagonal cartoon hazard stripes — a warning band clearly indicating the boundary. Bold dark charcoal outline. Chunky, solid, indestructible-looking. NO background, NO text.",
+      "negative_prompt": "realistic, pixel art, thin, fragile, blue glow, neon sci-fi, text, watermark, background scenery, complex details"
+    }
+  ],
+  "phaser_config": {
+    "key": "border-wall-h",
+    "path": "assets/environment/border-wall-h.png",
+    "size": { "w": 128, "h": 48 },
+    "object": "Phaser.GameObjects.TileSprite",
+    "positions": "bordes superior e inferior de la arena",
+    "depth": 5,
+    "notes": "Las balas rebotan en estos bordes. Indestructibles. border-wall-v se deriva rotando 90°."
+  }
+}

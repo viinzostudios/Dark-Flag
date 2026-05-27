@@ -1,0 +1,20 @@
+{
+  "id": "char-phantom",
+  "character": "Phantom",
+  "description": "Personaje fantasma encapuchado — skin legendario. Capa oscura fluyendo con ojos brillantes y farol fantasmal. Estilo misterioso oscuro.",
+  "prompt": "a single cute mysterious ghost character for a top-down video game, viewed from slightly above at 2.5D angle, small chibi proportions, wearing a flowing dark hooded cloak that spreads slightly around the base (cloak viewed from top shows hood and flowing fabric), TWO small bright glowing eyes visible under the dark hood (bright cyan-white glow), small decorative curved horns on top of the hood, a floating ethereal lantern orb in front of the character emitting ghostly pale cyan light (#67e8f9) with soft glow bloom effect, cloak is deep dark purple-navy (#1e1b4b) with subtle spiral patterns at the hem, pale lavender highlights on cloak folds, bold black outline 5px thick, cel-shaded cartoon coloring, vibrant glowing cyan-white lantern contrast against dark cloak, transparent background, single character perfectly centered in frame, top-down 2.5D perspective, video game sprite asset style, completely original character design, mysterious ghost aesthetic, dark fantasy style",
+  "negative_prompt": "among us, crewmate, human body, realistic, pixel art, weapons, text, logo, watermark, multiple characters, background, military, gore, classic halloween ghost, bedsheet ghost, skeleton, skull",
+  "output": "docs/08-assets/review/char-phantom-draft.png",
+  "final_output": "frontend/public/assets/characters/char-phantom.png",
+  "size": "1024x1024",
+  "quality": "low",
+  "background": "transparent",
+  "output_format": "png",
+  "model": "gpt-image-1",
+  "phaser_config": {
+    "key": "char-phantom",
+    "frameWidth": 128,
+    "frameHeight": 128,
+    "crop": true
+  }
+}

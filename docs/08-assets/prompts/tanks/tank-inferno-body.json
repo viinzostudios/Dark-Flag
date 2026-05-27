@@ -1,0 +1,25 @@
+{
+  "id": "tank-inferno-body",
+  "category": "tanks",
+  "name": "Skin Inferno — Cuerpo",
+  "generation_strategy": "IMAGEN COMBINADA 1536×1024: skin body (izquierda) + cañón temático (derecha).",
+  "group_image": "tank-inferno-group.png",
+  "api_size": "1536x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "tank-inferno-body.png",
+      "role": "Cuerpo del tanque skin Inferno (fuego/lava) — skin legendaria",
+      "output": { "api_size": "1536x1024", "crop": "left half (0–768px)", "game_size": "128x128", "background": "transparent" },
+      "prompt": "TWO cartoon tank sprites side by side on a 1536x1024 transparent canvas. Both viewed strictly from directly above at 90 degrees (bird's eye zenith view, only TOP SURFACE visible). STYLE: vibrant warm cartoon art, Brawl Stars quality, bold dark charcoal outlines, smooth cel-shading gradients.\n\nLEFT PANEL — INFERNO TANK BODY (fire/lava legendary skin): Deep crimson-red (#CC2200) tank body. The roof surface has: layered armor panels with bold flame-shaped decorative paint — cartoon flame motifs (bold orange-yellow pointed flame shapes) integrated into the armor panels, circular turret ring, armored hatch with flame accent. TWO SEGMENTED TRACK STRIPS on left/right edges (dark warm gray, individual track links). Cel-shading: bright warm orange-red glowing highlight, rich red mid-tone, dark maroon shadow. A subtle warm orange edge glow suggesting heat. Chunky squat proportions.\n\nRIGHT PANEL — INFERNO CANNON (matching fire theme): Same narrow elongated rectangle shape pointing UP (12 o'clock), base wider. Deep red-black (#330000) with orange energy line highlight along the barrel. Matching fire aesthetic. Bold charcoal outline.\n\nStrictly top-down. NO front/side face. NO background, NO text.",
+      "negative_prompt": "realistic fire, pixel art, military realism, blue colors, cute/innocent look, text, watermark, background scenery, realistic lava"
+    }
+  ],
+  "phaser_config": {
+    "key": "tank-inferno-body",
+    "path": "assets/tanks/skins/tank-inferno-body.png",
+    "size": { "w": 128, "h": 128 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 5
+  }
+}

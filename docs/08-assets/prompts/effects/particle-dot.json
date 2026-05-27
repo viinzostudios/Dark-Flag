@@ -1,0 +1,24 @@
+{
+  "id": "particle-dot",
+  "category": "effects",
+  "name": "Partícula — Dot de Energía (Phaser ParticleEmitter)",
+  "generation_strategy": "1 frame único. Phaser ParticleEmitter anima y controla el movimiento.",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "particle-dot.png",
+      "role": "Punto de energía — textura genérica para trails y auras",
+      "output": { "api_size": "1024x1024", "game_size": "12x12", "background": "transparent" },
+      "prompt": "A single small round glowing energy dot, perfectly centered on transparent background. Bright white core with soft radial glow fading to transparent. Perfectly circular, slightly larger than particle-spark. Versatile energy bead — will be tinted different colors in the game engine. NOT pixel art, NO color, NO outline, NO background, NO text.",
+      "negative_prompt": "pixel art, elongated, colored, outlined, complex, background, text, watermark"
+    }
+  ],
+  "phaser_config": {
+    "type": "Phaser.GameObjects.Particles.ParticleEmitter",
+    "usages": [
+      "Bullet trail: partículas detrás de la bala, tintadas según bounce state (blanco/amarillo/naranja/rojo)",
+      "Respawn: partículas convergiendo al centro",
+      "Leader aura: partículas doradas flotando hacia arriba, tintadas 0xFFD700"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "bullet-bounce1",
+  "category": "projectiles",
+  "name": "Bala — 1 Rebote Restante",
+  "generation_strategy": "Se genera en grid 2×2 junto con bounce3, bounce2, bounce0 en una imagen 1024×1024.",
+  "group_image": "bullets-grid.png",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "bullet-bounce1.png",
+      "role": "Bala con 2 rebotes usados — color naranja, señal de advertencia",
+      "output": { "api_size": "1024x1024", "game_size": "32x32", "background": "transparent" },
+      "prompt": "A cartoon game bullet sprite, round energy orb, bold black outline, cel-shaded style, isolated on transparent background, centered. The bullet is a small round sphere, bright orange (#FF8800) with an orange glow/halo. Simple 2-tone cel shading: bright yellow-orange highlight, mid orange base. Bold and clean cartoon style. NOT realistic, NOT pixel art, NOT elongated. Round cartoon ball in orange as a warning signal.",
+      "negative_prompt": "realistic, pixel art, elongated, military, dark, complex, white color, yellow color, red color, text, watermark, background scenery"
+    }
+  ],
+  "phaser_config": {
+    "key": "bullet-bounce1",
+    "path": "assets/projectiles/bullet-bounce1.png",
+    "size": { "w": 32, "h": 32 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 15,
+    "notes": "Bala naranja. Solo queda 1 rebote. Señal visual de advertencia."
+  }
+}

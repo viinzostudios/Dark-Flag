@@ -1,0 +1,26 @@
+{
+  "id": "bullet-bounce3",
+  "category": "projectiles",
+  "name": "Bala — todos los estados (grid 2×2)",
+  "generation_strategy": "IMAGEN COMBINADA 1024×1024 con los 4 estados en grid 2×2. Los otros bullet JSONs (bounce2/1/0) se extraen de esta imagen por código. Cada celda ocupa 512×512px del canvas.",
+  "group_image": "bullets-grid.png",
+  "api_size": "1024x1024",
+  "frames": [
+    {
+      "frame": 1,
+      "filename": "bullet-bounce3.png",
+      "role": "Bala fresca — máximo rebotes disponibles (extraída del grid, celda top-left)",
+      "output": { "api_size": "1024x1024", "crop": "top-left 512x512", "game_size": "32x32", "background": "transparent" },
+      "prompt": "Four cartoon game bullet/projectile sprites arranged in a 2x2 grid on a single 1024x1024 transparent canvas. Each sprite occupies one quadrant (512x512). Viewed from directly above (top-down zenith). STYLE: vibrant glowing energy orbs, cel-shaded cartoon style, smooth gradient shading, dark charcoal outlines (#1A1A2E), warm glow effects, professional game art quality matching Brawl Stars aesthetic. Each bullet is a perfectly round circle (disc seen from above), NO elongated shapes.\n\nTOP-LEFT (bounce3, fresh): Brilliant white-to-pale-cyan energy orb. Bright white (#FFFFFF) glowing core, soft cyan-white rim, intense warm white radiance glow halo. 2-tone shading: pure white highlight, pale cream base. Small bright star sparkle highlight. Most energetic and bright.\n\nTOP-RIGHT (bounce2, 1 bounce used): Rich warm yellow energy orb (#FFE000). Bright yellow glowing core, golden-yellow rim, warm yellow glow halo. Slightly less intense than bounce3. Saturated vibrant yellow.\n\nBOTTOM-LEFT (bounce1, 2 bounces used): Deep warm orange energy orb (#FF8800). Orange glowing core, burnt-orange rim, orange glow halo. Clearly degraded from yellow. Feels hotter/more dangerous.\n\nBOTTOM-RIGHT (bounce0, last bounce, most dangerous): Intense red energy orb (#FF2222). Deep red glowing core, dark crimson rim, red glow halo with subtle dark edges. Most dangerous, darkest variant.\n\nAll four: round circles, transparent background per quadrant, bold dark charcoal outlines, warm glow radiating outward, crisp and readable at small scale. Grid perfectly divided into 4 equal cells.",
+      "negative_prompt": "elongated, oval, missile, bullet silhouette, realistic, pixel art, military, text, watermark, solid background, non-circular, isometric"
+    }
+  ],
+  "phaser_config": {
+    "key": "bullet-bounce3",
+    "path": "assets/projectiles/bullet-bounce3.png",
+    "size": { "w": 32, "h": 32 },
+    "origin": { "x": 0.5, "y": 0.5 },
+    "depth": 15,
+    "notes": "Bala fresca. Color blanco-amarillo. Swap a bounce2 tras el primer rebote."
+  }
+}

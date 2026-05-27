@@ -1,0 +1,1 @@
+# Injected by CI pipeline from ADS_TXT_CONTENT secret
