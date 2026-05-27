@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { GAME, COLORS, getArenaColor, scoreToLevel } from '../constants';
+import { SPRITESHEET_CHARS } from './PreloadScene';
 import { PlayerTank } from '../objects/PlayerTank';
 import { RemoteTank } from '../objects/RemoteTank';
 import { FlagObject } from '../objects/FlagObject';
@@ -45,7 +46,7 @@ export class GameScene extends Phaser.Scene {
   private powerUps  = new Map<string, PowerUpPickup>();
   private obstacleImages: Phaser.GameObjects.Image[] = [];
 
-  // Dark overlay — viewport-sized RenderTexture with flashlight cones erased
+  // Darkness: full-screen RenderTexture filled with black; flashlight cone erased each frame
   private darkOverlay: Phaser.GameObjects.RenderTexture | null = null;
   private flashlightGfx: Phaser.GameObjects.Graphics | null = null;
 
@@ -110,7 +111,7 @@ export class GameScene extends Phaser.Scene {
     this.flagObject      = new FlagObject(this);
     this.destinationZone = new DestinationZone(this);
 
-    // Off-screen graphics used to erase flashlight cones from dark overlay
+    // Flashlight cone graphics — invisible to scene camera, used only as erase() source
     this.flashlightGfx = this.add.graphics().setScrollFactor(0).setDepth(49).setVisible(false);
 
     this.audio = new AudioManager();
@@ -260,9 +261,9 @@ export class GameScene extends Phaser.Scene {
     const now = Date.now();
     if (this.localInvincibleUntil > now) {
       const blinkOn = Math.floor(now / GAME.BLINK_INTERVAL_MS) % 2 === 0;
-      this.player.body.setAlpha(blinkOn ? 1 : 0.3);
+      this.player.setVisualAlpha(blinkOn ? 1 : 0.3);
     } else {
-      this.player.body.setAlpha(1);
+      this.player.setVisualAlpha(1);
     }
 
     // HUD
@@ -288,22 +289,42 @@ export class GameScene extends Phaser.Scene {
 
   private rebuildDarkOverlay(): void {
     this.darkOverlay?.destroy();
+    this.darkOverlay = null;
+
     const { width, height } = this.scale;
-    this.darkOverlay = this.add.renderTexture(0, 0, width, height)
-      .setScrollFactor(0).setDepth(50);
+    const cam = this.cameras.main;
+    const zoom = cam?.zoom || 1;
+    // RT spans full screen in world units: width/zoom × height/zoom.
+    // cam.x ≠ 0 when zoom ≠ 1 (Phaser shifts viewport), but the texture size
+    // only needs to cover screenW/zoom world units regardless of cam.x.
+    const texW = Math.ceil(width  / zoom) + 4;
+    const texH = Math.ceil(height / zoom) + 4;
+    this.darkOverlay = this.add.renderTexture(0, 0, texW, texH)
+      .setDepth(50).setOrigin(0, 0);
   }
 
   private updateDarkness(): void {
     if (!this.darkOverlay || !this.flashlightGfx) return;
 
-    const isBlackout = Date.now() < this.lastBlackoutUntil;
-    const alpha = isBlackout ? 0.97 : 0.88;
-    this.darkOverlay.fill(0x000000, alpha);
-
-    // Revelation power: skip flashlight cones → full visibility
-    if (this.localActivePower === 'REVELATION') return;
-
     const cam = this.cameras.main;
+    const isBlackout = Date.now() < this.lastBlackoutUntil;
+    const alpha = isBlackout ? 0.995 : 0.97;
+
+    // getWorldPoint(0,0) is the authoritative world position that maps to screen (0,0),
+    // accounting for all camera transforms (scroll, zoom, cam.x/cam.y offsets).
+    const topLeft = cam.getWorldPoint(0, 0);
+    const rtX = topLeft.x;
+    const rtY = topLeft.y;
+    this.darkOverlay.setPosition(rtX, rtY);
+
+    this.flashlightGfx.clear();
+
+    // REVELATION power-up: no darkness — transparent overlay
+    if (this.localActivePower === 'REVELATION') {
+      this.darkOverlay.fill(0x000000, 0);
+      this.darkOverlay.render();
+      return;
+    }
 
     for (const p of this.lastPlayers) {
       if (!p.lightOn || p.isDead) continue;
@@ -321,14 +342,15 @@ export class GameScene extends Phaser.Scene {
         wx = pos.x; wy = pos.y; angle = p.aimAngle;
       }
 
-      // World → screen
-      const sx = (wx - cam.scrollX) * cam.zoom;
-      const sy = (wy - cam.scrollY) * cam.zoom;
-
-      this.flashlightGfx.clear();
-      this.drawFlashlightCone(this.flashlightGfx, sx, sy, angle, cam.zoom);
-      this.darkOverlay.erase(this.flashlightGfx);
+      // Cone drawn in WORLD coordinates (zoom=1 → world units)
+      this.drawFlashlightCone(this.flashlightGfx, wx, wy, angle, 1, p.level);
     }
+
+    // Fill RT black, erase cone. Erase offset = -rtX/-rtY maps world→texture-local coords.
+    // render() MUST be called — fill/erase only queue commands in Phaser 4.
+    this.darkOverlay.fill(0x000000, alpha);
+    this.darkOverlay.erase(this.flashlightGfx, -rtX, -rtY);
+    this.darkOverlay.render();
   }
 
   private drawFlashlightCone(
@@ -337,22 +359,37 @@ export class GameScene extends Phaser.Scene {
     sy: number,
     angle: number,
     zoom: number,
+    level = 1,
   ): void {
-    const halfAngle  = GAME.LIGHT_CONE_ANGLE / 2;
-    const range      = GAME.LIGHT_CONE_RANGE * zoom;
+    const levelBonus = Math.min(level - 1, GAME.MAX_LEVEL - 1);
+    const coneAngle  = GAME.LIGHT_CONE_ANGLE + (levelBonus * 2 * Math.PI / 180);
+    const range      = (GAME.LIGHT_CONE_RANGE + levelBonus * 8) * zoom;
+    const halfAngle  = coneAngle / 2;
     const playerR    = GAME.PLAYER_RADIUS * zoom;
+    const rays       = GAME.LIGHT_RAY_COUNT;
 
     gfx.fillStyle(0xffffff, 1);
 
-    // Small full circle immediately around the player (always lit)
-    gfx.fillCircle(sx, sy, playerR + 4 * zoom);
+    // Small ambient circle around the player (always visible near self)
+    gfx.fillCircle(sx, sy, playerR + 6 * zoom);
 
-    // Cone polygon
+    // Main cone
     gfx.beginPath();
     gfx.moveTo(sx, sy);
-    for (let i = 0; i <= GAME.LIGHT_RAY_COUNT; i++) {
-      const a = angle - halfAngle + (i / GAME.LIGHT_RAY_COUNT) * GAME.LIGHT_CONE_ANGLE;
+    for (let i = 0; i <= rays; i++) {
+      const a = angle - halfAngle + (i / rays) * coneAngle;
       gfx.lineTo(sx + Math.cos(a) * range, sy + Math.sin(a) * range);
+    }
+    gfx.closePath();
+    gfx.fillPath();
+
+    // Soft edge: slightly wider cone at lower alpha (extends the visible area a bit)
+    gfx.fillStyle(0xffffff, 0.35);
+    gfx.beginPath();
+    gfx.moveTo(sx, sy);
+    for (let i = 0; i <= rays; i++) {
+      const a = angle - halfAngle + (i / rays) * coneAngle;
+      gfx.lineTo(sx + Math.cos(a) * range * 1.18, sy + Math.sin(a) * range * 1.18);
     }
     gfx.closePath();
     gfx.fillPath();
@@ -474,6 +511,7 @@ export class GameScene extends Phaser.Scene {
       if (!rt) {
         rt = new RemoteTank(this, p.id, p.x, p.y, p.username, p.characterSlug);
         this.remoteTanks.set(p.id, rt);
+        if (p.characterSlug) rt.applyCharacter(p.characterSlug);
         if (!p.isDead) this.spawnSpawnEffect(p.x, p.y);
       }
 
@@ -519,13 +557,16 @@ export class GameScene extends Phaser.Scene {
     if (!this.localLightOn) return false;
     if (this.localActivePower === 'REVELATION') return true;
 
-    const dx    = wx - this.player.x;
-    const dy    = wy - this.player.y;
-    const dist  = Math.sqrt(dx * dx + dy * dy);
-    if (dist > GAME.LIGHT_CONE_RANGE) return false;
+    const levelBonus = Math.min(this.localLevel - 1, GAME.MAX_LEVEL - 1);
+    const range      = GAME.LIGHT_CONE_RANGE + levelBonus * 8;
+    const halfCone   = (GAME.LIGHT_CONE_ANGLE + levelBonus * 2 * Math.PI / 180) / 2;
 
-    const angle    = Math.atan2(dy, dx);
-    const halfCone = GAME.LIGHT_CONE_ANGLE / 2;
+    const dx   = wx - this.player.x;
+    const dy   = wy - this.player.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > range) return false;
+
+    const angle = Math.atan2(dy, dx);
     let diff = angle - this.player.aimAngle;
     while (diff > Math.PI)  diff -= Math.PI * 2;
     while (diff < -Math.PI) diff += Math.PI * 2;
@@ -583,7 +624,9 @@ export class GameScene extends Phaser.Scene {
     this.obstacleImages = [];
 
     for (const obs of obstacles) {
-      const key = obs.isCircle ? 'obs-round' : 'obs-barrier';
+      const key = obs.isCircle ? 'obs-round'
+        : obs.type === 'BUNKER' ? 'obs-bunker'
+        : 'obs-barrier';
       if (this.textures.exists(key)) {
         const img = this.add.image(obs.x, obs.y, key)
           .setDisplaySize(obs.w, obs.h)
@@ -644,6 +687,8 @@ export class GameScene extends Phaser.Scene {
   private createPlayer(): void {
     const username = localStorage.getItem('df_username') ?? 'Jugador';
     this.player = new PlayerTank(this, 0, 0, username);
+    const slug = localStorage.getItem('df_active_character') ?? 'phantom';
+    this.player.applyCharacter(slug);
   }
 
   private setupCamera(): void {
@@ -667,8 +712,11 @@ export class GameScene extends Phaser.Scene {
     for (const p of players) {
       if (p.id === excludeId || !p.characterSlug) continue;
       const key = `char-${p.characterSlug}`;
-      if (!this.textures.exists(key)) {
-        toLoad.push(p.characterSlug);
+      if (this.textures.exists(key)) continue;
+      toLoad.push(p.characterSlug);
+      if (SPRITESHEET_CHARS.has(p.characterSlug)) {
+        this.load.spritesheet(key, `assets/characters/${p.characterSlug}.png`, { frameWidth: 512, frameHeight: 512 });
+      } else {
         this.load.image(key, `assets/characters/${p.characterSlug}.png`);
       }
     }

@@ -42,7 +42,7 @@ Sesión infinita sin salir de la sala. Stack: Angular 19 + Phaser 4.1 + NestJS +
 ### F0.3 Documentación core reescrita
 - [x] `docs/02-game-design/GDD.md` — Dark Flag GDD completo
 - [x] `docs/02-game-design/mecanicas-core.md` — Especificación técnica Dark Flag
-- [x] `docs/08-assets/estilo-grafico.md` — Guía de estilo Dark Flag
+- [x] `docs/08-assets/estilo-grafico.md` — Guía de estilo Dark Flag (reescrito: walker/floater, spritesheet 6 estados, arma propia por personaje, sin cooldown bar)
 - [ ] `docs/README.md` — Actualizar índice (referencias a tanques eliminadas, nuevas secciones)
 - [ ] `docs/02-game-design/economia-juego.md` — Actualizar economía (mismas monedas, nuevos contextos de recompensa)
 - [ ] `docs/03-backend/websocket-events.md` — Nuevos eventos Dark Flag (flag_picked, mace_hit, etc.)
@@ -640,5 +640,6 @@ F6.0 (prueba) → aprobación → F6.1 (skins) → F6.2-F6.5 (resto de assets)
 - [ ] F3.x: Phaser Dark Flag (personajes son círculos Arc, sin sprites, sin audio DF, sin partículas)
 - [ ] F4.x: PlayerStats schema, endpoints rankings, shop personajes
 - [ ] F5.x: Testing E2E, optimización sombras
-- [ ] F5.5–F13: Ver `docs/00-plan/plan-calidad.md`
+- [x] F5.5: Assets mínimos — spritesheets phantom/gearhead, obstáculos PNG transparentes, trap-marker, power-ups, VFX, arena space-station, linterna por nivel
+- [ ] F5.6–F13: Ver `docs/00-plan/plan-calidad.md`
 - [ ] F6: POSPUESTO — se ejecuta después de F13

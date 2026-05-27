@@ -16,112 +16,81 @@
 | Bordes de la linterna | ⚠️ Bruscos | Polígono duro, sin gradiente de borde |
 | Zona central iluminada | ❌ Ausente | No existe fuente de luz fija |
 | Luces ambientales | ❌ Ausente | Solo linterna del jugador |
-| Personajes | ⚠️ Primitiva | `Phaser.GameObjects.Arc` (círculo azul) |
-| Animación de walk/ataque | ❌ Ausente | No hay sprite sheets |
+| Personajes | ✅ Sprites | phantom + gearhead (6 poses), fallback Arc si no hay slug |
+| Animación de walk/ataque | ✅ Funciona | idle/move/stunned/strike/victory por estado |
 | Ghost / shield / sprint visual | ❌ Ausente | Solo lógica server, sin feedback visual |
-| VFX (mace, stun, levelup) | ⚠️ Placeholder | Arcos individuales con tweens manuales |
+| VFX (mace, stun, levelup) | ⚠️ Parcial | vfx-mace-impact y vfx-trap-trigger implementados; levelup sin VFX |
 | Sistema de partículas | ❌ Ausente | `Phaser.GameObjects.Particles` no usado |
 | Audio | ⚠️ AST legado | AudioManager existe pero tiene sonidos de tanques |
-| Sprites de power-ups | ❌ Ausente | 6 archivos `power-*.png` inexistentes → fallback a Arc |
-| Spritesheet VFX | ❌ Ausente | `vfx-mace-impact`, `vfx-trap-trigger` inexistentes |
+| Sprites de power-ups | ✅ Completo | 6 iconos individuales transparentes implementados |
+| Spritesheet VFX | ✅ Completo | `vfx-mace-impact` (6f), `vfx-trap-trigger` (4f) operativos |
 | Lobby | ⚠️ AST legado | LEVEL_DATA tiene perks de tanques, diseño Arena Siege |
 | Minimap | ❌ Ausente | No implementado |
 | Settings in-game | ❌ Ausente | Sin control de volumen ni idioma en partida |
 
 ---
 
-## F5.5 — Assets mínimos para jugar (1 escenario, 1 personaje)
+## F5.5 — Assets mínimos para jugar ✅ COMPLETADO
 
 > Prerequisito: nada funciona visualmente sin esto.
 
-### F5.5.1 — Sprite sheet personaje "Azure" (4 frames walk + attack)
+### F5.5.1 — Spritesheets de personajes (6 poses) ✅
 
-**Formato**: grid 2×2 en imagen 1024×1024 → Sharp recorta 4 PNGs de 256×256 → juego usa 64×64.
+Implementado con **phantom** y **gearhead** (en lugar de "Azure" del plan original).
+- Formato: 1536×1024, 3 cols × 2 filas, 512×512 px por celda
+- 6 poses: idle, move_a, move_b, strike, stunned, victory
+- Jugador local usa el personaje activo (slug guardado en localStorage)
+- Bots alternan `gearhead` / `phantom`
+- Fallback: `Phaser.GameObjects.Arc` si el slug no tiene spritesheet
 
-```
-┌──────────┬──────────┐
-│  idle    │  walk_a  │  ← frame 0 y 1
-├──────────┼──────────┤
-│  walk_b  │  attack  │  ← frame 2 y 3
-└──────────┴──────────┘
-```
+Outputs: `frontend/public/assets/characters/phantom.png`, `gearhead.png`
 
-- **idle**: personaje de pie con linterna apuntando al frente, postura relajada
-- **walk_a**: pierna izquierda adelantada, cuerpo ligeramente inclinado
-- **walk_b**: pierna derecha adelantada (par de walk_a)
-- **attack**: brazo extendido con maza, leve twist del torso
+### F5.5.2 — Flag icon y trap marker ✅
 
-Output: `frontend/public/assets/characters/char-azure.png` (spritesheet 256×256 × 4 = 512×512)
+- `flag-icon.png` (64×64, transparente) — `assets/ui/`
+- `trap-marker.png` (64×64, transparente) — placa de presión con triángulo rojo y rayas amarillas — `assets/environment/`
+- `TrapObject.ts` reescrito: usa `Image` en lugar de `Graphics` procedural
 
-### F5.5.2 — Sprites de objetos del juego en una sola imagen
+### F5.5.3 — Power-ups (6 iconos individuales) ✅
 
-**Grid 3×2 en 1024×1024** → 6 sprites de 341×170px → Sharp recorta individualmente:
+Generados 1:1 (no grid) con `quality: "high"` y `background: "transparent"`.
+Outputs en `frontend/public/assets/pickups/`:
+- `power-mace-shield.png`, `power-revelation.png`, `power-sprint.png`
+- `power-blackout.png`, `power-super-mace.png`, `power-ghost.png`
 
-```
-┌───────────┬───────────┬───────────┐
-│   bandera │  destino  │   trampa  │
-├───────────┼───────────┼───────────┤
-│  antorcha │  glow dot │  (spare)  │
-└───────────┴───────────┴───────────┘
-```
+### F5.5.4 — Spritesheets VFX ✅
 
-Outputs:
-- `frontend/public/assets/environment/flag-icon.png`
-- `frontend/public/assets/environment/destination-ring.png`
-- `frontend/public/assets/environment/trap-icon.png`
-- `frontend/public/assets/environment/torch-light.png` (fuente de luz central)
+- `vfx-mace-impact.png`: tira horizontal 768×128 (6 frames × 128px) — `assets/effects/`
+- `vfx-trap-trigger.png`: tira horizontal 384×96 (4 frames × 96px) — `assets/effects/`
 
-### F5.5.3 — Sprites de power-ups (grid 2×3 en 1024×1024)
+### F5.5.5 — Fondo de arena space-station ✅
 
-```
-┌──────────────┬──────────────┐
-│ MACE_SHIELD  │  REVELATION  │
-├──────────────┼──────────────┤
-│    SPRINT    │   BLACKOUT   │
-├──────────────┼──────────────┤
-│  SUPER_MACE  │    GHOST     │
-└──────────────┴──────────────┘
-```
+- `space-station.png` (1024×1024) — estación espacial oscura, hexágonos sci-fi, tileable
+- Cargado en PreloadScene con clave `floor-space-station` (coincide con lookup en GameScene)
 
-Outputs: `frontend/public/assets/pickups/power-MACE_SHIELD.png` ... (6 archivos)
+Output: `frontend/public/assets/environment/arenas/space-station.png`
 
-### F5.5.4 — Spritesheets VFX (los 2 críticos faltantes)
+### F5.5.6 — Obstáculos (3 tipos, PNG transparente) ✅
 
-- `vfx-mace-impact.png`: 6 frames de 128×128 en tira horizontal 768×128
-  - Flash blanco → chispas → desvanece (18fps, 333ms total)
-- `vfx-trap-trigger.png`: 4 frames de 96×96 en tira horizontal 384×96
-  - Humo + destello rojo (12fps, 333ms total)
+Generados individualmente con `background: "transparent"`, estilo sci-fi cyan/azul oscuro.
+Resizados con Sharp a dimensiones exactas del servidor.
 
-Outputs: `frontend/public/assets/effects/vfx-mace-impact.png`, `vfx-trap-trigger.png`
+| Asset | Dimensiones | Descripción |
+|-------|-------------|-------------|
+| `obs-bunker.png` | 300×200 | Bunker metálico, paneles oscuros con líneas cyan |
+| `obs-barrier.png` | 400×99 | Barrera horizontal, bordes naranjas, luces rojas |
+| `obs-round.png` | 160×160 | Pilar circular, vista cenital, anillo cyan |
 
-### F5.5.5 — Fondo de arena "default" (textura oscura tileable)
+Output: `frontend/public/assets/environment/`
 
-- 1024×1024 px, fondo piedra/suelo oscuro texturizado
-- Debe hacer `tileSprite()` sin costuras visibles
-- Paleta: muy oscuro (#080810 base) con variaciones sutiles de textura
+### F5.5.7 — Integración completa en motor Phaser ✅
 
-Output: `frontend/public/assets/environment/arenas/dark-arena.png`
+- `PreloadScene.ts`: carga todos los assets con claves correctas (`obs-round`, `obs-barrier`, `obs-bunker`, `trap-marker`, `power-*`, `vfx-*`, `floor-*`)
+- `BaseTank.ts`: sistema sprite/fallback — Arc oculto sirve de ancla para cámara, sprite renderiza visualmente; animación por estado (idle/move/stunned)
+- `GameScene.ts`: `createObstacles()` usa imagen por tipo; linterna por nivel (+8px rango, +2° ángulo por nivel); borde de cono suave (2 pasadas con alpha decreciente)
+- `isPointIlluminated()` usa mismo rango por nivel que el render visual
 
-### F5.5.6 — Obstáculos (3 tipos en 1 imagen 1536×1024)
-
-```
-┌──────────────┬──────────────┬──────────────┐
-│    BUNKER    │   BARRIER    │    ROUND     │
-│  (300×200)   │  (400×100)   │  (160×160)   │
-└──────────────┴──────────────┴──────────────┘
-```
-
-Sharp recorta 3 PNGs individuales.
-Outputs: `obs-bunker.png`, `obs-barrier.png`, `obs-round.png` (en `/environment/`)
-
-### F5.5.7 — Conectar assets en PreloadScene + GameScene
-
-- Actualizar `PreloadScene.ts`: cargar sprites con sus claves correctas
-- Actualizar `FlagObject.ts`, `TrapObject.ts`, `PowerUpPickup.ts`: usar sprites en lugar de primitivas
-- Actualizar `BaseTank.ts`: usar char-azure si existe (con fallback al Arc actual)
-- Script: `scripts/process-game-assets.js` — crop y resize con Sharp
-
-**Done cuando**: el juego se ve con sprites reales, sin un solo Arc visible como personaje o power-up.
+**Done**: el juego corre con sprites reales, obstáculos PNG transparentes, trampas con asset, power-ups con iconos propios.
 
 ---
 

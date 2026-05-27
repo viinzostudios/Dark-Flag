@@ -35,7 +35,7 @@ export class RemoteTank extends BaseTank {
     super(scene, x, y, id, username);
     this.lastKnownX = x;
     this.lastKnownY = y;
-    void characterSlug; // reserved for future character color application
+    void characterSlug; // GameScene calls applyCharacter after construction
   }
 
   pushState(serverTime: number, p: PlayerSnapshot): void {
@@ -75,11 +75,17 @@ export class RemoteTank extends BaseTank {
       this.y        = prev.y + (next.y - prev.y) * t;
       this.aimAngle = this.lerpAngle(prev.aimAngle, next.aimAngle, t);
       state = t > 0.5 ? next : prev;
+
+      const dx = Math.abs(next.x - prev.x);
+      const dy = Math.abs(next.y - prev.y);
+      this.isMoving = (dx + dy) > 0.5;
+      if (dx > 0.5) this.movingLeft = next.x < prev.x;
     } else {
       state = this.buffer[this.buffer.length - 1];
       this.x        = state.x;
       this.y        = state.y;
       this.aimAngle = state.aimAngle;
+      this.isMoving = false;
     }
 
     this.lastKnownX = this.x;

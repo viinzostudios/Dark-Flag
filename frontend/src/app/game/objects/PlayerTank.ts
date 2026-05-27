@@ -61,6 +61,13 @@ export class PlayerTank extends BaseTank {
     if (!this.strategy) return;
     this.strategy.update(time, this.x, this.y);
     this.aimAngle = this.strategy.getAimAngle();
+
+    const speed = this.strategy.getSpeed();
+    this.isMoving = speed > 0;
+    if (speed > 0) {
+      this.movingLeft = Math.cos(this.strategy.getAngle()) < 0;
+    }
+
     this.syncVisuals();
   }
 

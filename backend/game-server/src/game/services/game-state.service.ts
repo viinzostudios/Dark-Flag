@@ -29,12 +29,12 @@ const MACE_STUN_MS = 5000;
 const LEVEL_POINTS = 50;   // score points per level step
 const LEVEL_MAX = 15;
 
-// Bot character slugs for visual variety
+// Alternate between the two available spritesheets: gearhead (walker) and phantom (floater)
 const BOT_CHARACTER_SLUGS: string[] = [
-  'azure', 'crimson', 'emerald', 'amber', 'violet', 'slate', 'rose', 'teal',
-  'azure', 'crimson', 'emerald', 'amber', 'violet', 'slate', 'rose', 'teal',
-  'azure', 'crimson', 'emerald', 'amber', 'violet', 'slate', 'rose', 'teal',
-  'azure', 'crimson', 'emerald', 'amber', 'violet', 'teal',
+  'gearhead', 'phantom', 'gearhead', 'phantom',
+  'gearhead', 'phantom', 'gearhead', 'phantom',
+  'gearhead', 'phantom', 'gearhead', 'phantom',
+  'gearhead', 'phantom', 'gearhead', 'phantom',
 ];
 
 const BOT_NAMES = [

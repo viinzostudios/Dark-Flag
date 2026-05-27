@@ -14,14 +14,22 @@ export abstract class BaseTank {
   lightOn   = true;
   isDead    = false;
 
+  // Set by subclasses before syncVisuals()
+  protected isMoving  = false;
+  protected movingLeft = false;
+
   readonly id: string;
   readonly scene: Phaser.Scene;
 
+  // body: Arc kept as position anchor and camera follow target (hidden in sprite mode)
   readonly body: Phaser.GameObjects.Arc;
-  protected readonly nameLabel: Phaser.GameObjects.Text;
-  protected readonly levelBadge: Phaser.GameObjects.Text;
+  protected charSprite: Phaser.GameObjects.Sprite | null = null;
+  private   charSlug:   string | null = null;
+
+  protected readonly nameLabel:     Phaser.GameObjects.Text;
+  protected readonly levelBadge:    Phaser.GameObjects.Text;
   protected readonly flagIndicator: Phaser.GameObjects.Arc;
-  protected readonly stunOverlay: Phaser.GameObjects.Graphics;
+  protected readonly stunOverlay:   Phaser.GameObjects.Graphics;
   private   readonly maceIndicator: Phaser.GameObjects.Arc;
 
   constructor(
@@ -58,32 +66,95 @@ export abstract class BaseTank {
     this.stunOverlay = scene.add.graphics().setDepth(17);
   }
 
+  // ─── Character sprite ────────────────────────────────────────────────────────
+
+  applyCharacter(slug: string): void {
+    const textureKey = `char-${slug}`;
+    if (!this.scene.textures.exists(textureKey)) return;
+
+    // frameTotal > 2 means it was loaded as a spritesheet (image has 2: __BASE + frame 0)
+    const texture = this.scene.textures.get(textureKey);
+    if (texture.frameTotal <= 2) return;
+
+    this.charSlug = slug;
+    this.charSprite?.destroy();
+    this.charSprite = this.scene.add
+      .sprite(this.x, this.y, textureKey, 0)
+      .setDisplaySize(GAME.PLAYER_RADIUS * 3, GAME.PLAYER_RADIUS * 3)
+      .setDepth(10);
+    this.charSprite.play(`${slug}-idle`);
+  }
+
+  // Apply alpha to both the arc fallback and the sprite (for blink effects)
+  setVisualAlpha(alpha: number): void {
+    this.body.setAlpha(alpha);
+    this.charSprite?.setAlpha(alpha);
+  }
+
+  // ─── Sync visuals ────────────────────────────────────────────────────────────
+
   protected syncVisuals(): void {
     const visible = !this.isDead;
 
-    this.body.setVisible(visible).setPosition(this.x, this.y);
+    if (this.charSprite) {
+      // Arc must track position always — camera follows it even when invisible
+      this.body.setVisible(false).setPosition(this.x, this.y);
+      this.charSprite.setVisible(visible).setPosition(this.x, this.y);
+      this.charSprite.setFlipX(this.movingLeft);
+
+      if (visible && this.charSlug) {
+        this.updateSpriteAnimation(this.charSlug);
+      }
+    } else {
+      // Fallback arc mode
+      this.body.setVisible(visible).setPosition(this.x, this.y);
+    }
+
     this.nameLabel.setVisible(visible).setPosition(this.x, this.y - GAME.PLAYER_RADIUS - 18);
     this.levelBadge.setVisible(visible).setPosition(this.x, this.y + GAME.PLAYER_RADIUS + 8);
     this.flagIndicator.setVisible(visible && this.hasFlag).setPosition(this.x, this.y - GAME.PLAYER_RADIUS - 10);
-    this.maceIndicator.setVisible(visible && this.isStunned).setPosition(this.x + GAME.PLAYER_RADIUS + 6, this.y - GAME.PLAYER_RADIUS);
+    // maceIndicator only shown in arc mode (sprite has its own stunned frame)
+    this.maceIndicator.setVisible(visible && this.isStunned && !this.charSprite)
+      .setPosition(this.x + GAME.PLAYER_RADIUS + 6, this.y - GAME.PLAYER_RADIUS);
     this.stunOverlay.clear();
 
     if (visible) {
       const levelColor = getLevelColor(this.level);
       this.levelBadge.setText(`L${this.level}`).setStyle({ color: `#${levelColor.toString(16).padStart(6, '0')}` });
 
-      // Stun ring
-      if (this.isStunned) {
+      // Stun ring only in arc mode
+      if (this.isStunned && !this.charSprite) {
         this.stunOverlay.lineStyle(3, 0xff4444, 0.6);
         this.stunOverlay.strokeCircle(this.x, this.y, GAME.PLAYER_RADIUS + 4);
       }
     }
   }
 
-  applyCharacter(slug: string): void {
-    // No-op in base — texture system is programmatic in Dark Flag
-    void slug;
+  private updateSpriteAnimation(slug: string): void {
+    const currentKey = this.charSprite!.anims.currentAnim?.key ?? '';
+
+    if (this.isStunned) {
+      if (!currentKey.endsWith('-stunned')) {
+        this.charSprite!.play(`${slug}-stunned`);
+      }
+    } else if (this.isMoving) {
+      if (!currentKey.endsWith('-move')) {
+        this.charSprite!.play(`${slug}-move`);
+      }
+    } else {
+      // Return to idle if stunned/move animation ended or still playing
+      if (!currentKey.endsWith('-idle')) {
+        // Don't interrupt non-looping animations (strike, victory) while playing
+        const anim = this.charSprite!.anims.currentAnim;
+        const looping = anim?.repeat === -1;
+        if (looping || !this.charSprite!.anims.isPlaying) {
+          this.charSprite!.play(`${slug}-idle`);
+        }
+      }
+    }
   }
+
+  // ─── Misc ────────────────────────────────────────────────────────────────────
 
   protected clampToMap(): void {
     const r = GAME.PLAYER_RADIUS;
@@ -95,6 +166,7 @@ export abstract class BaseTank {
 
   destroy(): void {
     this.body.destroy();
+    this.charSprite?.destroy();
     this.nameLabel.destroy();
     this.levelBadge.destroy();
     this.flagIndicator.destroy();

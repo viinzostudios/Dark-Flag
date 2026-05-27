@@ -1,5 +1,9 @@
 import Phaser from 'phaser';
 
+// Characters that have a 6-pose spritesheet (1536×1024, 3×2 grid, 512×512 cells)
+export const SPRITESHEET_CHARS = new Set(['phantom', 'gearhead']);
+const SPRITE_CFG = { frameWidth: 512, frameHeight: 512 };
+
 // All 100 character slugs from the Dark Flag catalog (sortOrder 1-100)
 export const CHARACTER_SLUGS: string[] = [
   'novato', 'sombra-gris', 'noctambulo', 'centinela', 'acechador',
@@ -30,18 +34,23 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   preload(): void {
-    // Arena floor (active skin)
+    // Arena floor — key must match what GameScene looks for: `floor-${slug}`
     const arenaSlug = localStorage.getItem('df_arena') ?? 'space-station';
-    this.load.image('arena-floor', `assets/environment/arenas/${arenaSlug}.png`);
-    this.load.image('arena-floor-default', 'assets/environment/arenas/space-station.png');
+    this.load.image(`floor-${arenaSlug}`, `assets/environment/arenas/${arenaSlug}.png`);
+    if (arenaSlug !== 'space-station') {
+      this.load.image('floor-space-station', 'assets/environment/arenas/space-station.png');
+    }
 
-    // Characters — only active character, others use programmatic fallback
+    // Always load spritesheet characters
+    for (const slug of SPRITESHEET_CHARS) {
+      this.load.spritesheet(`char-${slug}`, `assets/characters/${slug}.png`, SPRITE_CFG);
+    }
+
+    // Active character (image fallback if not already a spritesheet char)
     const activeCharSlug = localStorage.getItem('df_active_character') ?? null;
-    if (activeCharSlug) {
+    if (activeCharSlug && !SPRITESHEET_CHARS.has(activeCharSlug)) {
       this.load.image(`char-${activeCharSlug}`, `assets/characters/${activeCharSlug}.png`);
     }
-    // Default character as fallback
-    this.load.image('char-novato', 'assets/characters/novato.png');
 
     // Flag & destination
     this.load.image('flag-icon', 'assets/ui/flag-icon.png');
@@ -54,10 +63,13 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('power-SUPER_MACE',   'assets/pickups/power-super-mace.png');
     this.load.image('power-GHOST',        'assets/pickups/power-ghost.png');
 
-    // Static obstacles
-    this.load.image('obs-block',  'assets/environment/obs-block.png');
-    this.load.image('obs-column', 'assets/environment/obs-column.png');
-    this.load.image('obs-crate',  'assets/environment/obs-crate.png');
+    // Static obstacles — keys match GameScene: obs-round (isCircle) and obs-barrier (rect)
+    this.load.image('obs-round',    'assets/environment/obs-round.png');
+    this.load.image('obs-barrier',  'assets/environment/obs-barrier.png');
+    this.load.image('obs-bunker',   'assets/environment/obs-bunker.png');
+
+    // Trap marker
+    this.load.image('trap-marker', 'assets/environment/trap-marker.png');
 
     // VFX
     this.load.spritesheet('vfx-mace-impact', 'assets/effects/vfx-mace-impact.png', { frameWidth: 128, frameHeight: 128 });
@@ -65,6 +77,17 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   create(): void {
+    // Character animations (6 frames: idle, move_a, move_b, strike, stunned, victory)
+    for (const slug of SPRITESHEET_CHARS) {
+      if (this.anims.exists(`${slug}-idle`)) continue;
+      const k = `char-${slug}`;
+      this.anims.create({ key: `${slug}-idle`,    frames: [{ key: k, frame: 0 }], frameRate: 1,  repeat: -1 });
+      this.anims.create({ key: `${slug}-move`,    frames: this.anims.generateFrameNumbers(k, { frames: [1, 2] }), frameRate: 8, repeat: -1 });
+      this.anims.create({ key: `${slug}-strike`,  frames: [{ key: k, frame: 3 }], frameRate: 1,  repeat: 0  });
+      this.anims.create({ key: `${slug}-stunned`, frames: [{ key: k, frame: 4 }], frameRate: 1,  repeat: -1 });
+      this.anims.create({ key: `${slug}-victory`, frames: [{ key: k, frame: 5 }], frameRate: 1,  repeat: 0  });
+    }
+
     // Mace impact animation
     if (!this.anims.exists('anim-mace-impact')) {
       this.anims.create({

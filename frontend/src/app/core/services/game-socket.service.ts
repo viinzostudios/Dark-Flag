@@ -63,6 +63,7 @@ export interface PowerUpSnapshot {
 
 export interface StaticObstacleSnapshot {
   id: string;
+  type?: 'BUNKER' | 'BARRIER' | 'ROUND';
   x: number;
   y: number;
   angle: number;
