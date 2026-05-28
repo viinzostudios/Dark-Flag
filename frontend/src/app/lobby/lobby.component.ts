@@ -646,7 +646,8 @@ const LEVEL_DATA: LevelInfo[] = [
       --t-focus-bd:     rgba(245,158,11,.55);
       --t-focus-bg:     rgba(245,158,11,.05);
       --t-accent-line:  rgba(245,158,11,.12);
-      --t-panel-bd:     rgba(245,158,11,.10);
+      --t-panel-bd:     rgba(245,158,11,.08);
+      --t-panel:        rgba(8,13,24,.92);
       --t-hover:        rgba(245,158,11,.05);
       --t-surface:      rgba(245,158,11,.03);
     }
@@ -673,28 +674,29 @@ const LEVEL_DATA: LevelInfo[] = [
       color: var(--t-sub); font-size: 13px;
       background: var(--t-surface);
       border: 1px solid var(--t-bd);
-      border-radius: 20px; padding: 4px 12px;
+      border-radius: 4px; padding: 4px 12px;
     }
     .coins-chip {
       color: #f9a825;
       font-size: 13px;
       font-weight: 700;
       background: rgba(249,168,37,0.08);
-      border: 1px solid rgba(249,168,37,0.25);
-      border-radius: 20px;
+      border: 1px solid rgba(249,168,37,0.20);
+      border-radius: 4px;
       padding: 4px 12px;
     }
     .nav-btn {
       background: transparent;
-      border: 1px solid var(--t-accent-bd2);
-      color: var(--t-accent);
-      border-radius: 6px;
+      border: 1px solid rgba(240,249,255,.10);
+      color: var(--t-tx3);
+      border-radius: 3px;
       padding: 6px 14px;
       font-size: 12px;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.15s;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
     }
+    .nav-btn:hover { background: rgba(245,158,11,.06); border-color: rgba(245,158,11,.25); color: var(--t-flag); }
     .nav-btn:hover { background: var(--t-accent-bg); }
     .logout-btn {
       border-color: rgba(255,100,100,0.3);
@@ -762,12 +764,14 @@ const LEVEL_DATA: LevelInfo[] = [
     /* ── Panels ─────────────────────────────────────────────────── */
     .panel {
       background: var(--t-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--t-panel-bd);
-      border-top: 2px solid rgba(245,158,11,.28);
-      border-radius: 12px;
+      border-top: 2px solid rgba(245,158,11,.22);
+      border-radius: 6px;
       padding: 20px;
       display: flex; flex-direction: column; gap: 12px;
-      box-shadow: var(--t-shadow);
+      box-shadow: 0 8px 32px rgba(0,0,0,.55);
     }
     .panel-header {
       font-family: 'Barlow Condensed', sans-serif;
@@ -817,7 +821,7 @@ const LEVEL_DATA: LevelInfo[] = [
     .alias-input {
       background: var(--t-surface);
       border: 1px solid var(--t-accent-bd2);
-      border-radius: 6px;
+      border-radius: 4px;
       color: var(--t-tx);
       font-size: 15px;
       font-weight: 700;
@@ -853,11 +857,13 @@ const LEVEL_DATA: LevelInfo[] = [
       position: relative;
       height: 100%;
       min-height: 320px;
-      border: 1px solid var(--t-accent-bd);
-      border-radius: 16px;
+      border: 1px solid rgba(245,158,11,.15);
+      border-top: 2px solid rgba(245,158,11,.35);
+      border-radius: 8px;
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
       background: url('/assets/environment/arena-lobby-bg.png') center/cover no-repeat #060912;
+      box-shadow: 0 8px 32px rgba(0,0,0,.55);
     }
     .grid-anim {
       position: absolute; inset: 0;
@@ -908,20 +914,20 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .join-code-toggle {
       background: transparent;
-      border: 1px solid var(--t-bd2);
+      border: 1px solid rgba(240,249,255,.10);
       color: var(--t-tx4);
-      border-radius: 6px;
+      border-radius: 3px;
       padding: 5px 12px;
       font-size: 11px;
       cursor: pointer;
       font-family: inherit;
       transition: background 0.15s, color 0.15s;
     }
-    .join-code-toggle:hover { background: var(--t-hover); color: var(--t-tx2); }
+    .join-code-toggle:hover { background: rgba(245,158,11,.05); color: var(--t-tx2); }
     .join-code-input {
-      background: var(--t-surface);
-      border: 1px solid var(--t-accent-bd2);
-      border-radius: 6px;
+      background: rgba(8,13,24,.80);
+      border: 1px solid rgba(245,158,11,.18);
+      border-radius: 3px;
       color: var(--t-tx);
       font-family: monospace;
       font-size: 12px;
@@ -933,7 +939,7 @@ const LEVEL_DATA: LevelInfo[] = [
       background: var(--t-accent);
       border: none;
       color: var(--t-on-accent);
-      border-radius: 6px;
+      border-radius: 3px;
       padding: 5px 14px;
       font-size: 12px;
       font-weight: 700;
@@ -945,9 +951,9 @@ const LEVEL_DATA: LevelInfo[] = [
 
     /* ── Info panel ─────────────────────────────────────────────── */
     .mode-card {
-      background: var(--t-accent-bg);
-      border: 1px solid var(--t-accent-bd);
-      border-radius: 8px;
+      background: rgba(245,158,11,.04);
+      border: 1px solid rgba(245,158,11,.12);
+      border-radius: 4px;
       padding: 12px 14px;
     }
     .mode-name { font-weight: 700; font-size: 14px; margin: 0 0 4px; }
@@ -986,12 +992,14 @@ const LEVEL_DATA: LevelInfo[] = [
     /* Active skin card */
     .skin-active-card {
       background: var(--t-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--t-panel-bd);
-      border-top: 2px solid rgba(245,158,11,.28);
-      border-radius: 12px;
+      border-top: 2px solid rgba(245,158,11,.22);
+      border-radius: 6px;
       padding: 18px;
       display: flex; flex-direction: column; gap: 14px;
-      box-shadow: var(--t-shadow);
+      box-shadow: 0 8px 32px rgba(0,0,0,.55);
     }
     .skin-label {
       font-family: 'Barlow Condensed', sans-serif;
@@ -1007,7 +1015,7 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .tank-preview {
       width: 54px; height: 54px;
-      border-radius: 10px;
+      border-radius: 6px;
       position: relative;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
@@ -1042,9 +1050,9 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .skin-change-btn {
       background: transparent;
-      border: 1px solid var(--t-accent-bd2);
+      border: 1px solid rgba(245,158,11,.22);
       color: var(--t-accent);
-      border-radius: 7px;
+      border-radius: 3px;
       padding: 7px 0;
       font-size: 12px;
       cursor: pointer;
@@ -1057,12 +1065,14 @@ const LEVEL_DATA: LevelInfo[] = [
     /* Progress card */
     .skin-progress-card {
       background: var(--t-panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--t-panel-bd);
-      border-top: 2px solid rgba(245,158,11,.28);
-      border-radius: 12px;
+      border-top: 2px solid rgba(245,158,11,.22);
+      border-radius: 6px;
       padding: 18px;
       display: flex; flex-direction: column; gap: 14px;
-      box-shadow: var(--t-shadow);
+      box-shadow: 0 8px 32px rgba(0,0,0,.55);
     }
     .progress-loading { font-size: 13px; color: var(--t-dim); }
     .all-unlocked { font-size: 13px; color: var(--t-accent); margin: 0; }
@@ -1072,7 +1082,7 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .tank-preview-sm {
       width: 44px; height: 44px;
-      border-radius: 8px;
+      border-radius: 6px;
       position: relative;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
@@ -1129,13 +1139,13 @@ const LEVEL_DATA: LevelInfo[] = [
     .claimable-item {
       display: flex; align-items: center; gap: 8px;
       border: 1px solid;
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 8px 10px;
       flex-wrap: nowrap;
     }
     .tank-preview-xs {
       width: 30px; height: 30px;
-      border-radius: 6px;
+      border-radius: 4px;
       position: relative;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
@@ -1147,7 +1157,7 @@ const LEVEL_DATA: LevelInfo[] = [
     .claim-btn {
       background: linear-gradient(135deg, var(--t-daily-bonus, #f9a825), #e65100);
       border: none;
-      border-radius: 5px;
+      border-radius: 3px;
       color: #fff;
       font-size: 11px;
       font-weight: 700;
@@ -1187,7 +1197,7 @@ const LEVEL_DATA: LevelInfo[] = [
       display: flex; gap: 10px; flex-shrink: 0;
     }
     .promo-btn {
-      border-radius: 7px;
+      border-radius: 3px;
       padding: 8px 16px;
       font-size: 13px;
       font-weight: 700;
@@ -1238,8 +1248,11 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .lvl-modal {
       background: var(--t-panel);
-      border: 1px solid var(--t-accent-bd);
-      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--t-panel-bd);
+      border-top: 2px solid rgba(245,158,11,.30);
+      border-radius: 8px;
       padding: 24px;
       max-width: 960px;
       width: 100%;
@@ -1260,8 +1273,8 @@ const LEVEL_DATA: LevelInfo[] = [
       font-size: 11px; color: var(--t-sub); flex: 1;
     }
     .lvl-close-btn {
-      background: transparent; border: 1px solid var(--t-bd);
-      color: var(--t-tx); border-radius: 6px; padding: 4px 10px;
+      background: transparent; border: 1px solid rgba(240,249,255,.10);
+      color: var(--t-tx); border-radius: 3px; padding: 4px 10px;
       cursor: pointer; font-family: inherit; font-size: 13px;
       margin-left: auto;
       transition: background 0.1s;
@@ -1274,9 +1287,9 @@ const LEVEL_DATA: LevelInfo[] = [
       gap: 10px;
     }
     .lvl-card {
-      background: var(--t-surface);
-      border: 1px solid var(--t-panel-bd);
-      border-radius: 10px;
+      background: rgba(8,13,24,.70);
+      border: 1px solid rgba(240,249,255,.06);
+      border-radius: 6px;
       padding: 12px 10px;
       display: flex; flex-direction: column; align-items: center; gap: 7px;
       text-align: center;
@@ -1389,14 +1402,14 @@ const LEVEL_DATA: LevelInfo[] = [
     /* ── Acentos de color por panel (misma paleta que las 4 cards del landing) ── */
     /* sky-blue → panel jugador / cyan → skin card / amber → play + progress / crimson → info + arena */
     .player-panel {
-      border-top-color: rgba(14,165,233,.65);
+      border-top-color: rgba(14,165,233,.45);
     }
     .player-panel .panel-header {
       color: #0ea5e9;
     }
 
     .info-panel {
-      border-top-color: rgba(225,29,72,.65);
+      border-top-color: rgba(225,29,72,.45);
     }
     .info-panel .panel-header {
       color: #e11d48;
@@ -1404,7 +1417,7 @@ const LEVEL_DATA: LevelInfo[] = [
 
     /* Skin del tank → cyan */
     .skins-inner .skin-active-card:first-child {
-      border-top-color: rgba(34,211,238,.65);
+      border-top-color: rgba(34,211,238,.45);
     }
     .skins-inner .skin-active-card:first-child .skin-label {
       color: #22d3ee;
@@ -1412,7 +1425,7 @@ const LEVEL_DATA: LevelInfo[] = [
 
     /* Skin de arena → crimson */
     .skins-inner .skin-active-card:last-child {
-      border-top-color: rgba(225,29,72,.65);
+      border-top-color: rgba(225,29,72,.45);
     }
     .skins-inner .skin-active-card:last-child .skin-label {
       color: #e11d48;
@@ -1424,7 +1437,7 @@ const LEVEL_DATA: LevelInfo[] = [
     .mbb-panel {
       background: var(--t-panel);
       border: 1px solid var(--t-panel-bd);
-      border-radius: 10px;
+      border-radius: 6px;
       padding: 10px 8px;
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       box-shadow: var(--t-shadow);
@@ -1434,7 +1447,7 @@ const LEVEL_DATA: LevelInfo[] = [
       color: var(--t-accent); text-transform: uppercase; text-align: center;
     }
     .mbb-preview {
-      width: 52px; height: 52px; border-radius: 8px;
+      width: 52px; height: 52px; border-radius: 4px;
       position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
@@ -1451,8 +1464,8 @@ const LEVEL_DATA: LevelInfo[] = [
       text-align: center; line-height: 1.3; word-break: break-word;
     }
     .mbb-btn {
-      background: transparent; border: 1px solid var(--t-accent-bd2);
-      color: var(--t-accent); border-radius: 5px; padding: 5px 0;
+      background: transparent; border: 1px solid rgba(245,158,11,.20);
+      color: var(--t-accent); border-radius: 3px; padding: 5px 0;
       font-size: 9px; cursor: pointer; font-family: inherit; width: 100%;
       transition: background 0.15s;
     }
@@ -1505,14 +1518,14 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .side-change-btn {
       background: transparent;
-      border: 1px solid var(--t-accent-bd2);
+      border: 1px solid rgba(245,158,11,.20);
       color: var(--t-accent);
-      border-radius: 5px; padding: 5px 0;
+      border-radius: 3px; padding: 5px 0;
       font-size: 9px; cursor: pointer;
       font-family: inherit; width: 100%;
       transition: background 0.15s;
     }
-    .side-change-btn:hover { background: var(--t-accent-bg); }
+    .side-change-btn:hover { background: rgba(245,158,11,.06); }
 
     /* ── Hamburger (oculto en desktop) ───────────────────────────── */
     .mobile-hamburger {
@@ -1520,8 +1533,8 @@ const LEVEL_DATA: LevelInfo[] = [
       flex-direction: column; align-items: center; justify-content: center;
       gap: 5px;
       background: transparent;
-      border: 1px solid var(--t-accent-bd);
-      border-radius: 7px;
+      border: 1px solid rgba(245,158,11,.20);
+      border-radius: 4px;
       padding: 0;
       width: 38px; height: 38px;
       cursor: pointer;
@@ -1581,7 +1594,7 @@ const LEVEL_DATA: LevelInfo[] = [
     .touch-item {
       font-size: 11px; color: var(--t-muted);
       background: var(--t-surface); border: 1px solid var(--t-bd);
-      border-radius: 20px; padding: 4px 10px;
+      border-radius: 3px; padding: 4px 10px;
     }
     .mobile-levels-btn-sm {
       display: none;
@@ -1695,7 +1708,7 @@ const LEVEL_DATA: LevelInfo[] = [
 
       /* Arena preview */
       .center { width: 100%; }
-      .arena-preview { min-height: 220px; border-radius: 12px; }
+      .arena-preview { min-height: 220px; border-radius: 6px; }
       .play-btn { padding: 18px 32px; }
       .play-label { font-size: 15px; letter-spacing: 2px; }
       .play-icon { font-size: 24px; }
@@ -1805,7 +1818,7 @@ const LEVEL_DATA: LevelInfo[] = [
 
       /* Arena preview compacta */
       .center { width: 100%; }
-      .arena-preview { min-height: 130px !important; border-radius: 10px; padding: 12px 16px; }
+      .arena-preview { min-height: 130px !important; border-radius: 6px; padding: 12px 16px; }
       .play-content { gap: 8px; }
       .arena-label { display: none; }
       .play-btn { padding: 10px 28px !important; }
