@@ -109,8 +109,10 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
     }
     .ap-title {
       font-size: 14px; font-weight: 800;
-      letter-spacing: 2px; color: var(--t-accent);
+      letter-spacing: 3px; color: var(--t-accent);
       white-space: nowrap;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
     }
     .ap-cats {
       display: flex; gap: 6px; flex-wrap: wrap; flex: 1;

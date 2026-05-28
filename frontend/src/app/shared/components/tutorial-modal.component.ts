@@ -89,20 +89,23 @@ const CARDS: TutorialCard[] = [
   styles: [`
     .backdrop {
       position: fixed; inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0,0,0,0.82);
+      backdrop-filter: blur(5px);
       display: flex; align-items: center; justify-content: center;
       z-index: 200;
     }
 
     .modal {
-      background: #12122a;
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(8,13,24,.92);
+      border: 1px solid rgba(245,158,11,.08);
+      border-top: 2px solid rgba(245,158,11,.22);
       border-radius: 8px;
       width: min(420px, 92vw);
       padding: 24px 24px 20px;
       display: flex; flex-direction: column; gap: 20px;
       font-family: 'Inter', system-ui, sans-serif;
       box-shadow: 0 8px 40px rgba(0,0,0,.70);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     }
 
     .header {
@@ -110,22 +113,23 @@ const CARDS: TutorialCard[] = [
     }
     .logo {
       font-size: 15px; font-weight: 800;
-      letter-spacing: 1px; color: #fff;
+      letter-spacing: 3px; color: #f59e0b;
       text-transform: uppercase;
+      font-family: 'Barlow Condensed', sans-serif;
     }
     .step-dots { display: flex; gap: 6px; }
     .dot {
       width: 8px; height: 8px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.25);
+      background: rgba(245,158,11,0.25);
       transition: background 0.2s;
     }
-    .dot.active { background: #fff; }
+    .dot.active { background: #f59e0b; }
 
     .card-area { min-height: 200px; }
     .card {
-      background: #1c1c3a;
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(8,13,24,.80);
+      border: 1px solid rgba(245,158,11,.08);
       border-top: 3px solid;
       border-radius: 6px;
       padding: 22px 20px;
@@ -133,13 +137,13 @@ const CARDS: TutorialCard[] = [
     }
     .card-icon { font-size: 36px; line-height: 1; }
     .card-title {
-      color: #fff; font-size: 17px; font-weight: 700; margin: 0;
+      color: var(--t-tx, #f0f9ff); font-size: 17px; font-weight: 700; margin: 0;
     }
     .card-body {
-      color: #c0c0d8; font-size: 14px; line-height: 1.55; margin: 0;
+      color: rgba(240,249,255,0.72); font-size: 14px; line-height: 1.55; margin: 0;
     }
     .card-hint {
-      color: rgba(255,255,255,0.45);
+      color: rgba(240,249,255,0.40);
       font-size: 12px; font-style: italic; margin: 4px 0 0;
     }
 
@@ -156,22 +160,27 @@ const CARDS: TutorialCard[] = [
     button:hover { opacity: 0.85; }
 
     .btn-skip {
-      background: transparent; color: rgba(255,255,255,0.4);
+      background: transparent; color: rgba(240,249,255,0.40);
       font-size: 13px; padding: 8px 10px;
     }
-    .btn-skip:hover { color: rgba(255,255,255,0.7); opacity: 1; }
+    .btn-skip:hover { color: rgba(240,249,255,0.70); opacity: 1; }
 
     .btn-prev {
-      background: rgba(255,255,255,0.08); color: #ccc;
+      background: rgba(245,158,11,.06); color: #f59e0b;
+      border: 1px solid rgba(245,158,11,.22) !important;
       font-size: 13px; padding: 9px 16px;
     }
     .btn-next {
-      background: #3b82f6; color: #fff;
+      background: linear-gradient(135deg, #d97706, #f59e0b); color: #060912;
       font-size: 14px; padding: 9px 18px;
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 2px; text-transform: uppercase;
     }
     .btn-play {
-      background: #10b981; color: #fff;
+      background: linear-gradient(135deg, #d97706, #f59e0b); color: #060912;
       font-size: 14px; padding: 9px 22px;
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 2px; text-transform: uppercase;
     }
   `],
 })

@@ -378,7 +378,7 @@ const RARITY_COLOR: Record<string, string> = {
     }
     .logo { display: flex; align-items: center; gap: 8px; flex: 1; }
     .logo-icon { font-size: 18px; }
-    .logo-text { font-size: 13px; font-weight: 800; letter-spacing: 3px; color: var(--t-accent); }
+    .logo-text { font-size: 13px; font-weight: 800; letter-spacing: 4px; color: var(--t-accent); font-family: 'Barlow Condensed', sans-serif; }
     .wallet-bar { display: flex; align-items: center; gap: 14px; }
     .wallet-coins { color: var(--t-daily-btn, #ffd600); font-size: 14px; font-weight: 700; }
     .wallet-gems  { color: #ab47bc; font-size: 14px; font-weight: 700; }
@@ -448,7 +448,7 @@ const RARITY_COLOR: Record<string, string> = {
       white-space: nowrap;
       transition: color 0.15s, border-color 0.15s;
     }
-    .tab.active { color: var(--t-tx); border-bottom-color: var(--t-accent); }
+    .tab.active { color: var(--t-accent); border-bottom-color: var(--t-accent); }
     .tab:hover:not(.active) { color: var(--t-tx4); }
     .tab-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
@@ -558,7 +558,7 @@ const RARITY_COLOR: Record<string, string> = {
       box-shadow: 0 0 12px var(--t-accent-glow);
     }
     .btn.primary:not(:disabled):hover { opacity: 0.9; box-shadow: 0 0 20px var(--t-accent-glow2); }
-    .btn.gem     { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
+    .btn.gem     { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; }
     .btn.preview { background: var(--t-surface2); border: 1px solid var(--t-bd2); color: var(--t-tx4); font-size: 10px; }
     .btn.coin-buy {
       background: linear-gradient(135deg, #92400e, #f59e0b);
@@ -580,7 +580,7 @@ const RARITY_COLOR: Record<string, string> = {
     .packages-view {
       max-width: 700px; margin: 0 auto; padding: 8px 0;
     }
-    .section-title { font-size: 18px; font-weight: 800; color: #ab47bc; margin: 0 0 8px; }
+    .section-title { font-size: 18px; font-weight: 800; color: #ab47bc; margin: 0 0 8px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 3px; text-transform: uppercase; }
     .section-sub { font-size: 13px; color: var(--t-tx4); margin: 0 0 20px; line-height: 1.6; }
     .packages-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;

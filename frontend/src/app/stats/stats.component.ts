@@ -147,11 +147,11 @@ interface GameSession {
                     <text [attr.x]="PAD_L - 6" [attr.y]="y.py + 4"
                           [attr.fill]="chartLabelFill()" font-size="10" text-anchor="end">{{ y.label }}</text>
                   }
-                  <path [attr.d]="killsAreaPath()" fill="rgba(33,150,243,0.08)" stroke="none"/>
-                  <path [attr.d]="killsLinePath()" fill="none" stroke="#2196f3" stroke-width="2" stroke-linejoin="round"/>
+                  <path [attr.d]="killsAreaPath()" fill="rgba(245,158,11,0.08)" stroke="none"/>
+                  <path [attr.d]="killsLinePath()" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/>
                   @for (pt of killsChartPoints(); track pt.i) {
                     <circle [attr.cx]="pt.x" [attr.cy]="pt.y" r="3.5"
-                            fill="#2196f3" [attr.stroke]="chartDotStroke()" stroke-width="1.5">
+                            fill="#f59e0b" [attr.stroke]="chartDotStroke()" stroke-width="1.5">
                       <title>Partida {{ pt.i + 1 }}: {{ pt.score }} kills</title>
                     </circle>
                   }
@@ -249,7 +249,7 @@ interface GameSession {
       background: var(--t-hdr-bg);
       backdrop-filter: blur(10px);
     }
-    .logo { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; letter-spacing: 3px; color: var(--t-accent); }
+    .logo { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; letter-spacing: 4px; color: var(--t-accent); font-family: 'Barlow Condensed', sans-serif; }
     .nav-links { display: flex; gap: 16px; }
     .nav-links a { color: var(--t-tx4); text-decoration: none; font-size: 13px; transition: color .15s; }
     .nav-links a:hover { color: var(--t-accent); }
@@ -285,11 +285,11 @@ interface GameSession {
     }
     .kpi-value { font-size: 26px; font-weight: 800; color: var(--t-tx); }
     .kpi-value.accent { color: var(--t-accent); }
-    .kpi-label { font-size: 11px; color: var(--t-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+    .kpi-label { font-size: 11px; color: var(--t-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Barlow Condensed', sans-serif; }
 
     /* Chart */
     .chart-section { margin-bottom: 36px; }
-    .chart-title { font-size: 15px; font-weight: 700; color: var(--t-tx4); margin: 0 0 12px; letter-spacing: 1px; text-transform: uppercase; }
+    .chart-title { font-size: 15px; font-weight: 700; color: var(--t-tx4); margin: 0 0 12px; letter-spacing: 3px; text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; }
     .chart-wrap {
       background: var(--t-surface);
       border: 1px solid var(--t-bd);
@@ -302,8 +302,9 @@ interface GameSession {
     .sessions-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .sessions-table th {
       background: var(--t-surface2); color: var(--t-muted); font-size: 10px; text-transform: uppercase;
-      letter-spacing: 1px; padding: 10px 14px; text-align: left; font-weight: 600;
+      letter-spacing: 1.5px; padding: 10px 14px; text-align: left; font-weight: 600;
       border-bottom: 1px solid var(--t-bd);
+      font-family: 'Barlow Condensed', sans-serif;
     }
     .sessions-table td { padding: 9px 14px; border-bottom: 1px solid var(--t-bd); color: var(--t-tx2); }
     .sessions-table tr:last-child td { border-bottom: none; }

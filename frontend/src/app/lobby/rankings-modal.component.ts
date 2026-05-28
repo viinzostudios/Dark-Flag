@@ -187,8 +187,10 @@ interface RankEntry {
     }
     .rm-title {
       font-size: 15px; font-weight: 800;
-      letter-spacing: 2px; color: var(--t-accent);
+      letter-spacing: 3px; color: var(--t-accent);
       white-space: nowrap;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
     }
     .rm-search-wrap { flex: 1; }
     .rm-search {
@@ -257,8 +259,9 @@ interface RankEntry {
     .rm-col-icon { font-size: 18px; }
     .rm-col-title {
       font-size: 12px; font-weight: 800;
-      letter-spacing: 1px; color: var(--t-tx);
+      letter-spacing: 2px; color: var(--t-tx);
       text-transform: uppercase;
+      font-family: 'Barlow Condensed', sans-serif;
     }
     .rm-col-sub {
       font-size: 10px; color: var(--t-dim); letter-spacing: 0.3px;

@@ -53,9 +53,10 @@ import { TranslateModule } from '@ngx-translate/core';
     }
     .rp-icon { font-size: 36px; }
     .rp-title {
-      font-size: 18px; font-weight: 800;
-      color: var(--t-tx); margin: 0;
-      letter-spacing: 0.5px;
+      font-size: 20px; font-weight: 800;
+      color: var(--t-accent); margin: 0;
+      letter-spacing: 3px; text-transform: uppercase;
+      font-family: 'Barlow Condensed', sans-serif;
     }
     .rp-desc {
       font-size: 13px; color: var(--t-muted);
