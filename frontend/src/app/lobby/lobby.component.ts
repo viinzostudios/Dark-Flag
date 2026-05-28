@@ -626,10 +626,29 @@ const LEVEL_DATA: LevelInfo[] = [
 
     .lobby {
       min-height: 100vh;
-      background: var(--t-bg);
+      background:
+        radial-gradient(ellipse 70% 55% at 85% 95%, rgba(245,158,11,.05) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 15% 5%,  rgba(14,165,233,.02)  0%, transparent 45%),
+        var(--t-bg);
       color: var(--t-tx);
       font-family: 'Inter', system-ui, sans-serif;
       display: flex; flex-direction: column;
+
+      /* ── Warm amber override: mueve el acento de sky-blue a gold ── */
+      --t-accent:       #f59e0b;
+      --t-accent-dk:    #d97706;
+      --t-on-accent:    #060912;
+      --t-accent-bg:    rgba(245,158,11,.05);
+      --t-accent-bd:    rgba(245,158,11,.22);
+      --t-accent-bd2:   rgba(245,158,11,.30);
+      --t-accent-glow:  rgba(245,158,11,.40);
+      --t-accent-glow2: rgba(245,158,11,.75);
+      --t-focus-bd:     rgba(245,158,11,.55);
+      --t-focus-bg:     rgba(245,158,11,.05);
+      --t-accent-line:  rgba(245,158,11,.12);
+      --t-panel-bd:     rgba(245,158,11,.10);
+      --t-hover:        rgba(245,158,11,.05);
+      --t-surface:      rgba(245,158,11,.03);
     }
 
     /* ── Header ─────────────────────────────────────────────────── */
@@ -744,17 +763,20 @@ const LEVEL_DATA: LevelInfo[] = [
     .panel {
       background: var(--t-panel);
       border: 1px solid var(--t-panel-bd);
+      border-top: 2px solid rgba(245,158,11,.28);
       border-radius: 12px;
       padding: 20px;
       display: flex; flex-direction: column; gap: 12px;
       box-shadow: var(--t-shadow);
     }
     .panel-header {
-      font-size: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: var(--t-accent);
       text-transform: uppercase;
+      opacity: .90;
     }
     .divider { height: 1px; background: var(--t-panel-bd); }
 
@@ -817,8 +839,8 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: var(--t-accent);
-      box-shadow: 0 0 6px var(--t-accent);
+      background: #22d3ee;
+      box-shadow: 0 0 6px rgba(34,211,238,.70);
     }
     .stat-row {
       display: flex; justify-content: space-between;
@@ -840,8 +862,8 @@ const LEVEL_DATA: LevelInfo[] = [
     .grid-anim {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(14,165,233,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(14,165,233,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(245,158,11,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,158,11,.055) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: gridScroll 8s linear infinite;
     }
@@ -860,14 +882,15 @@ const LEVEL_DATA: LevelInfo[] = [
     .play-btn {
       display: flex; flex-direction: column; align-items: center; gap: 8px;
       padding: 24px 48px;
-      background: linear-gradient(135deg, var(--t-accent), var(--t-accent-dk));
-      border: none; border-radius: 14px;
-      color: var(--t-on-accent);
+      background: linear-gradient(135deg, var(--t-accent-dk, #d97706), var(--t-accent, #f59e0b));
+      border: none; border-radius: 4px;
+      color: #060912;
       font-weight: 900;
       cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
-      font-family: inherit;
-      box-shadow: 0 0 30px var(--t-accent-glow);
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 3px;
+      box-shadow: 0 0 32px var(--t-accent-glow), 0 2px 16px rgba(0,0,0,.50);
     }
     .play-btn:not(:disabled):hover {
       transform: scale(1.04);
@@ -967,17 +990,20 @@ const LEVEL_DATA: LevelInfo[] = [
     .skin-active-card {
       background: var(--t-panel);
       border: 1px solid var(--t-panel-bd);
+      border-top: 2px solid rgba(245,158,11,.28);
       border-radius: 12px;
       padding: 18px;
       display: flex; flex-direction: column; gap: 14px;
       box-shadow: var(--t-shadow);
     }
     .skin-label {
-      font-size: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: var(--t-accent);
       text-transform: uppercase;
+      opacity: .90;
     }
     .skin-preview-wrap {
       display: flex; align-items: center; gap: 14px;
@@ -1035,6 +1061,7 @@ const LEVEL_DATA: LevelInfo[] = [
     .skin-progress-card {
       background: var(--t-panel);
       border: 1px solid var(--t-panel-bd);
+      border-top: 2px solid rgba(245,158,11,.28);
       border-radius: 12px;
       padding: 18px;
       display: flex; flex-direction: column; gap: 14px;
@@ -1174,8 +1201,8 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .promo-btn:hover { opacity: 0.85; transform: translateY(-1px); }
     .promo-btn-register {
-      background: linear-gradient(135deg, var(--t-accent-dk), var(--t-accent));
-      color: var(--t-on-accent);
+      background: linear-gradient(135deg, var(--t-accent-dk, #d97706), var(--t-accent, #f59e0b));
+      color: #060912;
     }
     .promo-btn-login {
       background: transparent;
@@ -1185,17 +1212,17 @@ const LEVEL_DATA: LevelInfo[] = [
 
     /* ── Levels button ──────────────────────────────────────────── */
     .levels-btn {
-      background: linear-gradient(135deg, var(--t-accent-dk), var(--t-accent));
-      border: 1px solid var(--t-accent-bd2);
-      color: #fff;
-      border-radius: 7px;
+      background: linear-gradient(135deg, var(--t-accent-dk, #d97706), var(--t-accent, #f59e0b));
+      border: none;
+      color: #060912;
+      border-radius: 4px;
       padding: 8px 0;
-      font-size: 12px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
       font-weight: 700;
+      letter-spacing: 2px;
       cursor: pointer;
-      font-family: inherit;
       width: 100%;
-      letter-spacing: 1px;
       transition: opacity 0.15s, box-shadow 0.15s;
     }
     .levels-btn:hover {
@@ -1229,7 +1256,8 @@ const LEVEL_DATA: LevelInfo[] = [
       flex-wrap: wrap;
     }
     .lvl-modal-title {
-      font-size: 16px; font-weight: 800; letter-spacing: 2px; color: var(--t-accent);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px; font-weight: 900; letter-spacing: 3px; color: var(--t-accent);
     }
     .lvl-modal-sub {
       font-size: 11px; color: var(--t-sub); flex: 1;
@@ -1528,11 +1556,12 @@ const LEVEL_DATA: LevelInfo[] = [
     }
     .mobile-levels-btn-sm {
       display: none;
-      background: linear-gradient(135deg, var(--t-accent-dk), var(--t-accent));
-      border: 1px solid var(--t-accent-bd2); color: #fff;
-      border-radius: 7px; padding: 7px 18px;
-      font-size: 11px; font-weight: 700;
-      cursor: pointer; font-family: inherit; letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--t-accent-dk, #d97706), var(--t-accent, #f59e0b));
+      border: none; color: #060912;
+      border-radius: 4px; padding: 7px 18px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      cursor: pointer;
       transition: opacity 0.15s;
     }
 
