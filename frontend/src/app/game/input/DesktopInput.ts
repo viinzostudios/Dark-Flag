@@ -9,9 +9,10 @@ import { InputStrategy } from './InputStrategy';
  * Esta clase NO conoce nada de móvil. Cambiarla no afecta MobileInput.
  */
 export class DesktopInput implements InputStrategy {
-  private readonly lKey: Phaser.Input.Keyboard.Key;
-  private readonly eKey: Phaser.Input.Keyboard.Key;
-  private readonly fKey: Phaser.Input.Keyboard.Key;
+  private readonly lKey:     Phaser.Input.Keyboard.Key;
+  private readonly eKey:     Phaser.Input.Keyboard.Key;
+  private readonly fKey:     Phaser.Input.Keyboard.Key;
+  private readonly spaceKey: Phaser.Input.Keyboard.Key;
 
   private _angle    = 0;
   private _speed    = 0;
@@ -27,9 +28,10 @@ export class DesktopInput implements InputStrategy {
   private fWasDown     = false;
 
   constructor(private readonly scene: Phaser.Scene) {
-    this.lKey = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.L);
-    this.eKey = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-    this.fKey = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+    this.lKey     = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+    this.eKey     = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.fKey     = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+    this.spaceKey = scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
   }
 
   update(_time: number, tankX: number, tankY: number): void {
@@ -43,7 +45,12 @@ export class DesktopInput implements InputStrategy {
     const dy   = worldPoint.y - tankY;
     const zoom = this.scene.cameras.main.zoom;
     const dist = Math.sqrt(dx * dx + dy * dy) * zoom;
-    this._speed = dist < GAME.MOUSE_MIN_DIST ? 0 : 1;
+    // Spacebar = freno: el personaje no se mueve, la linterna sigue al cursor
+    if (this.spaceKey.isDown) {
+      this._speed = 0;
+    } else {
+      this._speed = dist < GAME.MOUSE_MIN_DIST ? 0 : 1;
+    }
 
     // Mazo (edge-trigger: click izq o tecla E)
     const leftDown = pointer.leftButtonDown();

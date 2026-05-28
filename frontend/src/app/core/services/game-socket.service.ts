@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 
 // ─── Snapshot types (must match server game-state.model.ts) ─────────────────
 
-export type PowerUpType = 'MACE_SHIELD' | 'REVELATION' | 'SPRINT' | 'BLACKOUT' | 'SUPER_MACE' | 'GHOST';
+export type PowerUpType = 'MACE_SHIELD' | 'REVELATION' | 'SPRINT' | 'BLACKOUT' | 'SUPER_MACE' | 'GHOST' | 'SEE_OTHERS';
 
 export interface PlayerSnapshot {
   id: string;

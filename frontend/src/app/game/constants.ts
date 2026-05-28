@@ -32,7 +32,7 @@ export const GAME = {
   DESTINATION_RADIUS: 80,
 
   // Traps
-  TRAP_RADIUS:   18,
+  TRAP_RADIUS:   54,
 
   // Power-ups
   MAX_POWERUPS_ON_MAP: 4,
@@ -53,6 +53,7 @@ export const POWER_COLORS: Record<string, number> = {
   BLACKOUT:     0x7c3aed,   // purple
   SUPER_MACE:   0xff6d00,   // deep orange
   GHOST:        0xd1d5db,   // silver-white
+  SEE_OTHERS:   0xff00cc,   // magenta — ver linternas ajenas
 };
 
 export const COLORS = {

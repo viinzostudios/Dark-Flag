@@ -60,71 +60,85 @@ Sesión infinita sin salir de la sala. Stack: Angular 19 + Phaser 4.1 + NestJS +
 > Todas las vistas HTML existentes se rediseñan con la nueva paleta y estética de Dark Flag.
 > Prioridad: mobile-first. Verificar en móvil Y desktop.
 
-### Sistema de diseño (nuevo)
+### Sistema de diseño (implementado — difiere del plan original)
 
-| Token | Valor |
-|-------|-------|
-| `--bg-base` | `#080810` |
-| `--bg-surface` | `#12132a` |
-| `--bg-elevated` | `#1c1d3e` |
-| `--brand-primary` | `#7c3aed` (morado) |
-| `--brand-secondary` | `#06b6d4` (teal) |
-| `--accent-flag` | `#f59e0b` (ámbar — color de bandera) |
-| `--accent-danger` | `#ef4444` (rojo — mazo/stun) |
-| `--text-primary` | `#f8fafc` |
-| `--text-secondary` | `#94a3b8` |
-| `--border` | `#2d2f5e` |
+> **Nota 2026-05**: La paleta implementada usa **dark navy + amber/gold** (inspirada en thegameawards.com),
+> no el morado/teal planificado originalmente. El ámbar fue elegido porque refuerza el color de la bandera y da más carácter visual.
+
+| Token CSS | Valor real | Descripción |
+|-----------|------------|-------------|
+| `--t-accent` | `#f59e0b` | Amber principal (accent de bandera) |
+| `--t-accent-dk` | `#d97706` | Amber oscuro para gradientes |
+| `--t-on-accent` | `#060912` | Texto sobre botones amber |
+| `--t-panel` | `rgba(8,13,24,.92)` | Fondo de paneles/cards |
+| `--t-accent-bd` | `rgba(245,158,11,.22)` | Borde amber visible (border-top de panels) |
+| `--t-panel-bd` | `rgba(245,158,11,.08)` | Borde amber sutil (border lateral/inferior) |
+| `--t-surface` | `rgba(245,158,11,.03)` | Superficie ligeramente teñida |
+| `--t-accent-glow` | `rgba(245,158,11,.40)` | Glow de botones/efectos |
+| `--t-bg` | `#07071a` | Fondo base (dark navy) |
+
+**Tipografía**: `Barlow Condensed` 900 uppercase para títulos/headers/labels; `Inter` para body.
+
+**Mecanismo de theming por ruta**: cada ruta sobreescribe los vars en su contenedor raíz (`.lobby`, `.shop-root`, `.page`). El cascade CSS los propaga a todos los hijos, incluidos modales `position:fixed`. Ver `arquitectura-angular.md` § Design system.
 
 ### F1.1 Landing page
-- [ ] Fondo oscuro animado: partículas de luz flotantes + grid sutil oscuro
-- [ ] Hero: imagen generada con IA (Lampers — personajes originales del juego — con linternas en oscuridad)
-- [ ] Título "DARK FLAG" con gradiente morado→teal, efecto glow
-- [ ] Tagline: "Explora la oscuridad. Encuentra la bandera. Escapa de todos."
-- [ ] Botón "JUGAR AHORA" → `/lobby` (paleta morado, animación pulso)
-- [ ] CTAs secundarios: "Iniciar sesión" / "Registrarse"
-- [ ] Sección de features: 3 pills (🔦 Oscuridad total · ⚡ Mazo vs todos · 🏆 15 niveles)
-- [ ] Sin scroll (hero full-screen en desktop); en móvil: scroll suave
-- [ ] Remover TODAS las referencias a tanques, balas, Arena Siege Tanks
+- [x] Fondo animado: blobs con blur + grid overlay oscuro
+- [x] Título "DARK FLAG" con Barlow Condensed, gradiente amber
+- [x] Tagline Dark Flag
+- [x] Botón "JUGAR AHORA" → `/lobby` (botón amber con glow)
+- [x] CTAs secundarios: "Iniciar sesión" / "Registrarse"
+- [x] 4 secciones de features con cards (arena oscura, skins, XP, monetización)
+- [x] Sin scroll en desktop; scroll en móvil
+- [x] Referencias a tanques eliminadas
+- [ ] Hero image generada con IA (pendiente — no hay imagen hero aún)
 
 **Archivos**: `frontend/src/app/landing/landing.component.ts`
-**Done cuando**: La landing carga en 375px y 1440px sin overflow, botón lleva al lobby.
+**Nota**: Paleta implementada amber/gold, no morado/teal. 4 feature cards con bordes de colores (amber, cyan, rojo, verde).
 
 ---
 
-### F1.2 Pantallas de Auth (Login + Register)
-- [ ] Mismo fondo animado oscuro que la landing (blob oscuros, no verdes)
-- [ ] Card glassmorphism con border morado sutil
-- [ ] Inputs con focus morado (replace verde actual)
-- [ ] Submit button: gradiente morado→teal
-- [ ] Logo/ícono de linterna encima del formulario
-- [ ] Botón "← Volver" a la landing
+### F1.2 Pantallas de Auth (Login + Register + Forgot + Reset)
+- [x] Mismo fondo animado oscuro que la landing (blobs + grid)
+- [x] Card con borde amber sutil y `border-top` amber
+- [x] Inputs con focus amber
+- [x] Submit button: gradiente amber `#d97706 → #f59e0b`
+- [x] Barlow Condensed para título del card
+- [x] Botón "← Volver" a la landing
+- [x] forgot-password: flujo completo con estado `sent`
+- [x] reset-password: flujo completo con validación de token + confirmación
 
-**Archivos**: `frontend/src/app/auth/login/login.component.ts`, `frontend/src/app/auth/register/register.component.ts`
+**Archivos**: `frontend/src/app/auth/login/login.component.ts`, `frontend/src/app/auth/register/register.component.ts`, `frontend/src/app/auth/forgot-password/forgot-password.component.ts`, `frontend/src/app/auth/reset-password/reset-password.component.ts`
 
 ---
 
 ### F1.3 Lobby
-- [ ] Fondo oscuro con efecto de linterna ambiental (halo de luz suave)
-- [ ] Card del jugador: avatar + nombre + nivel + puntos de sesión actual
-- [ ] Preview de skin del personaje (figura Among Us-style con el skin equipado)
-- [ ] Selector de arena (8 opciones con thumbnails oscuros)
-- [ ] Botón "BUSCAR PARTIDA" prominente (morado con pulso)
-- [ ] Botón "Rankings" (teal)
-- [ ] Panel de niveles (qué gana en cada nivel 1-15)
-- [ ] Notificación de partida encontrada con overlay de carga oscuro
-- [ ] Mobile: bottom nav con los botones principales
+- [x] Fondo dark navy + gradiente amber sutil + grid animado amber
+- [x] Panel de jugador: avatar + nombre + nivel + coins (chip compacto)
+- [x] Panel de skin activa: preview body + cañón con card amber
+- [x] Arena preview: imagen de fondo `arena-lobby-bg.png` (Gearhead izq. + Phantom der.)
+- [x] Botón "BUSCAR PARTIDA" amber con glow, Barlow Condensed
+- [x] Panel de acciones: Shop, Rankings, Stats con bordes de colores por panel
+- [x] Modal de rankings (inherita vars amber por cascade CSS)
+- [x] Modal de tutorial Dark Flag (4 cards, cierra solo en el último)
+- [x] Avatar picker con tratamiento amber
+- [x] Register prompt
+- [x] Paleta cálida: 4 colores de acento por panel (blue, crimson, cyan, crimson)
 
-**Archivos**: `frontend/src/app/lobby/lobby.component.ts`
+**Archivos**: `frontend/src/app/lobby/lobby.component.ts`, `frontend/src/app/lobby/rankings-modal.component.ts`, `frontend/src/app/shared/components/tutorial-modal.component.ts`, `frontend/src/app/shared/components/avatar-picker.component.ts`, `frontend/src/app/shared/components/register-prompt.component.ts`
+**Asset**: `frontend/public/assets/environment/arena-lobby-bg.png` (draft quality:low — Gearhead + Phantom caminando)
 
 ---
 
 ### F1.4 Shop
-- [ ] Tabs de sección: Personajes / Avatares / Escenarios / Paquetes
-- [ ] Cards de personaje/skin: preview de la figura Among Us-style con el skin
-- [ ] Cards de arena: thumbnail oscuro del escenario
-- [ ] Cards de paquetes: mismo layout actual pero con paleta oscura
-- [ ] Botón de compra: ámbar/dorado (replace verde)
-- [ ] Modal de preview: fondo completamente oscuro + figura con linterna encendida
+- [x] Tabs de sección: Personajes / Avatares / Escenarios / Paquetes (amber active)
+- [x] Cards de skin: dark panel con border-top amber + blur, preview body+cañón
+- [x] Cards de avatares: mismo panel treatment, grid compacto
+- [x] Cards de arenas: panel oscuro con border-top amber
+- [x] Cards de paquetes: panel oscuro con border-top amber
+- [x] Botones de compra: amber primary / purple gem
+- [x] `.shop-root` sobreescribe vars amber (`--t-accent: #f59e0b`)
+- [x] Section title amber (era morado hardcoded)
+- [x] Header con logo Barlow Condensed amber
 
 **Archivos**: `frontend/src/app/shop/shop.component.ts`
 
@@ -627,7 +641,7 @@ F6.0 (prueba) → aprobación → F6.1 (skins) → F6.2-F6.5 (resto de assets)
 
 ---
 
-## Estado actual (última actualización 2026-05-27)
+## Estado actual (última actualización 2026-05-28)
 
 ### Completado ✓
 - [x] Diseño del juego definido y documentado
@@ -639,15 +653,35 @@ F6.0 (prueba) → aprobación → F6.1 (skins) → F6.2-F6.5 (resto de assets)
 - [x] Tutorial modal Dark Flag (4 cards, persistencia localStorage)
 - [x] MissionType + seed de misiones Dark Flag (11 misiones)
 - [x] Plan de calidad F5.5–F13 documentado en `docs/00-plan/plan-calidad.md`
+- [x] F5.5: Assets mínimos — spritesheets phantom/gearhead, obstáculos PNG transparentes, trap-marker, power-ups, VFX, arena space-station, linterna por nivel
+- [x] **F1.1 Landing**: rediseño completo — dark navy + amber, Barlow Condensed, 4 feature cards, blobs + grid animado
+- [x] **F1.2 Auth**: login, register, forgot-password, reset-password — misma estética amber, card con border-top amber
+- [x] **F1.3 Lobby**: paleta warm amber, arena preview con imagen IA, paneles con 4 colores de acento, modales (rankings, tutorial, avatar picker, register prompt)
+- [x] **F1.4 Shop**: paleta amber completa — vars sobreescritas en `.shop-root`, panel treatment en todas las cards (skins, avatares, arenas, paquetes)
+- [x] **Stats**: paleta amber — vars en `.page`, KPI cards y chart-wrap con panel treatment
+- [x] **Zoom**: +20% — PC: 0.90, móvil: 0.50
+- [x] **Linterna cruzada**: se ven los conos ajenos solo si se intersectan con el propio
+- [x] **Power-up SEE_OTHERS** (magenta, 20 s): ver todos los conos durante 20 s — imagen generada + integrada
+- [x] **Trampas ×3 más grandes** (backend TRAP_RADIUS 72 px, frontend visual 54 px)
+- [x] **Trampas mortales**: al activarse, eliminan al jugador (respawn + modal de muerte)
+- [x] **Spawn seguro**: bandera, destino, power-ups y jugadores no spawnan sobre obstáculos
+- [x] **Barra espaciadora = freno**: cuerpo inmóvil, linterna sigue al cursor
+- [x] **Bots con visión de linterna**: solo "ven" la bandera si su cono la ilumina; memoria de 5 s
+- [x] **Ghost atraviesa obstáculos**: además de trampas, el Ghost pasa por obstáculos estáticos
+- [x] **Ghost efecto parpadeante**: opacidad 0.55↔0.20 cada 250 ms
+- [x] **REVELATION y SEE_OTHERS corregidos**: funcionan correctamente con el darkness pipeline
+- [x] **Fallback de personaje**: si el slug no tiene texture cargada, usa 'phantom' automáticamente
 
-### Pendiente (juego funcional en placeholders, sin assets finales ni audio)
+### Pendiente
 - [ ] F0.2: Actualizar CLAUDE.md (nombre, descripción, directorio)
 - [ ] F0.3: Documentación secundaria (websocket-events, game-loop, schemas, phaser-scenes)
-- [ ] F1.x: Rediseño UI/UX completo (landing, auth, lobby, shop, overlays, HUD)
+- [ ] F1.5: Game overlays Angular (DeathOverlay Dark Flag, PreEntryOverlay, LevelUp/Down, FlagNotification)
+- [ ] F1.6: HUD Phaser Dark Flag
+- [ ] F1.x hero image: imagen hero landing con personajes IA
 - [ ] F2.x: Game loop Dark Flag completo (bots AI, todos los eventos WS, schemas BD)
 - [~] F3.x: Phaser Dark Flag — F3.1 darkness pipeline ✓; raycasting, personajes, objetos del juego pendientes
 - [ ] F4.x: PlayerStats schema, endpoints rankings, shop personajes
 - [ ] F5.x: Testing E2E, optimización sombras
-- [x] F5.5: Assets mínimos — spritesheets phantom/gearhead, obstáculos PNG transparentes, trap-marker, power-ups, VFX, arena space-station, linterna por nivel
 - [ ] F5.6–F13: Ver `docs/00-plan/plan-calidad.md`
 - [ ] F6: POSPUESTO — se ejecuta después de F13
+- [ ] arena-lobby-bg.png: regenerar en quality `"high"` cuando se apruebe el draft actual

@@ -257,9 +257,12 @@ export class GameScene extends Phaser.Scene {
     // Dark overlay: erase flashlight cones for all visible lit players
     this.updateDarkness();
 
-    // Blink effect when invincible (after respawn)
+    // Alpha effects: ghost blink (250 ms) overrides invincibility blink (120 ms)
     const now = Date.now();
-    if (this.localInvincibleUntil > now) {
+    if (this.localIsGhost) {
+      const blinkOn = Math.floor(now / 250) % 2 === 0;
+      this.player.setVisualAlpha(blinkOn ? 0.55 : 0.2);
+    } else if (this.localInvincibleUntil > now) {
       const blinkOn = Math.floor(now / GAME.BLINK_INTERVAL_MS) % 2 === 0;
       this.player.setVisualAlpha(blinkOn ? 1 : 0.3);
     } else {
@@ -316,15 +319,17 @@ export class GameScene extends Phaser.Scene {
     const rtX = topLeft.x;
     const rtY = topLeft.y;
     this.darkOverlay.setPosition(rtX, rtY);
+    this.darkOverlay.setAlpha(1);
 
     this.flashlightGfx.clear();
 
-    // REVELATION power-up: no darkness — transparent overlay
+    // REVELATION: ocultar overlay por completo → visibilidad total del escenario
     if (this.localActivePower === 'REVELATION') {
-      this.darkOverlay.fill(0x000000, 0);
-      this.darkOverlay.render();
+      this.darkOverlay.setAlpha(0);
       return;
     }
+
+    const seeOthers = this.localActivePower === 'SEE_OTHERS';
 
     for (const p of this.lastPlayers) {
       if (!p.lightOn || p.isDead) continue;
@@ -339,6 +344,18 @@ export class GameScene extends Phaser.Scene {
         const rt = this.remoteTanks.get(p.id);
         if (!rt) continue;
         const pos = rt.getPosition();
+
+        if (!seeOthers) {
+          // Solo dibuja la linterna ajena si los conos se cruzan:
+          // ellos están en mi cono O yo estoy en el suyo
+          const theyInMyCone = this.isPointIlluminated(pos.x, pos.y);
+          const iInTheirCone = this.isPointInCone(
+            this.player.x, this.player.y,
+            pos.x, pos.y, p.aimAngle, p.level,
+          );
+          if (!theyInMyCone && !iInTheirCone) continue;
+        }
+
         wx = pos.x; wy = pos.y; angle = p.aimAngle;
       }
 
@@ -554,20 +571,46 @@ export class GameScene extends Phaser.Scene {
   // ─── Visibility check ─────────────────────────────────────────────────────
 
   private isPointIlluminated(wx: number, wy: number): boolean {
-    if (!this.localLightOn) return false;
+    // REVELATION overrides everything — check before lightOn
     if (this.localActivePower === 'REVELATION') return true;
+    if (!this.localLightOn) return false;
 
-    const levelBonus = Math.min(this.localLevel - 1, GAME.MAX_LEVEL - 1);
+    // Comprobar cono propio
+    if (this.isPointInCone(wx, wy, this.player.x, this.player.y, this.player.aimAngle, this.localLevel)) {
+      return true;
+    }
+
+    // Con SEE_OTHERS también cuentan los conos ajenos
+    if (this.localActivePower === 'SEE_OTHERS') {
+      for (const p of this.lastPlayers) {
+        if (p.id === this.localPlayerId || !p.lightOn || p.isDead) continue;
+        const rt = this.remoteTanks.get(p.id);
+        if (!rt) continue;
+        const pos = rt.getPosition();
+        if (this.isPointInCone(wx, wy, pos.x, pos.y, p.aimAngle, p.level)) return true;
+      }
+    }
+
+    return false;
+  }
+
+  private isPointInCone(
+    px: number, py: number,
+    cx: number, cy: number,
+    aimAngle: number,
+    level: number,
+  ): boolean {
+    const levelBonus = Math.min(level - 1, GAME.MAX_LEVEL - 1);
     const range      = GAME.LIGHT_CONE_RANGE + levelBonus * 8;
     const halfCone   = (GAME.LIGHT_CONE_ANGLE + levelBonus * 2 * Math.PI / 180) / 2;
 
-    const dx   = wx - this.player.x;
-    const dy   = wy - this.player.y;
+    const dx   = px - cx;
+    const dy   = py - cy;
     const dist = Math.sqrt(dx * dx + dy * dy);
     if (dist > range) return false;
 
     const angle = Math.atan2(dy, dx);
-    let diff = angle - this.player.aimAngle;
+    let diff = angle - aimAngle;
     while (diff > Math.PI)  diff -= Math.PI * 2;
     while (diff < -Math.PI) diff += Math.PI * 2;
     return Math.abs(diff) <= halfCone;
@@ -695,7 +738,7 @@ export class GameScene extends Phaser.Scene {
     this.isMobile = isTouchDevice();
     this.cameras.main.setBounds(0, 0, this.mapW, this.mapH);
     this.cameras.main.startFollow(this.player.body, true, 0.1, 0.1);
-    this.cameras.main.setZoom(this.isMobile ? 0.42 : 0.75);
+    this.cameras.main.setZoom(this.isMobile ? 0.50 : 0.90);
 
     this.rebuildDarkOverlay();
 

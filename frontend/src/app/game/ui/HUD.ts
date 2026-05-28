@@ -10,8 +10,16 @@ const POWER_ICONS: Partial<Record<PowerUpType, string>> = {
   BLACKOUT:    '🌑',
   SUPER_MACE:  '💥',
   GHOST:       '👻',
+  SEE_OTHERS:  '🔦',
 };
-const POWER_DURATION_MS = 10000;
+const POWER_DURATIONS: Partial<Record<PowerUpType, number>> = {
+  REVELATION:  10000,
+  SPRINT:       8000,
+  BLACKOUT:     5000,
+  GHOST:        8000,
+  SEE_OTHERS:  20000,
+};
+const POWER_DURATION_MS = 10000; // fallback
 
 export class HUD {
   private readonly scene: Phaser.Scene;
@@ -308,7 +316,8 @@ export class HUD {
       const colHex   = POWER_COLORS[activePower] ?? 0xffffff;
       const colStr   = `#${colHex.toString(16).padStart(6, '0')}`;
       const remaining = Math.max(0, powerExpiresAt - time);
-      const barPct    = remaining / POWER_DURATION_MS;
+      const totalDuration = POWER_DURATIONS[activePower] ?? POWER_DURATION_MS;
+      const barPct    = Math.min(1, remaining / totalDuration);
       const secs      = Math.ceil(remaining / 1000);
       this.powerIcon.setText(icon);
       this.powerTimerText.setText(`${secs}s`).setColor(colStr);

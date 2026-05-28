@@ -429,7 +429,7 @@ function applyMace(attacker: Player, target: Player, state: ServerGameState, now
 
 ## 5. Trampas
 
-Las trampas son objetos ocultos en el suelo del mapa. Solo se activan si el jugador las pisa mientras va a más del 70% de velocidad máxima. Aturden al jugador y le hacen soltar la bandera.
+Las trampas son objetos ocultos en el suelo del mapa. Solo se activan si el jugador las pisa mientras va a más del 70% de velocidad máxima. **Eliminan al jugador** (respawn con modal de muerte) y le hacen soltar la bandera.
 
 ```typescript
 interface Trap {
@@ -440,11 +440,10 @@ interface Trap {
   respawnAt: number | null;
 }
 
-const TRAP_RADIUS                  = 20;          // px
+const TRAP_RADIUS                  = 72;          // px (server-side; visual frontend: 54px)
 const TRAP_VISIBLE_DISTANCE_BASE   = 40;          // px — visible solo si estás muy cerca
 const TRAP_VISIBLE_DISTANCE_LEVEL4 = 65;          // px — nivel 4+ detecta trampas más lejos
 const TRAP_SPEED_THRESHOLD         = 0.70;        // 70% de velocidad máxima para activarse
-const TRAP_STUN_MS                 = 2000;
 const TRAP_RESPAWN_MS              = 45000;
 const TRAP_COUNT_MIN               = 15;
 const TRAP_COUNT_MAX               = 20;
@@ -475,17 +474,21 @@ function checkTrapCollisions(state: ServerGameState, now: number): void {
 }
 
 function applyTrap(player: Player, trap: Trap, state: ServerGameState, now: number): void {
-  player.stunUntil = now + TRAP_STUN_MS;
-
+  // La trampa mata al jugador — dispara modal de eliminación en cliente
   if (player.hasFlag) {
     dropFlag(player, state, now);
-    emit('flag_trap', { playerId: player.id, x: player.x, y: player.y });
   }
+
+  player.isDead = true;
+  player.respawnAt = now + RESPAWN_MS;
+  player.activePowerType = null;
+  player.isGhost = false;
+  // (reset de todos los campos de power-up activo)
 
   trap.active = false;
   trap.respawnAt = now + TRAP_RESPAWN_MS;
 
-  emit('trap_triggered', { playerId: player.id, trapId: trap.id });
+  emit('player_died', { playerId: player.id, killerName: null, reason: 'trap' });
 }
 ```
 
@@ -517,7 +520,7 @@ function processTrapRespawns(state: ServerGameState, now: number): void {
 Los power-ups aparecen en el mapa como objetos recogibles. Máximo 4 activos simultáneamente. Se generan cada 20 segundos. Un jugador solo puede tener **1 power-up activo** a la vez; recoger uno mientras se tiene otro lo reemplaza.
 
 ```typescript
-type PowerUpType = 'MACE_SHIELD' | 'REVEAL' | 'SPRINT' | 'BLACKOUT' | 'SUPER_MACE' | 'GHOST';
+type PowerUpType = 'MACE_SHIELD' | 'REVELATION' | 'SPRINT' | 'BLACKOUT' | 'SUPER_MACE' | 'GHOST' | 'SEE_OTHERS';
 
 interface PowerUp {
   id: string;
@@ -531,21 +534,23 @@ const POWERUP_SPAWN_INTERVAL_MS = 20000;
 const POWERUP_RADIUS           = 18;
 
 const POWERUP_DURATIONS: Record<PowerUpType, number> = {
-  MACE_SHIELD: 0,      // hasta que absorbe 1 golpe
-  REVEAL:      6000,
+  MACE_SHIELD: 0,        // hasta que absorbe 1 golpe
+  REVELATION:  10000,
   SPRINT:      8000,
   BLACKOUT:    5000,
-  SUPER_MACE:  0,      // hasta que usa los 2 mazos
+  SUPER_MACE:  0,        // hasta que usa los 2 mazos
   GHOST:       8000,
+  SEE_OTHERS:  20000,
 };
 
 const POWERUP_WEIGHTS: Record<PowerUpType, number> = {
   MACE_SHIELD: 20,
-  REVEAL:      15,
+  REVELATION:  15,
   SPRINT:      20,
   BLACKOUT:    15,
   SUPER_MACE:  15,
   GHOST:       15,
+  SEE_OTHERS:  10,
 };
 ```
 
@@ -554,11 +559,12 @@ const POWERUP_WEIGHTS: Record<PowerUpType, number> = {
 | Power-up | Descripción |
 |----------|------------|
 | `MACE_SHIELD` | Bloquea el próximo golpe de mazo (absorbe 1 golpe). No caduca por tiempo. |
-| `REVEAL` | Revela la posición de todos los jugadores en el minimapa durante 6 s. |
+| `REVELATION` | Elimina la oscuridad completamente durante 10 s (el jugador ve todo el escenario). |
 | `SPRINT` | +60% de velocidad durante 8 s, independiente del nivel. |
 | `BLACKOUT` | Apaga la linterna de todos los rivales durante 5 s (no afecta al portador). |
 | `SUPER_MACE` | Los próximos 2 mazos duran 10 s de aturdimiento y quitan 2 niveles. |
-| `GHOST` | El jugador atraviesa las trampas y es invisible en el minimapa durante 8 s. |
+| `GHOST` | El jugador atraviesa trampas y obstáculos estáticos; invisible en el minimapa durante 8 s. Efecto visual: opacidad parpadeante (0.55↔0.20 cada 250 ms). |
+| `SEE_OTHERS` | Ver los conos de linterna de todos los demás jugadores durante 20 s. |
 
 ### Aplicar power-up
 
@@ -794,13 +800,28 @@ function updateBot(bot: BotState, state: ServerGameState, now: number): void {
 
 ### Razonamiento de linterna del bot
 
-El servidor calcula si la bandera o un jugador está dentro del cono ficticio del bot para decidir si "lo ve". Los bots no reaccionan a jugadores invisibles (power-up Ghost).
+El servidor calcula si la bandera está dentro del cono ficticio del bot para decidir si "la ve". Los bots tienen **memoria de linterna**: si iluminan la bandera, recuerdan su posición durante 5 s (`botFlagKnownUntil`). Pasado ese tiempo, vuelven a patrullar hasta re-iluminarla.
 
 ```typescript
-function isPointInBotCone(bot: BotState, point: { x: number; y: number }): boolean {
-  const config = { range: getLighthouseRange(bot.powerStack), coneAngle: getLighthouseCone(bot.powerStack) };
-  return isPointInCone(point, { x: bot.x, y: bot.y, aimAngle: bot.rotation, ...config });
+function isInBotFlashlight(bot: ServerPlayerState, px: number, py: number): boolean {
+  const range     = getBotConeRange(bot.level);
+  const halfAngle = getBotConeHalfAngle(bot.level);
+  const dx = px - bot.x;
+  const dy = py - bot.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist > range) return false;
+  const angleToPoint = Math.atan2(dy, dx);
+  let diff = angleToPoint - bot.aimAngle;
+  while (diff >  Math.PI) diff -= 2 * Math.PI;
+  while (diff < -Math.PI) diff += 2 * Math.PI;
+  return Math.abs(diff) <= halfAngle;
 }
+
+// En updateBots — actualizar memoria de bandera
+if (isInBotFlashlight(bot, flag.x, flag.y)) {
+  bot.botFlagKnownUntil = now + 5000; // recuerda por 5 s
+}
+const knowsFlag = now < bot.botFlagKnownUntil || bot.hasFlag;
 ```
 
 ---
@@ -836,7 +857,7 @@ function resolveTankCollisions(players: Map<string, ServerPlayerState>): void {
 }
 ```
 
-Nota: los jugadores con Ghost activo no participan en la colisión con otros jugadores (atraviesan), pero sí colisionan con los bordes del mapa y los obstáculos estáticos.
+Nota: los jugadores con Ghost activo no participan en la colisión con otros jugadores (atraviesan). Los jugadores Ghost también **atraviesan obstáculos estáticos** (el servidor omite `resolveAllStaticCollisions` para ellos). Solo los bordes del mapa los detienen.
 
 ---
 
@@ -909,16 +930,15 @@ export const DARK_FLAG_CONSTANTS = {
   FARO_HITBOX_RADIUS:  80,
 
   // Trampas
-  TRAP_RADIUS:                   20,
+  TRAP_RADIUS:                   72,   // server-side; visual frontend: 54px
   TRAP_VISIBLE_DISTANCE_BASE:    40,
   TRAP_VISIBLE_DISTANCE_LEVEL4:  65,
   TRAP_SPEED_THRESHOLD:          0.70,
-  TRAP_STUN_MS:                  2000,
   TRAP_RESPAWN_MS:               45000,
   TRAP_COUNT_MIN:                15,
   TRAP_COUNT_MAX:                20,
 
-  // Power-ups
+  // Power-ups (7 tipos: MACE_SHIELD, REVELATION, SPRINT, BLACKOUT, SUPER_MACE, GHOST, SEE_OTHERS)
   POWERUP_RADIUS:            18,
   MAX_POWERUPS_ON_MAP:       4,
   POWERUP_SPAWN_INTERVAL_MS: 20000,

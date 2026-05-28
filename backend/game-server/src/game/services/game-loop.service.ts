@@ -26,7 +26,7 @@ const DESTINATION_RADIUS = 80;
 
 const TRAP_SPEED_THRESHOLD = 0.70;
 const TRAP_STUN_MS = 2000;
-const TRAP_RADIUS = 24;
+const TRAP_RADIUS = 72;
 const TRAP_RESPAWN_MS = 45000;
 
 const MAX_POWERUPS_ON_MAP = 4;
@@ -38,6 +38,7 @@ const SPRINT_DURATION_MS = 8000;
 const GHOST_DURATION_MS = 8000;
 const BLACKOUT_DURATION_MS = 5000;
 const REVELATION_DURATION_MS = 10000;
+const SEE_OTHERS_DURATION_MS = 20000;
 
 const SCORE_FLAG_PICKUP = 20;
 const SCORE_MACE_HIT = 10;
@@ -55,13 +56,40 @@ const BOT_MACE_RANGE = 100;
 const BOT_PULSE_INTERVAL_MS = 20000;
 
 const POWER_WEIGHTS: { type: PowerUpType; weight: number }[] = [
-  { type: 'MACE_SHIELD', weight: 25 },
-  { type: 'REVELATION',  weight: 20 },
-  { type: 'SPRINT',      weight: 25 },
+  { type: 'MACE_SHIELD', weight: 20 },
+  { type: 'REVELATION',  weight: 15 },
+  { type: 'SPRINT',      weight: 20 },
   { type: 'BLACKOUT',    weight: 15 },
   { type: 'SUPER_MACE',  weight: 10 },
-  { type: 'GHOST',       weight: 15 },
+  { type: 'GHOST',       weight: 10 },
+  { type: 'SEE_OTHERS',  weight: 20 },
 ];
+
+// ─── Bot flashlight cone ──────────────────────────────────────────────────────
+
+function getBotConeRange(level: number): number {
+  const ranges = [150, 175, 175, 175, 200, 200, 250, 250, 250, 300, 300, 350, 350, 350, 500];
+  return ranges[Math.min(level - 1, ranges.length - 1)];
+}
+
+function getBotConeHalfAngle(level: number): number {
+  const deg = [60, 60, 60, 60, 80, 80, 80, 80, 90, 100, 100, 110, 110, 120, 130];
+  return (deg[Math.min(level - 1, deg.length - 1)] * Math.PI / 180) / 2;
+}
+
+function isInBotFlashlight(bot: ServerPlayerState, px: number, py: number): boolean {
+  if (!bot.lightOn) return false;
+  const range = getBotConeRange(bot.level);
+  const dx = px - bot.x;
+  const dy = py - bot.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist > range) return false;
+  const angle = Math.atan2(dy, dx);
+  let diff = angle - bot.aimAngle;
+  while (diff > Math.PI)  diff -= Math.PI * 2;
+  while (diff < -Math.PI) diff += Math.PI * 2;
+  return Math.abs(diff) <= getBotConeHalfAngle(bot.level);
+}
 
 // ─── Level → speed mapping ────────────────────────────────────────────────────
 
@@ -167,7 +195,7 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
       player.x += Math.cos(input.mouseAngle) * speed * dt;
       player.y += Math.sin(input.mouseAngle) * speed * dt;
 
-      this.resolveAllStaticCollisions(player, state);
+      if (!player.isGhost) this.resolveAllStaticCollisions(player, state);
       this.clampToMap(player, state);
 
       // Mace input is processed in processMaces()
@@ -343,8 +371,6 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
         trap.active = false;
         trap.respawnAt = now + TRAP_RESPAWN_MS;
 
-        player.stunUntil = now + TRAP_STUN_MS;
-
         // Drop flag if carrier
         if (player.hasFlag) {
           player.hasFlag = false;
@@ -353,6 +379,7 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
           state.flag.x = player.x;
           state.flag.y = player.y;
           state.flag.droppedAt = now;
+          state.flag.firstIlluminatedBy = null;
 
           if (this.server) {
             this.server.to(roomId).emit('flag_dropped', {
@@ -365,14 +392,26 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
           }
         }
 
+        // Kill player (show death modal on client)
+        player.isDead = true;
+        player.respawnAt = now + RESPAWN_MS;
+        player.activePowerType = null;
+        player.powerExpiresAt = 0;
+        player.hasMaceShield = false;
+        player.sprintActive = false;
+        player.isGhost = false;
+        player.superMaceCharges = 0;
+
         if (this.server) {
           this.server.to(roomId).emit('trap_triggered', {
             playerId: player.id,
             trapId: trap.id,
           });
-          this.server.to(roomId).emit('player_stunned', {
+          this.server.to(roomId).emit('player_died', {
             playerId: player.id,
-            duration: TRAP_STUN_MS,
+            playerName: player.username,
+            killerName: null,
+            reason: 'trap',
           });
         }
         break;
@@ -585,6 +624,9 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
         player.isGhost = true;
         player.powerExpiresAt = now + GHOST_DURATION_MS;
         break;
+      case 'SEE_OTHERS':
+        player.powerExpiresAt = now + SEE_OTHERS_DURATION_MS;
+        break;
     }
   }
 
@@ -649,6 +691,11 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
       if (!bot.isBot || bot.isDead) continue;
       if (now < bot.stunUntil) continue;
 
+      // Update flashlight-based flag memory: bot sees the flag → remembers it 5 s
+      if (state.flag.isOnGround && isInBotFlashlight(bot, state.flag.x, state.flag.y)) {
+        bot.botFlagKnownUntil = now + 5000;
+      }
+
       this.updateBotState(bot, state, now);
 
       const dx = bot.botDirectionX;
@@ -659,7 +706,7 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
       bot.x += (dx / len) * BOT_SPEED * dt;
       bot.y += (dy / len) * BOT_SPEED * dt;
 
-      this.resolveAllStaticCollisions(bot, state);
+      if (!bot.isGhost) this.resolveAllStaticCollisions(bot, state);
       this.clampToMap(bot, state);
     }
   }
@@ -667,11 +714,18 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
   private updateBotState(bot: ServerPlayerState, state: ServerGameState, now: number): void {
     const carrier = state.flag.carriedBy ? state.players.get(state.flag.carriedBy) : null;
 
+    // Bots use flashlight-limited knowledge:
+    // - SEEK_FLAG only if they have recent memory of the flag (saw it with their cone)
+    // - CARRY_FLAG: always know the destination once carrying
+    // - HUNT_CARRIER: only if they can currently see the carrier with their cone
+    const knowsFlag = state.flag.isOnGround && now < bot.botFlagKnownUntil;
+    const seesCarrier = carrier && carrier.id !== bot.id && isInBotFlashlight(bot, carrier.x, carrier.y);
+
     if (bot.hasFlag) {
       bot.botState = 'CARRY_FLAG';
-    } else if (carrier && carrier.id !== bot.id) {
+    } else if (seesCarrier) {
       bot.botState = 'HUNT_CARRIER';
-    } else if (state.flag.isOnGround) {
+    } else if (knowsFlag) {
       bot.botState = 'SEEK_FLAG';
     } else {
       bot.botState = 'PATROL';
@@ -736,8 +790,22 @@ export class GameLoopService implements OnModuleInit, OnModuleDestroy {
   }
 
   private doRespawn(player: ServerPlayerState, state: ServerGameState, now: number): void {
-    player.x = 200 + Math.random() * (state.mapWidth - 400);
-    player.y = 200 + Math.random() * (state.mapHeight - 400);
+    // Find a position clear of obstacles
+    let rx = 200 + Math.random() * (state.mapWidth - 400);
+    let ry = 200 + Math.random() * (state.mapHeight - 400);
+    for (let attempt = 0; attempt < 30; attempt++) {
+      const cx = 200 + Math.random() * (state.mapWidth - 400);
+      const cy = 200 + Math.random() * (state.mapHeight - 400);
+      const clear = state.obstacles.every(obs => {
+        const obsR = obs.isCircle ? obs.w / 2 : Math.max(obs.w, obs.h) / 2;
+        const dx = cx - obs.x;
+        const dy = cy - obs.y;
+        return Math.sqrt(dx * dx + dy * dy) >= PLAYER_RADIUS + obsR + 30;
+      });
+      if (clear) { rx = cx; ry = cy; break; }
+    }
+    player.x = rx;
+    player.y = ry;
     player.isDead = false;
     player.stunUntil = 0;
     player.invincibleUntil = now + 1500;

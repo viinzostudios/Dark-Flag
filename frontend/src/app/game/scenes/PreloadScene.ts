@@ -62,6 +62,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('power-BLACKOUT',     'assets/pickups/power-blackout.png');
     this.load.image('power-SUPER_MACE',   'assets/pickups/power-super-mace.png');
     this.load.image('power-GHOST',        'assets/pickups/power-ghost.png');
+    this.load.image('power-SEE_OTHERS',   'assets/pickups/power-see-others.png');
 
     // Static obstacles — keys match GameScene: obs-round (isCircle) and obs-barrier (rect)
     this.load.image('obs-round',    'assets/environment/obs-round.png');

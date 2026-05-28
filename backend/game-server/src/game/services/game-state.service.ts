@@ -98,6 +98,33 @@ function randomMapPoint(mapWidth: number, mapHeight: number, margin = 150): { x:
   };
 }
 
+function isClearOfObstacles(
+  x: number, y: number, clearance: number,
+  obstacles: ServerStaticObstacleState[],
+): boolean {
+  for (const obs of obstacles) {
+    const obsR = obs.isCircle ? obs.w / 2 : Math.max(obs.w, obs.h) / 2;
+    const dx = x - obs.x;
+    const dy = y - obs.y;
+    if (Math.sqrt(dx * dx + dy * dy) < clearance + obsR + 30) return false;
+  }
+  return true;
+}
+
+function randomMapPointSafe(
+  mapWidth: number, mapHeight: number,
+  obstacles: ServerStaticObstacleState[],
+  clearance: number,
+  margin = 150,
+): { x: number; y: number } {
+  for (let i = 0; i < 40; i++) {
+    const x = margin + Math.random() * (mapWidth - margin * 2);
+    const y = margin + Math.random() * (mapHeight - margin * 2);
+    if (isClearOfObstacles(x, y, clearance, obstacles)) return { x, y };
+  }
+  return randomMapPoint(mapWidth, mapHeight, margin);
+}
+
 export function scoreToLevel(score: number): number {
   return Math.min(LEVEL_MAX, Math.floor(score / LEVEL_POINTS) + 1);
 }
@@ -121,8 +148,8 @@ export class GameStateService {
     const now = Date.now();
     const obstacles = generateObstacles(mapWidth, mapHeight);
 
-    const flagPos = randomMapPoint(mapWidth, mapHeight);
-    const destPos = randomMapPoint(mapWidth, mapHeight, 200);
+    const flagPos = randomMapPointSafe(mapWidth, mapHeight, obstacles, 40);
+    const destPos = randomMapPointSafe(mapWidth, mapHeight, obstacles, 80, 200);
 
     const state: ServerGameState = {
       tick: 0,
@@ -154,7 +181,7 @@ export class GameStateService {
 
     // Generate traps spread across the map
     for (let i = 0; i < TRAP_COUNT; i++) {
-      const pos = randomMapPoint(mapWidth, mapHeight, 100);
+      const pos = randomMapPointSafe(mapWidth, mapHeight, obstacles, 30, 100);
       const trapId = uuidv4().slice(0, 8);
       state.traps.set(trapId, {
         id: trapId,
@@ -165,8 +192,8 @@ export class GameStateService {
       });
     }
 
-    // Spawn initial power-ups
-    const initialPowerTypes: PowerUpType[] = ['MACE_SHIELD', 'SPRINT', 'REVELATION', 'GHOST'];
+    // Spawn initial power-ups (garantiza que SEE_OTHERS aparezca desde el inicio)
+    const initialPowerTypes: PowerUpType[] = ['MACE_SHIELD', 'SPRINT', 'SEE_OTHERS', 'GHOST'];
     for (const type of initialPowerTypes) {
       this.spawnPowerUp(state, type);
     }
@@ -214,6 +241,7 @@ export class GameStateService {
         knockbackVy: 0,
         knockbackTicks: 0,
         lastFlagPickupAt: 0,
+        botFlagKnownUntil: 0,
       };
 
       state.players.set(bot.id, bot);
@@ -276,6 +304,7 @@ export class GameStateService {
       knockbackVy: 0,
       knockbackTicks: 0,
       lastFlagPickupAt: 0,
+      botFlagKnownUntil: 0,
     };
 
     state.players.set(playerId, player);
@@ -314,14 +343,9 @@ export class GameStateService {
   // ─── Power-up spawn ────────────────────────────────────────────────────────
 
   spawnPowerUp(state: ServerGameState, type: PowerUpType): void {
-    const margin = 100;
+    const pos = randomMapPointSafe(state.mapWidth, state.mapHeight, state.obstacles, 30, 100);
     const id = uuidv4().slice(0, 8);
-    state.powerUps.set(id, {
-      id,
-      type,
-      x: margin + Math.random() * (state.mapWidth - margin * 2),
-      y: margin + Math.random() * (state.mapHeight - margin * 2),
-    });
+    state.powerUps.set(id, { id, type, x: pos.x, y: pos.y });
   }
 
   // ─── Flag helpers ──────────────────────────────────────────────────────────

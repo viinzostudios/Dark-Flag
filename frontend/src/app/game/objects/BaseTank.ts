@@ -69,20 +69,27 @@ export abstract class BaseTank {
   // ─── Character sprite ────────────────────────────────────────────────────────
 
   applyCharacter(slug: string): void {
-    const textureKey = `char-${slug}`;
-    if (!this.scene.textures.exists(textureKey)) return;
+    let textureKey  = `char-${slug}`;
+    let effectiveSlug = slug;
 
-    // frameTotal > 2 means it was loaded as a spritesheet (image has 2: __BASE + frame 0)
-    const texture = this.scene.textures.get(textureKey);
-    if (texture.frameTotal <= 2) return;
+    // Fallback: if requested character isn't loaded, use phantom (always preloaded)
+    if (!this.scene.textures.exists(textureKey)) {
+      textureKey    = 'char-phantom';
+      effectiveSlug = 'phantom';
+      if (!this.scene.textures.exists(textureKey)) return;
+    }
 
-    this.charSlug = slug;
+    // frameTotal > 2 → spritesheet con animaciones; ≤ 2 → imagen estática
+    const texture    = this.scene.textures.get(textureKey);
+    const isAnimated = texture.frameTotal > 2;
+
+    this.charSlug = isAnimated ? effectiveSlug : null;
     this.charSprite?.destroy();
     this.charSprite = this.scene.add
       .sprite(this.x, this.y, textureKey, 0)
       .setDisplaySize(GAME.PLAYER_RADIUS * 3, GAME.PLAYER_RADIUS * 3)
       .setDepth(10);
-    this.charSprite.play(`${slug}-idle`);
+    if (isAnimated) this.charSprite.play(`${effectiveSlug}-idle`);
   }
 
   // Apply alpha to both the arc fallback and the sprite (for blink effects)

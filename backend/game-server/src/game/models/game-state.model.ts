@@ -16,11 +16,12 @@ export interface ClientInput {
 
 export type PowerUpType =
   | 'MACE_SHIELD'    // blocks next mace hit
-  | 'REVELATION'     // reveals all players for 10s
+  | 'REVELATION'     // removes darkness overlay for 10s
   | 'SPRINT'         // +40% speed for 8s
   | 'BLACKOUT'       // turns off everyone's flashlight for 5s
   | 'SUPER_MACE'     // next 2 maces deal double stun
-  | 'GHOST';         // invisible to others for 8s
+  | 'GHOST'          // invisible + passes through obstacles for 8s
+  | 'SEE_OTHERS';    // see all other players' flashlight cones for 20s
 
 // ─── Static obstacles ─────────────────────────────────────────────────────────
 
@@ -131,6 +132,9 @@ export interface ServerPlayerState {
 
   // Anti-cheat
   lastFlagPickupAt: number;         // rate-limits flag pickup to 1 per 5s
+
+  // Bot flashlight memory
+  botFlagKnownUntil: number;        // timestamp until which bot remembers the flag's position
 }
 
 // ─── Server game state ────────────────────────────────────────────────────────
