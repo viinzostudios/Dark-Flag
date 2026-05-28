@@ -1386,6 +1386,38 @@ const LEVEL_DATA: LevelInfo[] = [
       background-size: cover; background-position: center;
     }
 
+    /* ── Acentos de color por panel (misma paleta que las 4 cards del landing) ── */
+    /* sky-blue → panel jugador / cyan → skin card / amber → play + progress / crimson → info + arena */
+    .player-panel {
+      border-top-color: rgba(14,165,233,.65);
+    }
+    .player-panel .panel-header {
+      color: #0ea5e9;
+    }
+
+    .info-panel {
+      border-top-color: rgba(225,29,72,.65);
+    }
+    .info-panel .panel-header {
+      color: #e11d48;
+    }
+
+    /* Skin del tank → cyan */
+    .skins-inner .skin-active-card:first-child {
+      border-top-color: rgba(34,211,238,.65);
+    }
+    .skins-inner .skin-active-card:first-child .skin-label {
+      color: #22d3ee;
+    }
+
+    /* Skin de arena → crimson */
+    .skins-inner .skin-active-card:last-child {
+      border-top-color: rgba(225,29,72,.65);
+    }
+    .skins-inner .skin-active-card:last-child .skin-label {
+      color: #e11d48;
+    }
+
     /* ── Mobile bottom bar (oculta en desktop) ──────────────────────── */
     .mobile-bottom-bar { display: none; }
 
