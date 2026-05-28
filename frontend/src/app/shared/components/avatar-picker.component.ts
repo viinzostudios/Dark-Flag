@@ -93,12 +93,12 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
     .ap-modal {
       background: var(--t-panel);
       border: 1px solid var(--t-accent-bd);
-      border-radius: 16px;
+      border-radius: 8px;
       width: 100%; max-width: 900px;
       max-height: 92vh;
       display: flex; flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 0 50px var(--t-accent-glow);
+      box-shadow: 0 8px 40px rgba(0,0,0,.70), 0 0 50px var(--t-accent-glow);
     }
     .ap-hdr {
       display: flex; align-items: center; gap: 14px;
@@ -119,7 +119,7 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
       background: transparent;
       border: 1px solid var(--t-panel-bd);
       color: var(--t-muted);
-      border-radius: 20px;
+      border-radius: 4px;
       padding: 5px 12px;
       font-size: 11px; font-weight: 600;
       cursor: pointer; font-family: inherit;
@@ -132,7 +132,7 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
     }
     .ap-close {
       background: transparent; border: 1px solid var(--t-bd);
-      color: var(--t-tx); border-radius: 7px; padding: 6px 12px;
+      color: var(--t-tx); border-radius: 3px; padding: 6px 12px;
       cursor: pointer; font-family: inherit; font-size: 13px;
       flex-shrink: 0;
     }
@@ -167,7 +167,7 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
     .ap-card {
       display: flex; flex-direction: column; align-items: center; gap: 5px;
       padding: 10px 6px;
-      border-radius: 10px;
+      border-radius: 6px;
       border: 1.5px solid var(--t-panel-bd);
       cursor: pointer;
       transition: border-color 0.15s, background 0.15s, transform 0.1s;
@@ -188,7 +188,7 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
     .ap-img {
       width: 64px; height: 64px;
       object-fit: contain;
-      border-radius: 8px;
+      border-radius: 4px;
       display: block;
     }
     .ap-equipped-badge {
@@ -228,7 +228,7 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
     .ap-shop-btn {
       background: var(--t-accent);
       color: var(--t-on-accent, #000);
-      border: none; border-radius: 8px;
+      border: none; border-radius: 4px;
       padding: 8px 18px;
       font-size: 12px; font-weight: 700;
       cursor: pointer; font-family: inherit;
@@ -241,7 +241,7 @@ type Category = 'all' | 'animals' | 'food' | 'characters' | 'fantasy' | 'symbols
       .ap-modal {
         max-width: 100%; width: 100%;
         max-height: 92vh;
-        border-radius: 20px 20px 0 0;
+        border-radius: 8px 8px 0 0;
         border-left: none; border-right: none; border-bottom: none;
       }
       .ap-hdr { padding: 14px 16px; gap: 10px; }

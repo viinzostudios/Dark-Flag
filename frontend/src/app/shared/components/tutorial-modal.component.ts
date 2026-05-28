@@ -97,11 +97,12 @@ const CARDS: TutorialCard[] = [
     .modal {
       background: #12122a;
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
+      border-radius: 8px;
       width: min(420px, 92vw);
       padding: 24px 24px 20px;
       display: flex; flex-direction: column; gap: 20px;
       font-family: 'Inter', system-ui, sans-serif;
+      box-shadow: 0 8px 40px rgba(0,0,0,.70);
     }
 
     .header {
@@ -126,7 +127,7 @@ const CARDS: TutorialCard[] = [
       background: #1c1c3a;
       border: 1px solid rgba(255,255,255,0.08);
       border-top: 3px solid;
-      border-radius: 12px;
+      border-radius: 6px;
       padding: 22px 20px;
       display: flex; flex-direction: column; gap: 10px;
     }
@@ -149,7 +150,7 @@ const CARDS: TutorialCard[] = [
 
     button {
       border: none; cursor: pointer;
-      border-radius: 8px; font-family: inherit;
+      border-radius: 4px; font-family: inherit;
       font-weight: 600; transition: opacity 0.15s;
     }
     button:hover { opacity: 0.85; }

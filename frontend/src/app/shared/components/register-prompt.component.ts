@@ -42,13 +42,13 @@ import { TranslateModule } from '@ngx-translate/core';
     .rp-modal {
       background: var(--t-panel);
       border: 1px solid var(--t-accent-bd);
-      border-radius: 16px;
+      border-radius: 8px;
       padding: 32px 28px;
       max-width: 400px;
       width: 100%;
       display: flex; flex-direction: column; align-items: center;
       gap: 16px;
-      box-shadow: 0 0 40px var(--t-accent-glow);
+      box-shadow: 0 8px 40px rgba(0,0,0,.70), 0 0 40px var(--t-accent-glow);
       text-align: center;
     }
     .rp-icon { font-size: 36px; }
@@ -66,7 +66,7 @@ import { TranslateModule } from '@ngx-translate/core';
       align-self: stretch;
       background: var(--t-accent-bg);
       border: 1px solid var(--t-accent-bd);
-      border-radius: 10px;
+      border-radius: 6px;
       padding: 14px 16px;
     }
     .rp-perk {
@@ -79,7 +79,7 @@ import { TranslateModule } from '@ngx-translate/core';
     }
     .rp-btn {
       padding: 12px 0;
-      border-radius: 9px;
+      border-radius: 4px;
       font-size: 14px; font-weight: 700;
       cursor: pointer; font-family: inherit;
       border: none;

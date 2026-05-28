@@ -384,7 +384,7 @@ const RARITY_COLOR: Record<string, string> = {
     .wallet-gems  { color: #ab47bc; font-size: 14px; font-weight: 700; }
     .back-btn {
       color: var(--t-tx4); text-decoration: none; font-size: 13px;
-      padding: 6px 14px; border: 1px solid var(--t-bd2); border-radius: 6px;
+      padding: 6px 14px; border: 1px solid var(--t-bd2); border-radius: 3px;
       transition: color 0.15s, border-color 0.15s;
     }
     .back-btn:hover { color: var(--t-accent); border-color: var(--t-accent-bd2); }
@@ -472,7 +472,7 @@ const RARITY_COLOR: Record<string, string> = {
     .card {
       background: var(--t-surface);
       border: 1px solid var(--t-bd);
-      border-radius: 12px;
+      border-radius: 6px;
       padding: 13px;
       display: flex; flex-direction: column; gap: 7px;
       transition: border-color 0.2s, transform 0.15s;
@@ -486,7 +486,7 @@ const RARITY_COLOR: Record<string, string> = {
 
     .preview {
       width: 100%; height: 96px;
-      border-radius: 9px; position: relative;
+      border-radius: 6px; position: relative;
       display: flex; align-items: center; justify-content: center;
       gap: 6px;
       background: var(--t-surface2);
@@ -545,7 +545,7 @@ const RARITY_COLOR: Record<string, string> = {
     .price-row { display: flex; gap: 5px; }
     .btn {
       padding: 7px 10px;
-      border: none; border-radius: 6px;
+      border: none; border-radius: 3px;
       font-size: 11px; font-weight: 700;
       cursor: pointer; font-family: inherit;
       transition: opacity 0.15s;
@@ -588,7 +588,7 @@ const RARITY_COLOR: Record<string, string> = {
     .pkg-card {
       background: var(--t-surface);
       border: 1px solid var(--t-bd);
-      border-radius: 12px; padding: 20px;
+      border-radius: 6px; padding: 20px;
       text-align: center;
       display: flex; flex-direction: column; gap: 8px;
     }
@@ -609,7 +609,7 @@ const RARITY_COLOR: Record<string, string> = {
     }
     .arena-shop-card {
       background: var(--t-surface); border: 1px solid var(--t-bd);
-      border-radius: 12px; overflow: hidden;
+      border-radius: 6px; overflow: hidden;
       transition: border-color 0.2s, transform 0.15s;
     }
     .arena-shop-card:hover { transform: translateY(-1px); }
@@ -649,7 +649,7 @@ const RARITY_COLOR: Record<string, string> = {
     .avatar-shop-card {
       display: flex; flex-direction: column; align-items: center; gap: 5px;
       padding: 10px 6px;
-      border-radius: 10px;
+      border-radius: 6px;
       border: 1.5px solid var(--t-bd);
       background: var(--t-surface);
       transition: border-color 0.15s, transform 0.1s;
@@ -665,7 +665,7 @@ const RARITY_COLOR: Record<string, string> = {
       position: relative; width: 64px; height: 64px;
     }
     .av-img {
-      width: 64px; height: 64px; object-fit: contain; border-radius: 8px; display: block;
+      width: 64px; height: 64px; object-fit: contain; border-radius: 4px; display: block;
     }
     .av-equipped-badge {
       position: absolute; top: -4px; right: -4px;

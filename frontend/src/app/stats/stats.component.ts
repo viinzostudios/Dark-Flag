@@ -280,7 +280,7 @@ interface GameSession {
     .kpi-card {
       background: var(--t-surface);
       border: 1px solid var(--t-bd);
-      border-radius: 12px; padding: 16px;
+      border-radius: 6px; padding: 16px;
       text-align: center;
     }
     .kpi-value { font-size: 26px; font-weight: 800; color: var(--t-tx); }
@@ -293,12 +293,12 @@ interface GameSession {
     .chart-wrap {
       background: var(--t-surface);
       border: 1px solid var(--t-bd);
-      border-radius: 12px; padding: 12px 4px 4px;
+      border-radius: 6px; padding: 12px 4px 4px;
     }
     .chart-svg { width: 100%; height: 180px; display: block; overflow: visible; }
 
     /* Table */
-    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--t-bd); }
+    .table-wrap { overflow-x: auto; border-radius: 6px; border: 1px solid var(--t-bd); }
     .sessions-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .sessions-table th {
       background: var(--t-surface2); color: var(--t-muted); font-size: 10px; text-transform: uppercase;
@@ -331,7 +331,7 @@ interface GameSession {
         gap: 8px;
         margin-bottom: 24px;
       }
-      .kpi-card { padding: 12px 10px; border-radius: 10px; }
+      .kpi-card { padding: 12px 10px; border-radius: 6px; }
       .kpi-value { font-size: 22px; }
 
       /* Charts */

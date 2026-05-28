@@ -169,13 +169,13 @@ interface RankEntry {
     .rm-modal {
       background: var(--t-panel);
       border: 1px solid var(--t-accent-bd);
-      border-radius: 16px;
+      border-radius: 8px;
       width: 100%;
       max-width: 1100px;
       max-height: 92vh;
       display: flex; flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 0 50px var(--t-accent-glow);
+      box-shadow: 0 8px 40px rgba(0,0,0,.70), 0 0 50px var(--t-accent-glow);
     }
 
     /* ── Header ─────────────────────── */
@@ -195,7 +195,7 @@ interface RankEntry {
       width: 100%;
       background: var(--t-surface);
       border: 1px solid var(--t-accent-bd2);
-      border-radius: 8px;
+      border-radius: 4px;
       padding: 8px 14px;
       color: var(--t-tx);
       font-size: 13px;
@@ -209,7 +209,7 @@ interface RankEntry {
       background: transparent;
       border: 1px solid var(--t-bd);
       color: var(--t-tx);
-      border-radius: 7px;
+      border-radius: 3px;
       padding: 6px 12px;
       cursor: pointer;
       font-family: inherit;
@@ -326,7 +326,7 @@ interface RankEntry {
       .rm-modal {
         max-width: 100%; width: 100%;
         max-height: 90vh;
-        border-radius: 20px 20px 0 0;
+        border-radius: 8px 8px 0 0;
         border-left: none; border-right: none; border-bottom: none;
       }
       .rm-hdr { padding: 14px 16px; gap: 10px; flex-wrap: wrap; }
