@@ -857,19 +857,16 @@ const LEVEL_DATA: LevelInfo[] = [
       border-radius: 16px;
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
-      background: var(--t-accent-bg);
+      background: url('/assets/environment/arena-lobby-bg.png') center/cover no-repeat #060912;
     }
     .grid-anim {
       position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(245,158,11,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(245,158,11,.055) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: gridScroll 8s linear infinite;
-    }
-    @keyframes gridScroll {
-      from { background-position: 0 0; }
-      to   { background-position: 40px 40px; }
+      background: linear-gradient(
+        to top,
+        transparent 0%,
+        rgba(6,9,18,.20) 55%,
+        rgba(6,9,18,.60) 100%
+      );
     }
     .play-content {
       position: relative;
