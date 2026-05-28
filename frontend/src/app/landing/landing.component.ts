@@ -61,6 +61,9 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
 
         <div class="feat-card" routerLink="/lobby">
           <div class="card-accent" style="background:#0ea5e9"></div>
+          <div class="card-art">
+            <img class="card-img" src="/assets/pickups/power-blackout.png" alt="Oscuridad" />
+          </div>
           <div class="card-body">
             <span class="card-tag">{{ 'landing.card_mechanic' | translate }}</span>
             <div class="card-name">{{ 'landing.card_darkness_name' | translate }}</div>
@@ -70,6 +73,9 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
 
         <div class="feat-card" routerLink="/lobby">
           <div class="card-accent" style="background:#22d3ee"></div>
+          <div class="card-art">
+            <img class="card-img" src="/assets/pickups/power-super-mace.png" alt="Mazo" />
+          </div>
           <div class="card-body">
             <span class="card-tag">{{ 'landing.card_combat' | translate }}</span>
             <div class="card-name">{{ 'landing.card_mace_name' | translate }}</div>
@@ -79,6 +85,9 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
 
         <div class="feat-card" routerLink="/lobby">
           <div class="card-accent" style="background:#f59e0b"></div>
+          <div class="card-art">
+            <img class="card-img" src="/assets/ui/flag-icon.png" alt="Bandera" />
+          </div>
           <div class="card-body">
             <span class="card-tag">{{ 'landing.card_objective' | translate }}</span>
             <div class="card-name">{{ 'landing.card_flag_name' | translate }}</div>
@@ -88,6 +97,9 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
 
         <div class="feat-card" routerLink="/lobby">
           <div class="card-accent" style="background:#e11d48"></div>
+          <div class="card-art">
+            <img class="card-img" src="/assets/characters/gearhead.png" alt="Gearhead" />
+          </div>
           <div class="card-body">
             <span class="card-tag">{{ 'landing.card_progression' | translate }}</span>
             <div class="card-name">{{ 'landing.card_levels_name' | translate }}</div>
@@ -359,6 +371,19 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
       opacity: .85;
     }
 
+    .card-art {
+      flex-shrink: 0;
+      width: clamp(52px, 7vw, 80px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 6px;
+    }
+    .card-img {
+      width: clamp(38px, 5.5vw, 60px);
+      height: clamp(38px, 5.5vw, 60px);
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.55));
+    }
+
     .card-body {
       flex: 1;
       display: flex; flex-direction: column; justify-content: center;
@@ -425,6 +450,8 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
 
       .cards { height: clamp(80px, 13vh, 120px); }
       .card-desc { display: none; }
+      .card-art { width: clamp(40px, 6vw, 60px); }
+      .card-img { width: clamp(30px, 4.5vw, 48px); height: clamp(30px, 4.5vw, 48px); }
       .card-body { padding: 10px 12px; }
     }
 
@@ -436,6 +463,8 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
       .tagline { display: none; }
       .cards { height: 84px; }
       .card-tag { display: none; }
+      .card-art { width: 38px; }
+      .card-img { width: 28px; height: 28px; }
       .card-name { font-size: 12px; }
       .cta-group { gap: 10px; }
     }
@@ -473,6 +502,8 @@ import { LangSelectorComponent } from '../shared/components/lang-selector.compon
       .cards { height: 60px; }
       .card-tag { display: none; }
       .card-desc { display: none; }
+      .card-art { width: 34px; }
+      .card-img { width: 24px; height: 24px; }
       .card-name { font-size: 11px; }
       .card-body { padding: 8px 10px; }
 
