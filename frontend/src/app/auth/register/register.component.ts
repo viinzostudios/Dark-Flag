@@ -160,25 +160,26 @@ import { LangSelectorComponent } from '../../shared/components/lang-selector.com
     .card {
       position: relative;
       z-index: 10;
-      background: var(--t-surface2);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--t-bd);
-      border-radius: 24px;
+      background: rgba(11,17,32,.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(14,165,233,.15);
+      border-top: 2px solid rgba(14,165,233,.35);
+      border-radius: 6px;
       padding: clamp(24px, 4vw, 40px);
       width: min(420px, 90vw);
       color: var(--t-tx);
-      box-shadow: var(--t-card-shadow);
+      box-shadow: 0 8px 40px rgba(0,0,0,.70), 0 0 1px rgba(14,165,233,.15);
     }
 
     .card-title {
-      font-size: clamp(22px, 3vw, 30px);
-      font-weight: 800;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       margin: 0 0 6px;
-      background: var(--t-logo-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #f0f9ff;
     }
     .card-head { margin-bottom: 20px; }
 
@@ -224,21 +225,22 @@ import { LangSelectorComponent } from '../../shared/components/lang-selector.com
       width: 100%;
       padding: 14px;
       margin-top: 4px;
-      background: linear-gradient(135deg, var(--t-accent-dk), var(--t-accent));
+      background: linear-gradient(135deg, var(--t-flag-dk, #d97706), var(--t-flag));
       border: none;
-      border-radius: 12px;
-      color: var(--t-on-accent);
-      font-size: 16px;
-      font-weight: 800;
+      border-radius: 4px;
+      color: #060912;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
       cursor: pointer;
-      font-family: inherit;
-      letter-spacing: .04em;
-      box-shadow: 0 0 30px var(--t-accent-glow);
+      box-shadow: 0 0 28px var(--t-flag-glow);
       transition: transform .15s, box-shadow .15s;
     }
     .btn-submit:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 0 50px var(--t-accent-glow2);
+      transform: translateY(-2px);
+      box-shadow: 0 0 52px var(--t-flag-glow2, rgba(245,158,11,.75));
     }
     .btn-submit:disabled { opacity: .5; cursor: not-allowed; }
 

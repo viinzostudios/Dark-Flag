@@ -644,8 +644,10 @@ const LEVEL_DATA: LevelInfo[] = [
     .logo { display: flex; align-items: center; gap: 10px; }
     .logo-icon { font-size: 20px; }
     .logo-text {
-      font-size: 14px; font-weight: 800;
-      letter-spacing: 3px; color: var(--t-accent);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px; font-weight: 900;
+      letter-spacing: 4px; color: var(--t-flag);
+      text-transform: uppercase;
     }
     .user-bar { display: flex; align-items: center; gap: 12px; }
     .user-chip {
@@ -838,8 +840,8 @@ const LEVEL_DATA: LevelInfo[] = [
     .grid-anim {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(124,58,237,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,0.07) 1px, transparent 1px);
+        linear-gradient(rgba(14,165,233,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14,165,233,0.07) 1px, transparent 1px);
       background-size: 40px 40px;
       animation: gridScroll 8s linear infinite;
     }

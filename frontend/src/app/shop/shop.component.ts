@@ -558,7 +558,7 @@ const RARITY_COLOR: Record<string, string> = {
       box-shadow: 0 0 12px var(--t-accent-glow);
     }
     .btn.primary:not(:disabled):hover { opacity: 0.9; box-shadow: 0 0 20px var(--t-accent-glow2); }
-    .btn.gem     { background: linear-gradient(135deg, #5b21b6, #7c3aed); color: #fff; }
+    .btn.gem     { background: linear-gradient(135deg, #0284c7, #0ea5e9); color: #fff; }
     .btn.preview { background: var(--t-surface2); border: 1px solid var(--t-bd2); color: var(--t-tx4); font-size: 10px; }
     .btn.coin-buy {
       background: linear-gradient(135deg, #92400e, #f59e0b);

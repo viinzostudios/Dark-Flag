@@ -18,116 +18,113 @@ body {
    Mobile global utilities
    ════════════════════════════════════════════════════════════ */
 
-/* Scroll suave en todo el sitio */
 * { -webkit-overflow-scrolling: touch; }
 
-/* Target táctil mínimo 44px (WCAG) para todos los botones en mobile */
 @media (max-width: 768px) {
   button, a, input, select, textarea {
     touch-action: manipulation;
   }
-
-  /* Quitar el delay de tap en iOS/Android */
   button { -webkit-tap-highlight-color: transparent; }
 }
 
 /* ════════════════════════════════════════════════════════════
-   Dark Flag — paleta oscura: morado + teal + ámbar
+   Dark Flag — paleta TGA: navy profundo + teal/sky + gold
    ════════════════════════════════════════════════════════════ */
 
-/* Helper global: glow morado para cualquier elemento */
-.dark-glow {
-  box-shadow: 0 0 24px rgba(124,58,237,.55), 0 0 48px rgba(124,58,237,.25);
+.tga-glow {
+  box-shadow: 0 0 24px rgba(14,165,233,.50), 0 0 48px rgba(14,165,233,.22);
 }
 
 html,
 html[data-theme="dark"] {
   /* ── Fondos ─────────────────────────────────────────────── */
-  --t-bg:          #080810;
-  --t-bg2:         #0d0d1c;
-  --t-hdr-bg:      rgba(8,8,16,.88);
+  --t-bg:          #060912;
+  --t-bg2:         #0b1120;
+  --t-hdr-bg:      rgba(6,9,18,.92);
 
   /* ── Superficies ────────────────────────────────────────── */
-  --t-surface:     rgba(124,58,237,.06);
-  --t-surface2:    #12132a;
-  --t-panel:       rgba(18,19,42,.80);
-  --t-input-bg:    #1c1d3e;
+  --t-surface:     rgba(14,165,233,.05);
+  --t-surface2:    #111827;
+  --t-panel:       rgba(11,17,32,.88);
+  --t-input-bg:    #162036;
 
   /* ── Bordes ─────────────────────────────────────────────── */
-  --t-bd:          #2d2f5e;
-  --t-bd2:         rgba(45,47,94,.80);
-  --t-panel-bd:    rgba(45,47,94,.60);
+  --t-bd:          #1e3a5f;
+  --t-bd2:         rgba(30,58,95,.80);
+  --t-panel-bd:    rgba(30,58,95,.55);
 
   /* ── Texto ──────────────────────────────────────────────── */
-  --t-tx:          #f8fafc;
-  --t-tx2:         rgba(248,250,252,.85);
-  --t-tx3:         rgba(248,250,252,.60);
-  --t-tx4:         rgba(248,250,252,.45);
-  --t-tx5:         rgba(248,250,252,.32);
-  --t-tx6:         rgba(248,250,252,.20);
-  --t-placeholder: rgba(148,163,184,.40);
-  --t-dim:         #4a5568;
-  --t-muted:       #94a3b8;
-  --t-sub:         #cbd5e1;
+  --t-tx:          #f0f9ff;
+  --t-tx2:         rgba(240,249,255,.85);
+  --t-tx3:         rgba(240,249,255,.60);
+  --t-tx4:         rgba(240,249,255,.45);
+  --t-tx5:         rgba(240,249,255,.32);
+  --t-tx6:         rgba(240,249,255,.20);
+  --t-placeholder: rgba(148,163,184,.38);
+  --t-dim:         #334155;
+  --t-muted:       #64748b;
+  --t-sub:         #94a3b8;
 
-  /* ── Acento principal — morado ──────────────────────────── */
-  --t-accent:       #7c3aed;
-  --t-accent-dk:    #5b21b6;
+  /* ── Acento principal — sky/teal ────────────────────────── */
+  --t-accent:       #0ea5e9;
+  --t-accent-dk:    #0284c7;
   --t-on-accent:    #ffffff;
-  --t-accent-bg:    rgba(124,58,237,.08);
-  --t-accent-bd:    rgba(124,58,237,.28);
-  --t-accent-bd2:   rgba(124,58,237,.42);
-  --t-accent-glow:  rgba(124,58,237,.45);
-  --t-accent-glow2: rgba(124,58,237,.80);
-  --t-focus-bd:     rgba(124,58,237,.65);
-  --t-focus-bg:     rgba(124,58,237,.06);
-  --t-accent-line:  rgba(124,58,237,.14);
+  --t-accent-bg:    rgba(14,165,233,.08);
+  --t-accent-bd:    rgba(14,165,233,.28);
+  --t-accent-bd2:   rgba(14,165,233,.42);
+  --t-accent-glow:  rgba(14,165,233,.42);
+  --t-accent-glow2: rgba(14,165,233,.78);
+  --t-focus-bd:     rgba(14,165,233,.65);
+  --t-focus-bg:     rgba(14,165,233,.06);
+  --t-accent-line:  rgba(14,165,233,.12);
 
   /* ── Acento secundario — teal ───────────────────────────── */
-  --t-teal:         #06b6d4;
-  --t-teal-glow:    rgba(6,182,212,.40);
+  --t-teal:         #22d3ee;
+  --t-teal-glow:    rgba(34,211,238,.38);
 
-  /* ── Acento flag — ámbar ────────────────────────────────── */
+  /* ── Acento gold — botones CTA / flag ──────────────────── */
   --t-flag:         #f59e0b;
-  --t-flag-glow:    rgba(245,158,11,.40);
+  --t-flag-dk:      #d97706;
+  --t-flag-glow:    rgba(245,158,11,.42);
+  --t-flag-glow2:   rgba(245,158,11,.78);
 
-  /* ── Acento danger — rojo ───────────────────────────────── */
+  /* ── Danger ─────────────────────────────────────────────── */
   --t-danger:       #ef4444;
 
-  /* ── Blobs — profundidad morada ─────────────────────────── */
-  --t-b1:    radial-gradient(circle, #1a0a3d 0%, #080810 100%);
-  --t-b1-op: .85;
-  --t-b2:    radial-gradient(circle, #061828 0%, #020810 100%);
+  /* ── Blobs — profundidad azul marino ───────────────────── */
+  --t-b1:    radial-gradient(circle, #091a3d 0%, #060912 100%);
+  --t-b1-op: .90;
+  --t-b2:    radial-gradient(circle, #061828 0%, #030912 100%);
   --t-b2-op: .70;
-  --t-b3:    radial-gradient(circle, #0d1a36 0%, #050a1a 100%);
-  --t-b3-op: .60;
-  --t-grid:  rgba(124,58,237,.022);
+  --t-b3:    radial-gradient(circle, #0d1a36 0%, #060912 100%);
+  --t-b3-op: .55;
+  --t-grid:  rgba(14,165,233,.018);
 
   /* ── Degradado del título ───────────────────────────────── */
-  --t-title-grad: linear-gradient(135deg, #f8fafc 0%, #a78bfa 40%, #7c3aed 70%, #06b6d4 100%);
-  --t-logo-grad:  linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #06b6d4 100%);
+  --t-title-grad: linear-gradient(135deg, #f0f9ff 0%, #7dd3fc 35%, #0ea5e9 65%, #f59e0b 100%);
+  --t-logo-grad:  linear-gradient(135deg, #7dd3fc 0%, #0ea5e9 55%, #f59e0b 100%);
 
   /* ── Utilidades UI ──────────────────────────────────────── */
   --t-err:        #ef4444;
 
-  --t-badge-bg: rgba(124,58,237,.12);
-  --t-badge-bd: rgba(124,58,237,.35);
-  --t-badge-tx: #a78bfa;
+  --t-badge-bg: rgba(14,165,233,.12);
+  --t-badge-bd: rgba(14,165,233,.35);
+  --t-badge-tx: #7dd3fc;
 
   --t-ghost-bg:   rgba(255,255,255,.04);
   --t-ghost-bg-h: rgba(255,255,255,.08);
-  --t-ghost-bd:   rgba(45,47,94,.70);
-  --t-ghost-bd-h: rgba(124,58,237,.40);
-  --t-ghost-tx:   rgba(248,250,252,.80);
+  --t-ghost-bd:   rgba(30,58,95,.70);
+  --t-ghost-bd-h: rgba(14,165,233,.40);
+  --t-ghost-tx:   rgba(240,249,255,.80);
 
-  --t-back:   rgba(248,250,252,.48);
-  --t-back-h: rgba(248,250,252,.90);
+  --t-back:   rgba(240,249,255,.48);
+  --t-back-h: rgba(240,249,255,.90);
 
-  /* ── Daily / coins (ámbar) ──────────────────────────────── */
+  /* ── Daily / coins ─────────────────────────────────────── */
   --t-daily-bg:     rgba(245,158,11,.07);
   --t-daily-bd:     rgba(245,158,11,.22);
   --t-daily-btn:    #f59e0b;
-  --t-daily-btn-tx: #080810;
+  --t-daily-btn-tx: #060912;
   --t-daily-bonus:  #f59e0b;
 
   --t-opt-bg: rgba(245,158,11,.08);
@@ -135,97 +132,97 @@ html[data-theme="dark"] {
   --t-opt-tx: #f59e0b;
 
   /* ── Gráficas ───────────────────────────────────────────── */
-  --t-chart-grid:  rgba(45,47,94,.50);
-  --t-chart-text:  rgba(248,250,252,.32);
-  --t-dot-stroke:  #080810;
+  --t-chart-grid:  rgba(30,58,95,.50);
+  --t-chart-text:  rgba(240,249,255,.32);
+  --t-dot-stroke:  #060912;
 
-  --t-floor-op: .06;
+  --t-floor-op: .05;
 
-  --t-hover:       rgba(124,58,237,.04);
+  --t-hover:       rgba(14,165,233,.04);
   --t-shadow:      none;
-  --t-card-shadow: 0 4px 16px rgba(0,0,0,.70), 0 0 1px rgba(124,58,237,.20);
-  --t-strip-bg:    rgba(0,0,0,.32);
+  --t-card-shadow: 0 4px 20px rgba(0,0,0,.75), 0 0 1px rgba(14,165,233,.18);
+  --t-strip-bg:    rgba(0,0,0,.30);
 }
 
 /* ════════════════════════════════════════════════════════════
-   Dark Flag — tema claro (modo accesibilidad / exterior)
+   Dark Flag — tema claro (modo accesibilidad)
    ════════════════════════════════════════════════════════════ */
 html[data-theme="light"] {
   /* Fondos */
-  --t-bg:          #f0f0ff;
-  --t-bg2:         #e6e6f5;
-  --t-hdr-bg:      rgba(240,240,255,.92);
+  --t-bg:          #e8f4f8;
+  --t-bg2:         #d0e9f5;
+  --t-hdr-bg:      rgba(232,244,248,.94);
 
   /* Superficies */
   --t-surface:     rgba(255,255,255,.90);
   --t-surface2:    #ffffff;
-  --t-panel:       rgba(255,255,255,.80);
+  --t-panel:       rgba(255,255,255,.82);
   --t-input-bg:    rgba(255,255,255,.70);
 
   /* Bordes */
-  --t-bd:          rgba(124,58,237,.15);
-  --t-bd2:         rgba(124,58,237,.25);
-  --t-panel-bd:    rgba(124,58,237,.10);
+  --t-bd:          rgba(14,165,233,.18);
+  --t-bd2:         rgba(14,165,233,.28);
+  --t-panel-bd:    rgba(14,165,233,.12);
 
   /* Texto */
-  --t-tx:          #0f0e1a;
-  --t-tx2:         rgba(15,14,26,.88);
-  --t-tx3:         rgba(15,14,26,.70);
-  --t-tx4:         rgba(15,14,26,.55);
-  --t-tx5:         rgba(15,14,26,.42);
-  --t-tx6:         rgba(15,14,26,.30);
-  --t-placeholder: rgba(15,14,26,.38);
-  --t-dim:         rgba(15,14,26,.50);
-  --t-muted:       rgba(15,14,26,.62);
-  --t-sub:         rgba(15,14,26,.75);
+  --t-tx:          #0c1a2e;
+  --t-tx2:         rgba(12,26,46,.88);
+  --t-tx3:         rgba(12,26,46,.70);
+  --t-tx4:         rgba(12,26,46,.55);
+  --t-tx5:         rgba(12,26,46,.42);
+  --t-tx6:         rgba(12,26,46,.30);
+  --t-placeholder: rgba(12,26,46,.38);
+  --t-dim:         rgba(12,26,46,.50);
+  --t-muted:       rgba(12,26,46,.62);
+  --t-sub:         rgba(12,26,46,.75);
 
-  /* Acento — morado */
-  --t-accent:       #6d28d9;
-  --t-accent-dk:    #4c1d95;
+  /* Acento */
+  --t-accent:       #0284c7;
+  --t-accent-dk:    #0369a1;
   --t-on-accent:    #ffffff;
-  --t-accent-bg:    rgba(109,40,217,.10);
-  --t-accent-bd:    rgba(109,40,217,.28);
-  --t-accent-bd2:   rgba(109,40,217,.40);
-  --t-accent-glow:  rgba(109,40,217,.30);
-  --t-accent-glow2: rgba(109,40,217,.60);
-  --t-focus-bd:     rgba(109,40,217,.55);
-  --t-focus-bg:     rgba(109,40,217,.06);
-  --t-accent-line:  rgba(109,40,217,.12);
+  --t-accent-bg:    rgba(2,132,199,.10);
+  --t-accent-bd:    rgba(2,132,199,.28);
+  --t-accent-bd2:   rgba(2,132,199,.40);
+  --t-accent-glow:  rgba(2,132,199,.30);
+  --t-accent-glow2: rgba(2,132,199,.60);
+  --t-focus-bd:     rgba(2,132,199,.55);
+  --t-focus-bg:     rgba(2,132,199,.06);
+  --t-accent-line:  rgba(2,132,199,.12);
 
-  /* Acento secundario */
   --t-teal:         #0891b2;
   --t-teal-glow:    rgba(8,145,178,.35);
   --t-flag:         #d97706;
+  --t-flag-dk:      #b45309;
   --t-flag-glow:    rgba(217,119,6,.35);
+  --t-flag-glow2:   rgba(217,119,6,.65);
   --t-danger:       #dc2626;
 
-  /* Blobs ocultos */
-  --t-b1:    radial-gradient(circle, #e0d7ff 0%, #f0f0ff 100%);
+  --t-b1:    radial-gradient(circle, #d0e9f5 0%, #e8f4f8 100%);
   --t-b1-op: 0;
-  --t-b2:    radial-gradient(circle, #f0f0ff 0%, #f0f0ff 100%);
+  --t-b2:    radial-gradient(circle, #e8f4f8 0%, #e8f4f8 100%);
   --t-b2-op: 0;
-  --t-b3:    radial-gradient(circle, #f0f0ff 0%, #f0f0ff 100%);
+  --t-b3:    radial-gradient(circle, #e8f4f8 0%, #e8f4f8 100%);
   --t-b3-op: 0;
-  --t-grid:  rgba(124,58,237,.04);
+  --t-grid:  rgba(14,165,233,.04);
 
   --t-floor-op: .04;
 
   --t-err:        #dc2626;
-  --t-title-grad: linear-gradient(135deg, #0f0e1a 0%, #4c1d95 50%, #6d28d9 100%);
-  --t-logo-grad:  linear-gradient(135deg, #4c1d95 0%, #6d28d9 50%, #0891b2 100%);
+  --t-title-grad: linear-gradient(135deg, #0c1a2e 0%, #0369a1 50%, #0284c7 100%);
+  --t-logo-grad:  linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #d97706 100%);
 
-  --t-badge-bg: rgba(109,40,217,.12);
-  --t-badge-bd: rgba(109,40,217,.30);
-  --t-badge-tx: #4c1d95;
+  --t-badge-bg: rgba(2,132,199,.12);
+  --t-badge-bd: rgba(2,132,199,.30);
+  --t-badge-tx: #0369a1;
 
   --t-ghost-bg:   rgba(255,255,255,.40);
   --t-ghost-bg-h: rgba(255,255,255,.65);
-  --t-ghost-bd:   rgba(124,58,237,.20);
-  --t-ghost-bd-h: rgba(124,58,237,.40);
-  --t-ghost-tx:   rgba(15,14,26,.88);
+  --t-ghost-bd:   rgba(14,165,233,.22);
+  --t-ghost-bd-h: rgba(14,165,233,.40);
+  --t-ghost-tx:   rgba(12,26,46,.88);
 
-  --t-back:   rgba(15,14,26,.55);
-  --t-back-h: rgba(15,14,26,.92);
+  --t-back:   rgba(12,26,46,.55);
+  --t-back-h: rgba(12,26,46,.92);
 
   --t-daily-bg:     rgba(217,119,6,.10);
   --t-daily-bd:     rgba(217,119,6,.28);
@@ -237,12 +234,12 @@ html[data-theme="light"] {
   --t-opt-bd: rgba(217,119,6,.28);
   --t-opt-tx: #b45309;
 
-  --t-chart-grid: rgba(124,58,237,.10);
-  --t-chart-text: rgba(15,14,26,.52);
-  --t-dot-stroke: #f0f0ff;
+  --t-chart-grid: rgba(14,165,233,.10);
+  --t-chart-text: rgba(12,26,46,.52);
+  --t-dot-stroke: #e8f4f8;
 
-  --t-hover:       rgba(124,58,237,.06);
-  --t-shadow:      0 2px 12px rgba(124,58,237,.14);
-  --t-card-shadow: 0 4px 24px rgba(124,58,237,.14), 0 1px 4px rgba(0,0,0,.06);
+  --t-hover:       rgba(14,165,233,.06);
+  --t-shadow:      0 2px 12px rgba(14,165,233,.14);
+  --t-card-shadow: 0 4px 24px rgba(14,165,233,.14), 0 1px 4px rgba(0,0,0,.06);
   --t-strip-bg:    rgba(255,255,255,.35);
 }
